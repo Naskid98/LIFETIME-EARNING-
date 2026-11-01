@@ -219,8 +219,22 @@ async function loadWalletAndWithdrawals(){
       try{
         const {data:transactions,error:txError}=await supabaseClient.from('wallet_transactions').select('entry_type,amount_kobo,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
         if(txError)throw txError;
-        const rewards=(transactions||[]).filter(t=>t.entry_type==='referral_reward');
-        rewardHistory.innerHTML=rewards.length?rewards.map(t=>`<div class="listrow"><div><b class="reward">+₦${(Number(t.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>Ladan referral • ${new Date(t.created_at).toLocaleString()}</small></div><span class="tag">An saka</span></div>`).join(''):'Babu kuɗin referral da aka saka tukuna.';
+        const historyItems=(transactions||[]);
+        const labels={
+          referral_reward:'Ladan referral',
+          points_conversion:'Canza Points zuwa Wallet',
+          withdrawal:'Cire kuɗi',
+          withdrawal_refund:'Mayar da kuɗin withdrawal',
+          admin_credit:'Ladan da admin ya saka',
+          admin_debit:'Cirewa daga admin'
+        };
+        rewardHistory.innerHTML=historyItems.length?historyItems.map(t=>{
+          const amount=Number(t.amount_kobo||0)/100;
+          const isDebit=['withdrawal','admin_debit'].includes(t.entry_type);
+          const sign=isDebit?'−':'+', label=labels[t.entry_type]||"Mu’amalar Wallet";
+          const amountClass=isDebit?'':'reward';
+          return `<div class="listrow"><div><b class="${amountClass}">${sign}₦${Math.abs(amount).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}</b><small>${label} • ${new Date(t.created_at).toLocaleString()}</small></div><span class="tag">${isDebit?'An cire':'An saka'}</span></div>`;
+        }).join(''):'Babu tarihin mu’amalar Wallet tukuna.';
       }catch(txErr){rewardHistory.textContent='Ba a iya ɗauko tarihin kuɗin shiga ba: '+txErr.message;}
     }
   }catch(err){balanceEl.textContent='Ba a samu ba';historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+err.message;}
