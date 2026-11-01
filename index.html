@@ -44,21 +44,31 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <div class="feature"><div class="icon">↗</div><h3>Withdrawal</h3><p>Shafin neman cire rewards wanda zai fara aiki bayan an haɗa payment provider da sharuddan cire kuɗi.</p></div>
 <div class="feature"><div class="icon">♙</div><h3>Account & Tsaro</h3><p>Tsarin asusu, bayanan mai amfani da kariya daga amfani da tsarin ta hanyar yaudara.</p></div>
 </div></div></section>
-<section class="how" id="how"><div class="wrap"><div class="section-head"><span class="eyebrow">YADDA YAKE AIKI</span><h2>Matakai huɗu masu sauƙi</h2><p>Wannan sigar farko tana nuna tsarin amfani; ba ta biya kuɗi na gaske ba tukuna.</p></div><div class="steps">
+<section class="how" id="how"><div class="wrap"><div class="section-head"><span class="eyebrow">YADDA YAKE AIKI</span><h2>Matakai huɗu masu sauƙi</h2><p>Rajista, profile, wallet, tasks da referral suna amfani da bayanan database. Tallace-tallace da wasu hanyoyin samun kuɗi ba su haɗu ba tukuna.</p></div><div class="steps">
 <div class="step"><span class="num">MATAKI 01</span><h3>Yi rajista</h3><p>Ƙirƙiri account ta amfani da sunanka da email.</p></div><div class="step"><span class="num">MATAKI 02</span><h3>Duba ayyuka</h3><p>Shiga dashboard ka duba tasks ko tallace-tallacen da aka amince da su.</p></div><div class="step"><span class="num">MATAKI 03</span><h3>Tara rewards</h3><p>Rewards za su dogara da ayyukan da aka tabbatar da dokokin dandamali.</p></div><div class="step"><span class="num">MATAKI 04</span><h3>Duba wallet</h3><p>Ka duba tarihin rewards da sharuddan cire su idan an kunna tsarin.</p></div>
 </div></div></section>
-<section id="about"><div class="wrap"><div class="cta"><div><h2>LIFETIME EARNING</h2><p>Watch • Do • Earn • Repeat<br>Gina damarka ta dijital, mataki ɗaya a lokaci.</p></div><button class="btn btn-gold" onclick="showView('register')">Ƙirƙiri Account →</button></div><p class="notice">Bayani: Wannan website prototype ne na demo. Rajista, ad rewards, referrals, wallet da withdrawal ba su haɗu da sabar ko tsarin biyan kuɗi na gaske ba. Ba a tabbatar da samun kuɗi ba. Za a buƙaci backend, database, ingantaccen tsarin tsaro, da ad/payment providers masu izini kafin ƙaddamarwa.</p></div></section>
+<section id="about"><div class="wrap"><div class="cta"><div><h2>LIFETIME EARNING</h2><p>Watch • Do • Earn • Repeat<br>Gina damarka ta dijital, mataki ɗaya a lokaci.</p></div><button class="btn btn-gold" onclick="showView('register')">Ƙirƙiri Account →</button></div><p class="notice">Bayani: An haɗa wasu sassan website da Supabase. Ads da automatic payments ba su haɗu ba tukuna. Withdrawal requests suna jiran duba da aiwatarwa daga admin. Ba a tabbatar da samun kuɗi ba.</p></div></section>
 </div>
 <section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>
 <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
-<div class="dash-grid"><div class="stat"><span>Wallet</span><strong id="dashboardWalletBalance">Ana ɗauko...</strong><small class="tag">Balance daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Ci gaban demo</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
+<div class="dash-grid"><div class="stat"><span>Wallet</span><strong id="walletTopBalance">Ana ɗauko...</strong><small class="tag">Daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Ci gaban demo</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
 <div class="dash-columns"><div class="panel"><h2>Tasks na demo</h2><p class="empty-note">Waɗannan ayyuka misalai ne kawai; ba su samar da kuɗi na gaske ba.</p><div class="listrow"><div><b>Kammala bayanin account</b><small>Task 1</small></div><button class="btn btn-soft" data-task-key="complete_profile" onclick="completeTask(this,'complete_profile')">Kammala</button></div><div class="listrow"><div><b>Duba shafin features</b><small>Task 2</small></div><button class="btn btn-soft" data-task-key="review_features" onclick="completeTask(this,'review_features')">Kammala</button></div><div class="listrow"><div><b>Karanta dokokin website</b><small>Task 3</small></div><button class="btn btn-soft" data-task-key="read_rules" onclick="completeTask(this,'read_rules')">Kammala</button></div></div>
-<div class="panel" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
+<div class="panel" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
 <div class="panel" style="margin-top:17px" id="pointsHistoryPanel"><h2>⭐ Tarihin Maki</h2><p class="empty-note">Za ka ga duk maki da aka ƙara ko aka cire daga account ɗinka. Points ba kuɗi ba ne.</p><div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div></div>
 <div class="panel" style="margin-top:17px" id="walletPanel"><h2>Wallet & Withdrawal</h2>
 <p class="empty-note">Balance daga database ne. Ana iya neman withdrawal idan wallet ɗinka yana da isasshen balance. Minimum ₦5,000.</p>
 <div class="dash-grid" style="grid-template-columns:repeat(2,1fr);margin:14px 0"><div class="stat"><span>Wallet balance</span><strong id="walletBalance">₦0.00</strong></div><div class="stat"><span>Withdrawal minimum</span><strong>₦5,000</strong></div></div>
+<div class="panel" style="margin:14px 0;background:#f8fbf7;border-color:#dce9dc">
+<h3>⭐ Canza Points zuwa Wallet</h3>
+<p class="empty-note">Mafi ƙaranci: 1,000 Points. Ƙima: 100 Points = ₦10.</p>
+<form id="convertPointsForm" onsubmit="convertPointsToWallet(event)">
+<label class="field"><span>Adadin Points da kake son canzawa</span><input id="convertPointsAmount" type="number" min="1000" step="1" required inputmode="numeric" placeholder="Misali: 1000" oninput="updateConversionPreview()"></label>
+<div class="noticebox" id="conversionPreview">1,000 Points = ₦100.00</div>
+<button class="btn btn-gold" id="convertPointsButton" type="submit">Convert Points to Wallet</button>
+</form>
+<div id="convertPointsMessage" class="noticebox" role="status">Ka tabbatar da adadin Points kafin conversion. Wannan aikin ba za a iya juyawa baya ba.</div>
+</div>
 <form id="withdrawForm" onsubmit="submitWithdrawal(event)" style="margin-top:15px"><h3>Neman cire kuɗi</h3>
 <label class="field"><span>Adadin kuɗi (₦)</span><input id="withdrawAmount" type="number" min="5000" step="0.01" required placeholder="5000"></label>
 <label class="field"><span>Sunan banki</span><input id="bankName" required maxlength="80" placeholder="Misali: Access Bank"></label>
@@ -66,7 +76,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <label class="field"><span>Lambar account</span><input id="accountNumber" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Lambobi 10"></label>
 <button class="btn btn-green" type="submit">Aika buƙatar withdrawal</button></form>
 <div id="withdrawMessage" class="noticebox" role="status">Za a duba buƙatar withdrawal kafin a aiwatar da biyan kuɗi.</div>
-<h3>Tarihin withdrawal</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div>
+<h3>Tarihin withdrawal</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div><h3>Tarihin kuɗin shiga (Wallet)</h3><div id="walletRewardHistory" class="empty-note">Ana ɗauko tarihin kuɗin shiga...</div>
 </div>
 <div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2>Admin Dashboard</h2><p class="empty-note">Wannan sashe yana bayyana ga admin kawai.</p>
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0">
@@ -75,7 +85,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
 <div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
 </div>
-<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="margin:0">Task Review</h3><button class="btn btn-soft" type="button" onclick="loadAdminTaskSubmissions()">Sabunta jerin Tasks ↻</button></div><p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p><div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
+<h3>Task Review</h3><p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p><div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
 <h3 style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
 <h3 style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
 </div>
@@ -90,7 +100,6 @@ const SUPABASE_URL = 'https://biuomwzxmcvztavgsdvh.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdW9td3p4bWN2enRhdmdzZHZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMTk4ODUsImV4cCI6MjEwODc5NTg4NX0.MqkNzPkatWhGNn_vk-Za_pMpcoN91JLY9RsZkz-ns7g';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentUser = null;
-let adminTaskChannel = null;
 
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}return false;}
 function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
@@ -161,7 +170,18 @@ async function loadReferralInfo(){
     if(error)throw error;
     document.getElementById('referralCount').textContent=String(rows?.length||0);
     listEl.innerHTML=rows?.length?rows.map(r=>`<div class="listrow"><div><b>Sabon mai amfani</b><small>${new Date(r.created_at).toLocaleDateString()}</small></div><span class="tag">${escapeHtml(r.status)}</span></div>`).join(''):'Ba a samu wanda ya yi rajista ta link ɗinka ba tukuna.';
-    setMessage('referralMessage','An shirya referral link ɗinka. Ana nuna matsayin rajista da ladan referral a tarihin wallet idan an cancanta.');
+    const rewardEl=document.getElementById('referralRewardHistory');
+    try{
+      // Use wallet_transactions as the display source so referral history matches the actual wallet credits.
+      const {data:rewards,error:rewardError}=await supabaseClient.from('wallet_transactions').select('amount_kobo,created_at').eq('user_id',currentUser.id).eq('entry_type','referral_reward').order('created_at',{ascending:false}).limit(50);
+      if(rewardError)throw rewardError;
+      const totalKobo=(rewards||[]).reduce((sum,r)=>sum+Number(r.amount_kobo||0),0);
+      rewardEl.innerHTML=rewards&&rewards.length?rewards.map(r=>`<div class="listrow"><div><b class="reward">+₦${(Number(r.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>Ladan referral • ${new Date(r.created_at).toLocaleString()}</small></div><span class="tag">An saka</span></div>`).join(''):'Ba a samu ladan referral a account ɗinka tukuna.';
+      setMessage('referralMessage',totalKobo>0?'Referral yana aiki. An saka ₦'+(totalKobo/100).toLocaleString('en-NG',{minimumFractionDigits:2})+' a wallet ɗinka daga ladan referral.':'An shirya referral link ɗinka. Za a saka ladan ₦500 idan wanda ka gayyata ya tabbatar da email kuma admin ya amince da tasks 3.');
+    }catch(rewardErr){
+      rewardEl.textContent='Ba a iya ɗauko tarihin ladan referral ba: '+rewardErr.message;
+      setMessage('referralMessage','An shirya referral link ɗinka. Ana iya samun lada bayan an cika sharuddan referral.');
+    }
   }catch(err){codeEl.value='Ba a samu ba';linkEl.value='';listEl.textContent='Ba a iya ɗauko referral ba: '+err.message;setMessage('referralMessage','Ka tabbatar an gudanar da Referral SQL setup a Supabase.');}
 }
 async function copyReferralLink(){
@@ -173,22 +193,75 @@ async function copyReferralLink(){
 async function loadWalletAndWithdrawals(){
   if(!currentUser)return;
   const balanceEl=document.getElementById('walletBalance');
-  const dashboardBalanceEl=document.getElementById('dashboardWalletBalance');
   const historyEl=document.getElementById('withdrawHistory');
   try{
     const {data:wallet,error:walletError}=await supabaseClient.from('wallets').select('balance_kobo').eq('user_id',currentUser.id).single();
     if(walletError) throw walletError;
     const formattedBalance='₦'+(Number(wallet.balance_kobo||0)/100).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
     balanceEl.textContent=formattedBalance;
-    if(dashboardBalanceEl) dashboardBalanceEl.textContent=formattedBalance;
+    const topBalance=document.getElementById('walletTopBalance');if(topBalance)topBalance.textContent=formattedBalance;
     const {data:items,error}=await supabaseClient.from('withdrawal_requests').select('id,amount_kobo,bank_name,account_name,status,admin_note,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false});
     if(error) throw error;
     if(!items||!items.length){historyEl.textContent='Ba ka da tarihin withdrawal tukuna.';}
     else historyEl.innerHTML=items.map(x=>`<div class="listrow"><div><b>₦${(Number(x.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>${escapeHtml(x.bank_name)} • ${new Date(x.created_at).toLocaleDateString()}</small>${x.admin_note?`<small>${escapeHtml(x.admin_note)}</small>`:''}</div><span class="tag">${escapeHtml(x.status)}</span></div>`).join('');
-  }catch(err){balanceEl.textContent='Ba a samu ba';if(dashboardBalanceEl)dashboardBalanceEl.textContent='Ba a samu ba';historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+err.message;}
+    const rewardHistory=document.getElementById('walletRewardHistory');
+    if(rewardHistory){
+      try{
+        const {data:transactions,error:txError}=await supabaseClient.from('wallet_transactions').select('entry_type,amount_kobo,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
+        if(txError)throw txError;
+        const rewards=(transactions||[]).filter(t=>t.entry_type==='referral_reward');
+        rewardHistory.innerHTML=rewards.length?rewards.map(t=>`<div class="listrow"><div><b class="reward">+₦${(Number(t.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>Ladan referral • ${new Date(t.created_at).toLocaleString()}</small></div><span class="tag">An saka</span></div>`).join(''):'Babu kuɗin referral da aka saka tukuna.';
+      }catch(txErr){rewardHistory.textContent='Ba a iya ɗauko tarihin kuɗin shiga ba: '+txErr.message;}
+    }
+  }catch(err){balanceEl.textContent='Ba a samu ba';historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+err.message;}
   await loadAdminPanel();
 }
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function updateConversionPreview(){
+  const input=document.getElementById('convertPointsAmount');
+  const points=Number(input?.value||1000);
+  const preview=document.getElementById('conversionPreview');
+  if(!preview)return;
+  if(!Number.isSafeInteger(points)||points<1000){preview.textContent='Mafi ƙaranci Points 1,000 ne.';return;}
+  const naira=points/10;
+  preview.textContent=points.toLocaleString('en-NG')+' Points = ₦'+naira.toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function createConversionRequestId(){
+  if(window.crypto?.randomUUID)return window.crypto.randomUUID();
+  const bytes=new Uint8Array(16);window.crypto.getRandomValues(bytes);
+  bytes[6]=(bytes[6]&0x0f)|0x40;bytes[8]=(bytes[8]&0x3f)|0x80;
+  const h=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+  return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+}
+async function convertPointsToWallet(e){
+  e.preventDefault();
+  if(!currentUser){setMessage('convertPointsMessage','Ka fara shiga account kafin conversion.');return;}
+  const input=document.getElementById('convertPointsAmount');
+  const points=Number(input.value);
+  if(!Number.isSafeInteger(points)||points<1000){setMessage('convertPointsMessage','Mafi ƙaranci Points 1,000 ne.');return;}
+  const button=document.getElementById('convertPointsButton');
+  button.disabled=true;button.textContent='Ana canza Points...';
+  setMessage('convertPointsMessage','Ana tabbatar da Points ɗinka a database...');
+  try{
+    const {data,error}=await supabaseClient.rpc('convert_points_to_wallet',{
+      p_points:points,
+      p_request_id:createConversionRequestId()
+    });
+    if(error)throw error;
+    setMessage('convertPointsMessage','An yi conversion cikin nasara. Transaction ID: '+String(data||'An rubuta transaction')+'.');
+    input.value='';updateConversionPreview();
+    const {data:profile,error:profileError}=await supabaseClient.from('profiles').select('points').eq('id',currentUser.id).single();
+    if(profileError)throw profileError;
+    document.getElementById('pointCount').textContent=Number(profile.points||0).toLocaleString('en-NG');
+    await loadWalletAndWithdrawals();
+    await loadPointsHistory();
+  }catch(err){
+    setMessage('convertPointsMessage','Conversion bai yi nasara ba: '+err.message);
+  }finally{
+    button.disabled=false;button.textContent='Convert Points to Wallet';
+  }
+}
+
 async function submitWithdrawal(e){
   e.preventDefault();
   if(!currentUser)return;
@@ -214,7 +287,6 @@ async function loadAdminPanel(){
     const {data:isAdmin,error:checkError}=await supabaseClient.rpc('is_app_admin');
     if(checkError||!isAdmin){panel.style.display='none';return;}
     panel.style.display='block';
-    subscribeToAdminTaskSubmissions();
     await loadAdminTaskSubmissions();
     const {data:stats,error:statsError}=await supabaseClient.rpc('admin_dashboard_stats');
     if(statsError)throw statsError;
@@ -238,12 +310,6 @@ async function loadAdminPanel(){
   }catch(err){panel.style.display='block';document.getElementById('adminWithdrawals').textContent='Admin dashboard error: '+err.message;}
 }
 
-function subscribeToAdminTaskSubmissions(){
-  if(!currentUser || adminTaskChannel)return;
-  adminTaskChannel=supabaseClient.channel('admin-task-submissions-'+currentUser.id)
-    .on('postgres_changes',{event:'*',schema:'public',table:'task_submissions'},()=>loadAdminTaskSubmissions())
-    .subscribe();
-}
 async function loadAdminTaskSubmissions(){
   const target=document.getElementById('adminTaskSubmissions');
   if(!target)return;
@@ -286,7 +352,6 @@ async function markWithdrawalPaid(id){
 
 async function logoutUser(){
   if(taskStatusChannel){await supabaseClient.removeChannel(taskStatusChannel);taskStatusChannel=null;}
-  if(adminTaskChannel){await supabaseClient.removeChannel(adminTaskChannel);adminTaskChannel=null;}
   const {error}=await supabaseClient.auth.signOut();
   if(error){setMessage('dashboardMessage','An samu matsala wajen fita: '+error.message);return;}
   currentUser=null;showView('home');
@@ -305,7 +370,6 @@ supabaseClient.auth.getSession().then(async({data})=>{
   if(data.session){currentUser=data.session.user;await loadProfile();subscribeToTaskStatus();showView('dashboard');}
 });
 async function loadTaskSubmissions(){
-  if(!currentUser)return;
   const {data,error}=await supabaseClient.from('task_submissions')
     .select('task_key,status,admin_note,created_at')
     .eq('user_id',currentUser.id).order('created_at',{ascending:false});
@@ -315,7 +379,7 @@ async function loadTaskSubmissions(){
   const labels={complete_profile:'Kammala bayanin account',review_features:'Duba shafin features',read_rules:'Karanta dokokin website'};
   document.querySelectorAll('[data-task-key]').forEach(btn=>{
     const key=btn.dataset.taskKey;const row=(data||[]).find(x=>x.task_key===key);
-    btn.disabled=!!row&&(row.status==='pending'||row.status==='approved');btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'Approved':row.status==='rejected'?'Sake aikawa':'Aika hujja';
+    btn.disabled=!!row;btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'Approved':row.status==='rejected'?'Rejected':'Aika hujja';
     btn.title=row?.admin_note||'';
   });
 }
@@ -334,7 +398,6 @@ async function completeTask(btn,taskKey){
     if(error)throw error;
     setMessage('dashboardMessage','An aika task ɗinka. Za a duba hujjar kafin a ba da points.');
     await loadTaskSubmissions();
-    await loadAdminTaskSubmissions();
   }catch(err){
     alert('Ba a aika task ba: '+err.message);
     btn.disabled=false;btn.textContent='Aika hujja';
