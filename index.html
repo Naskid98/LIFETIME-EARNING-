@@ -53,7 +53,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
 <div class="dash-grid"><div class="stat"><span>Wallet</span><strong id="walletTopBalance">Ana ɗauko...</strong><small class="tag">Daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Ci gaban demo</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
-<div class="dash-columns"><div class="panel"><h2>Tasks na demo</h2><p class="empty-note">Waɗannan ayyuka misalai ne kawai; ba su samar da kuɗi na gaske ba.</p><div class="listrow"><div><b>Kammala bayanin account</b><small>Task 1</small></div><button class="btn btn-soft" data-task-key="complete_profile" onclick="completeTask(this,'complete_profile')">Kammala</button></div><div class="listrow"><div><b>Duba shafin features</b><small>Task 2</small></div><button class="btn btn-soft" data-task-key="review_features" onclick="completeTask(this,'review_features')">Kammala</button></div><div class="listrow"><div><b>Karanta dokokin website</b><small>Task 3</small></div><button class="btn btn-soft" data-task-key="read_rules" onclick="completeTask(this,'read_rules')">Kammala</button></div></div>
+<div class="dash-columns"><div class="panel"><h2>Tasks masu samuwa</h2><p class="empty-note">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa. Admin zai duba kafin a saka Points.</p><div id="availableTasks">Ana ɗauko Tasks...</div></div>
 <div class="panel" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
 <div class="panel" style="margin-top:17px" id="pointsHistoryPanel"><h2>⭐ Tarihin Maki</h2><p class="empty-note">Za ka ga duk maki da aka ƙara ko aka cire daga account ɗinka. Points ba kuɗi ba ne.</p><div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div></div>
 <div class="panel" style="margin-top:17px" id="walletPanel"><h2>Wallet & Withdrawal</h2>
@@ -85,7 +85,16 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
 <div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
 </div>
-<h3>Task Review</h3><p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p><div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
+<h3>Task Manager</h3><p class="empty-note">Ƙirƙiri sabon Task, saita ladan Points, ko dakatar da Task. Kada a yi alkawarin kuɗi na gaske sai an tabbatar da tushen kudaden rewards.</p>
+<form id="adminCreateTaskForm" onsubmit="createAdminTask(event)" style="max-width:650px;margin:14px 0">
+<label class="field"><span>Sunan Task</span><input id="newTaskTitle" maxlength="100" required placeholder="Misali: Kalli koyarwar bidiyo"></label>
+<label class="field"><span>Bayani da umarnin Task</span><input id="newTaskDescription" maxlength="500" required placeholder="Bayyana abin da user zai yi"></label>
+<label class="field"><span>Points da za a bayar</span><input id="newTaskPoints" type="number" min="1" max="1000000" step="1" required inputmode="numeric" placeholder="Misali: 100"></label>
+<button class="btn btn-green" id="createTaskButton" type="submit">Ƙirƙiri Task</button>
+<div id="adminTaskMessage" class="noticebox" role="status">Sabon Task zai bayyana ga users bayan an ƙirƙira shi.</div>
+</form>
+<div id="adminTasksList">Ana ɗauko Tasks...</div>
+<h3 style="margin-top:24px">Task Review</h3><p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p><div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
 <h3 style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
 <h3 style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
 </div>
@@ -143,6 +152,7 @@ async function loadProfile(){
   await loadWalletAndWithdrawals();
   await loadReferralInfo();
   await loadPointsHistory();
+  await loadAvailableTasks();
   await loadTaskSubmissions();
 }
 async function loadPointsHistory(){
@@ -287,6 +297,7 @@ async function loadAdminPanel(){
     const {data:isAdmin,error:checkError}=await supabaseClient.rpc('is_app_admin');
     if(checkError||!isAdmin){panel.style.display='none';return;}
     panel.style.display='block';
+    await loadAdminTasks();
     await loadAdminTaskSubmissions();
     const {data:stats,error:statsError}=await supabaseClient.rpc('admin_dashboard_stats');
     if(statsError)throw statsError;
@@ -318,7 +329,8 @@ async function loadAdminTaskSubmissions(){
     .order('created_at',{ascending:false}).limit(100);
   if(error){target.textContent='Ba a iya ɗauko submissions ba: '+error.message;return;}
   if(!rows||!rows.length){target.textContent='Babu task submissions tukuna.';return;}
-  const labels={complete_profile:'Kammala bayanin account',review_features:'Duba shafin features',read_rules:'Karanta dokokin website'};
+  const {data:taskRows}=await supabaseClient.from('tasks').select('task_key,title,reward_points');
+  const labels=Object.fromEntries((taskRows||[]).map(t=>[t.task_key,t.title+' ('+t.reward_points+' Points)']));
   target.innerHTML=rows.map(r=>{const statusLabel=r.status==='approved'?'Approved':r.status==='rejected'?'Rejected':'Pending';return `<div class="listrow" style="align-items:flex-start;gap:12px"><div style="min-width:0;flex:1"><b>${escapeHtml(labels[r.task_key]||r.task_key)} — ${statusLabel}</b><small>User ID: ${escapeHtml(r.user_id)}</small><small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof||'Babu hujja')}</p>${r.admin_note?`<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>`:''}</div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==='pending'?`<button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button><button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>`:''}</div></div>`;}).join('');
 }
 async function reviewTaskSubmission(id,decision){
@@ -369,40 +381,94 @@ function subscribeToTaskStatus(){
 supabaseClient.auth.getSession().then(async({data})=>{
   if(data.session){currentUser=data.session.user;await loadProfile();subscribeToTaskStatus();showView('dashboard');}
 });
+async function loadAvailableTasks(){
+  const target=document.getElementById('availableTasks');
+  if(!target||!currentUser)return;
+  const {data:tasks,error}=await supabaseClient.from('tasks')
+    .select('task_key,title,description,reward_points,is_active')
+    .eq('is_active',true).order('created_at',{ascending:true});
+  if(error){target.textContent='Ba a iya ɗauko Tasks ba: '+error.message;return;}
+  if(!tasks||!tasks.length){target.textContent='Babu sabon Task a yanzu. Ka sake dubawa daga baya.';return;}
+  target.innerHTML=tasks.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small></div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">Aika hujja</button></div>`).join('');
+  await loadTaskSubmissions();
+}
 async function loadTaskSubmissions(){
+  if(!currentUser)return;
   const {data,error}=await supabaseClient.from('task_submissions')
     .select('task_key,status,admin_note,created_at')
     .eq('user_id',currentUser.id).order('created_at',{ascending:false});
   if(error){setMessage('dashboardMessage','Ba a iya ɗauko matsayin tasks ba: '+error.message);return;}
+  const {data:tasks}=await supabaseClient.from('tasks').select('task_key,is_active');
+  const activeTasks=(tasks||[]).filter(t=>t.is_active);
   const approved=new Set((data||[]).filter(x=>x.status==='approved').map(x=>x.task_key));
-  document.getElementById('taskCount').textContent=approved.size+'/3';
-  const labels={complete_profile:'Kammala bayanin account',review_features:'Duba shafin features',read_rules:'Karanta dokokin website'};
+  const countEl=document.getElementById('taskCount');
+  if(countEl)countEl.textContent=approved.size+'/'+activeTasks.length;
   document.querySelectorAll('[data-task-key]').forEach(btn=>{
     const key=btn.dataset.taskKey;const row=(data||[]).find(x=>x.task_key===key);
-    btn.disabled=!!row;btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'Approved':row.status==='rejected'?'Rejected':'Aika hujja';
+    btn.disabled=!!row;
+    btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'An amince':'An ƙi';
     btn.title=row?.admin_note||'';
   });
 }
 async function completeTask(btn,taskKey){
   if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
-  const prompts={
-    complete_profile:'Ka bayyana yadda ka kammala bayanin account ɗinka (aƙalla haruffa 10):',
-    review_features:'Ka rubuta abubuwan da ka gani a shafin features (aƙalla haruffa 10):',
-    read_rules:'Ka taƙaita dokokin website da ka karanta (aƙalla haruffa 10):'
-  };
-  const proof=prompt(prompts[taskKey]);if(proof===null)return;
+  const description=btn?.dataset?.taskDescription||'Ka bayyana yadda ka kammala wannan Task.';
+  const proof=prompt(description+'\n\nKa rubuta hujja mai aƙalla haruffa 10:');
+  if(proof===null)return;
   if(proof.trim().length<10){alert('Hujja ta yi gajarta. Ka rubuta aƙalla haruffa 10.');return;}
   btn.disabled=true;btn.textContent='Ana aikawa...';
   try{
     const {error}=await supabaseClient.rpc('submit_task_for_review',{p_task_key:taskKey,p_proof:proof.trim()});
     if(error)throw error;
-    setMessage('dashboardMessage','An aika task ɗinka. Za a duba hujjar kafin a ba da points.');
+    setMessage('dashboardMessage','An aika Task ɗinka. Admin zai duba hujjar kafin a ba da Points.');
     await loadTaskSubmissions();
   }catch(err){
-    alert('Ba a aika task ba: '+err.message);
+    alert('Ba a aika Task ba: '+err.message);
     btn.disabled=false;btn.textContent='Aika hujja';
   }
 }
+function makeTaskKey(title){
+  const slug=String(title||'task').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,45)||'task';
+  const suffix=(window.crypto?.randomUUID?window.crypto.randomUUID().slice(0,8):Math.random().toString(36).slice(2,10));
+  return slug+'_'+suffix;
+}
+async function createAdminTask(event){
+  event.preventDefault();
+  const title=document.getElementById('newTaskTitle').value.trim();
+  const description=document.getElementById('newTaskDescription').value.trim();
+  const reward=Number(document.getElementById('newTaskPoints').value);
+  const button=document.getElementById('createTaskButton');
+  if(!title||!description||!Number.isSafeInteger(reward)||reward<1||reward>1000000){setMessage('adminTaskMessage','Ka duba sunan Task, bayani da Points.');return;}
+  button.disabled=true;button.textContent='Ana ƙirƙira...';
+  try{
+    const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
+    if(adminError)throw adminError;
+    if(!isAdmin)throw new Error('Admin kawai zai iya ƙirƙirar Task.');
+    const {error}=await supabaseClient.from('tasks').insert({task_key:makeTaskKey(title),title,description,reward_points:reward,is_active:true,created_by:currentUser.id});
+    if(error)throw error;
+    document.getElementById('adminCreateTaskForm').reset();
+    setMessage('adminTaskMessage','An ƙirƙiri Task cikin nasara. Yanzu users za su iya ganinsa.');
+    await loadAdminTasks();
+    await loadAvailableTasks();
+  }catch(err){setMessage('adminTaskMessage','Ba a iya ƙirƙirar Task ba: '+err.message);}
+  finally{button.disabled=false;button.textContent='Ƙirƙiri Task';}
+}
+async function loadAdminTasks(){
+  const target=document.getElementById('adminTasksList');if(!target)return;
+  const {data:rows,error}=await supabaseClient.from('tasks').select('task_key,title,description,reward_points,is_active,created_at').order('created_at',{ascending:false});
+  if(error){target.textContent='Ba a iya ɗauko Tasks ba: '+error.message;return;}
+  if(!rows||!rows.length){target.textContent='Babu Tasks tukuna.';return;}
+  target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} Points • ${t.is_active?'Aiki':'An dakatar'}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?'Dakatar':'Kunna'}</button></div>`).join('');
+}
+async function toggleAdminTask(taskKey,active){
+  try{
+    const {error}=await supabaseClient.from('tasks').update({is_active:active,updated_at:new Date().toISOString()}).eq('task_key',taskKey);
+    if(error)throw error;
+    await loadAdminTasks();
+    await loadAvailableTasks();
+  }catch(err){alert('Ba a iya sauya matsayin Task ba: '+err.message);}
+}
+
 </script>
 </body>
 </html>
