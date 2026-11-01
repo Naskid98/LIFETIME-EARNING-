@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ha">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LIFETIME EARNING | Watch • Do • Earn • Repeat</title>
+<style>
+:root{--green:#075b35;--green2:#0a8748;--gold:#e6bb4c;--ink:#13251b;--muted:#65766b;--paper:#f5f8f4;--line:#e1e9e1;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,92%);margin:auto}
+header{background:#063d25;color:white;position:sticky;top:0;z-index:10;border-bottom:1px solid #ffffff20}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#f8df7a,#c99520);display:grid;place-items:center;color:#064427;font-size:23px;font-weight:900;box-shadow:0 5px 18px #0002}.brand small{display:block;color:#f2ce66;letter-spacing:2px;font-size:10px}.links{display:flex;gap:25px;align-items:center;color:#e5f0e8;font-size:14px}.actions{display:flex;gap:9px}.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:750;transition:.2s}.btn:hover{transform:translateY(-1px)}.btn-gold{background:linear-gradient(135deg,#f6dc7c,#dcae36);color:#123a24}.btn-outline{background:transparent;color:white;border:1px solid #ffffff65}.btn-green{background:var(--green2);color:white}.btn-soft{background:#e9f5ec;color:var(--green)}
+.hero{background:radial-gradient(ellipse at 80% 10%,#147848 0,transparent 36%),linear-gradient(120deg,#053a23,#087342);color:white;padding:74px 0 66px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center}.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #f2cf6b60;border-radius:30px;padding:8px 13px;color:#f4d777;font-size:12px;font-weight:800;letter-spacing:1px}.hero h1{font-size:clamp(38px,5vw,65px);line-height:1.04;letter-spacing:-2px;margin:22px 0 18px}.hero h1 span{color:#f1cc61}.hero p{color:#d3e7da;line-height:1.8;font-size:17px;max-width:570px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0}.trust{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:#d5e8db}.visual{position:relative;min-height:370px;display:grid;place-items:center}.orbit{position:absolute;width:340px;height:340px;border:1px solid #f0cf6750;border-radius:50%;box-shadow:0 0 0 35px #ffffff05,0 0 0 70px #ffffff03}.app-card{position:relative;width:min(320px,90%);border:1px solid #f3d56c66;background:linear-gradient(150deg,#0b7542,#034126);border-radius:28px;padding:23px;box-shadow:0 25px 70px #001d10aa;transform:rotate(2deg)}.app-top{display:flex;justify-content:space-between;align-items:center;color:#d8ebde;font-size:12px}.balance{margin:25px 0 20px;background:#ffffff10;border:1px solid #ffffff1a;padding:19px;border-radius:18px}.balance span{font-size:12px;color:#d0e3d7}.balance strong{display:block;font-size:32px;margin:6px 0;color:white}.goldline{height:1px;background:#e5bf55;margin:16px 0}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick div{background:#ffffff12;border-radius:13px;padding:12px 5px;text-align:center;font-size:11px}.quick b{display:block;font-size:21px;color:#f0ce68;margin-bottom:5px}
+section{padding:70px 0}.section-head{text-align:center;max-width:650px;margin:0 auto 34px}.section-head .eyebrow{color:var(--green2);border-color:#0a874833}.section-head h2{font-size:clamp(28px,4vw,42px);margin:14px 0 10px;letter-spacing:-1px}.section-head p{color:var(--muted);line-height:1.7}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.feature{background:white;border:1px solid var(--line);padding:25px;border-radius:20px;box-shadow:0 8px 24px #12351b05}.icon{width:48px;height:48px;border-radius:15px;background:#e9f5ec;color:var(--green2);display:grid;place-items:center;font-size:23px}.feature h3{margin:18px 0 8px}.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+.how{background:#edf4ed}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{background:white;border-radius:18px;padding:22px;border:1px solid var(--line)}.num{font-weight:900;color:#c79b2c;font-size:14px}.step h3{margin:10px 0}.step p{font-size:14px;line-height:1.65;color:var(--muted)}
+.cta{background:linear-gradient(110deg,#064026,#0a7845);color:white;border-radius:26px;padding:38px;display:flex;align-items:center;justify-content:space-between;gap:25px}.cta h2{font-size:clamp(24px,3vw,34px);margin:0 0 9px}.cta p{margin:0;color:#d3e8da;line-height:1.7}
+footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.foot small{color:#a9c5b3}.notice{font-size:12px;line-height:1.6;color:#789083;margin-top:18px}
+/* demo application views */
+.view{display:none;min-height:75vh;padding:38px 0 65px}.view.active{display:block}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 12px 34px #0c472008}.auth{max-width:480px;margin:20px auto}.auth h1{margin:0 0 8px}.auth p{color:var(--muted);line-height:1.6}.field{display:block;margin:15px 0}.field span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb;outline-color:var(--green2)}.full{width:100%}.dashboard-head{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:white;border:1px solid var(--line);border-radius:17px;padding:20px}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;font-size:26px;margin:10px 0 3px}.dash-columns{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-top:17px}.listrow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.listrow:last-child{border:0}.listrow small{display:block;color:var(--muted);margin-top:4px}.reward{color:var(--green2);font-weight:850}.tag{display:inline-block;background:#e9f5ec;color:var(--green);padding:5px 9px;border-radius:30px;font-size:11px;font-weight:800}.empty-note{color:var(--muted);font-size:13px;line-height:1.7}.noticebox{background:#fff8e3;border:1px solid #eedb9b;color:#6f5616;padding:14px;border-radius:13px;font-size:13px;line-height:1.6;margin-top:15px}
+@media(max-width:800px){.links{display:none}.hero-grid{grid-template-columns:1fr}.visual{min-height:330px}.features{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.dash-grid{grid-template-columns:repeat(2,1fr)}.dash-columns{grid-template-columns:1fr}.cta{align-items:flex-start;flex-direction:column}}
+@media(max-width:480px){.nav{height:68px}.brand{font-size:13px}.actions .btn{padding:10px 11px;font-size:12px}.hero{padding:53px 0}.hero h1{letter-spacing:-1px}.features,.steps{grid-template-columns:1fr}.dash-grid{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat strong{font-size:21px}.cta{padding:25px}.panel{padding:18px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#" onclick="showView('home');return false"><span class="mark">↗</span><span>LIFETIME <span style="color:#f0cd68">EARNING</span><small>WATCH • DO • EARN • REPEAT</small></span></a>
+<nav class="links"><a href="#features" onclick="showView('home')">Features</a><a href="#how" onclick="showView('home')">Yadda yake aiki</a><a href="#about" onclick="showView('home')">Game da mu</a></nav>
+<div class="actions"><button class="btn btn-outline" onclick="showView('login')">Shiga</button><button class="btn btn-gold" onclick="showView('register')">Yi Rajista</button></div>
+</div></header>
+<main>
+<div id="home" class="view active" style="padding:0">
+<div class="hero"><div class="wrap hero-grid"><div>
+<div class="eyebrow">✦ DAMAMMAKIN DIJITAL</div>
+<h1>Ka gina damarka.<br><span>Ka fara yau.</span></h1>
+<p>LIFETIME EARNING dandamali ne da aka tsara domin taimaka wa mutane su gano damammakin samun rewards ta ayyukan intanet, tasks da gayyatar abokai—cikin tsari mai bayyani.</p>
+<div class="hero-buttons"><button class="btn btn-gold" onclick="showView('register')">Fara yanzu&nbsp; →</button><button class="btn btn-outline" onclick="document.getElementById('how').scrollIntoView()">Yadda yake aiki</button></div>
+<div class="trust"><span>✓ Mai sauƙin amfani</span><span>✓ Android da Website</span><span>✓ Hausa + English</span></div>
+</div><div class="visual"><div class="orbit"></div><div class="app-card"><div class="app-top"><b>✦ LIFETIME EARNING</b><span>● Preview</span></div><div class="balance"><span>Demo Wallet Balance</span><strong>₦0.00</strong><span>Ka fara da kammala tasks masu samuwa</span><div class="goldline"></div><button class="btn btn-gold full" onclick="showView('register')">Ƙirƙiri Account</button></div><div class="quick"><div><b>▶</b>Ads</div><div><b>✓</b>Tasks</div><div><b>♧</b>Referral</div></div></div></div></div></div>
+<section id="features"><div class="wrap"><div class="section-head"><span class="eyebrow">ABUBUWAN DA KE CIKI</span><h2>Duk abin da kake buƙata, a wuri guda</h2><p>An tsara website ɗin da sauƙin amfani a wayar Android da kwamfuta.</p></div><div class="features">
+<div class="feature"><div class="icon">▶</div><h3>Watch Ads</h3><p>Shafin tallace-tallace da tsarin rewards, bayan an haɗa ad provider da ya amince da wannan amfani.</p></div>
+<div class="feature"><div class="icon">✓</div><h3>Daily Tasks</h3><p>Kammala ayyuka da duba ci gabanka a wuri guda.</p></div>
+<div class="feature"><div class="icon">♧</div><h3>Refer & Earn</h3><p>Gayyato abokai ta hanyar referral link bisa ƙa'idojin shirin.</p></div>
+<div class="feature"><div class="icon">₦</div><h3>Wallet</h3><p>Duba balance, points da tarihin rewards. Ana buƙatar backend mai tsaro kafin amfani da kuɗi na gaske.</p></div>
+<div class="feature"><div class="icon">↗</div><h3>Withdrawal</h3><p>Shafin neman cire rewards wanda zai fara aiki bayan an haɗa payment provider da sharuddan cire kuɗi.</p></div>
+<div class="feature"><div class="icon">♙</div><h3>Account & Tsaro</h3><p>Tsarin asusu, bayanan mai amfani da kariya daga amfani da tsarin ta hanyar yaudara.</p></div>
+</div></div></section>
+<section class="how" id="how"><div class="wrap"><div class="section-head"><span class="eyebrow">YADDA YAKE AIKI</span><h2>Matakai huɗu masu sauƙi</h2><p>Wannan sigar farko tana nuna tsarin amfani; ba ta biya kuɗi na gaske ba tukuna.</p></div><div class="steps">
+<div class="step"><span class="num">MATAKI 01</span><h3>Yi rajista</h3><p>Ƙirƙiri account ta amfani da sunanka da email.</p></div><div class="step"><span class="num">MATAKI 02</span><h3>Duba ayyuka</h3><p>Shiga dashboard ka duba tasks ko tallace-tallacen da aka amince da su.</p></div><div class="step"><span class="num">MATAKI 03</span><h3>Tara rewards</h3><p>Rewards za su dogara da ayyukan da aka tabbatar da dokokin dandamali.</p></div><div class="step"><span class="num">MATAKI 04</span><h3>Duba wallet</h3><p>Ka duba tarihin rewards da sharuddan cire su idan an kunna tsarin.</p></div>
+</div></div></section>
+<section id="about"><div class="wrap"><div class="cta"><div><h2>LIFETIME EARNING</h2><p>Watch • Do • Earn • Repeat<br>Gina damarka ta dijital, mataki ɗaya a lokaci.</p></div><button class="btn btn-gold" onclick="showView('register')">Ƙirƙiri Account →</button></div><p class="notice">Bayani: Wannan website prototype ne na demo. Rajista, ad rewards, referrals, wallet da withdrawal ba su haɗu da sabar ko tsarin biyan kuɗi na gaske ba. Ba a tabbatar da samun kuɗi ba. Za a buƙaci backend, database, ingantaccen tsarin tsaro, da ad/payment providers masu izini kafin ƙaddamarwa.</p></div></section>
+</div>
+<section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>
+<section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
+<section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
+<div class="dash-grid"><div class="stat"><span>Wallet</span><strong id="dashboardWalletBalance">Ana ɗauko...</strong><small class="tag">Balance daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Ci gaban demo</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
+<div class="dash-columns"><div class="panel"><h2>Tasks na demo</h2><p class="empty-note">Waɗannan ayyuka misalai ne kawai; ba su samar da kuɗi na gaske ba.</p><div class="listrow"><div><b>Kammala bayanin account</b><small>Task 1</small></div><button class="btn btn-soft" data-task-key="complete_profile" onclick="completeTask(this,'complete_profile')">Kammala</button></div><div class="listrow"><div><b>Duba shafin features</b><small>Task 2</small></div><button class="btn btn-soft" data-task-key="review_features" onclick="completeTask(this,'review_features')">Kammala</button></div><div class="listrow"><div><b>Karanta dokokin website</b><small>Task 3</small></div><button class="btn btn-soft" data-task-key="read_rules" onclick="completeTask(this,'read_rules')">Kammala</button></div></div>
+<div class="panel" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
+<div class="panel" style="margin-top:17px" id="pointsHistoryPanel"><h2>⭐ Tarihin Maki</h2><p class="empty-note">Za ka ga duk maki da aka ƙara ko aka cire daga account ɗinka. Points ba kuɗi ba ne.</p><div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div></div>
+<div class="panel" style="margin-top:17px" id="walletPanel"><h2>Wallet & Withdrawal</h2>
+<p class="empty-note">Balance daga database ne. Ana iya neman withdrawal idan wallet ɗinka yana da isasshen balance. Minimum ₦5,000.</p>
+<div class="dash-grid" style="grid-template-columns:repeat(2,1fr);margin:14px 0"><div class="stat"><span>Wallet balance</span><strong id="walletBalance">₦0.00</strong></div><div class="stat"><span>Withdrawal minimum</span><strong>₦5,000</strong></div></div>
+<form id="withdrawForm" onsubmit="submitWithdrawal(event)" style="margin-top:15px"><h3>Neman cire kuɗi</h3>
+<label class="field"><span>Adadin kuɗi (₦)</span><input id="withdrawAmount" type="number" min="5000" step="0.01" required placeholder="5000"></label>
+<label class="field"><span>Sunan banki</span><input id="bankName" required maxlength="80" placeholder="Misali: Access Bank"></label>
+<label class="field"><span>Sunan mai account</span><input id="accountName" required maxlength="100" placeholder="Sunan da ke banki"></label>
+<label class="field"><span>Lambar account</span><input id="accountNumber" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Lambobi 10"></label>
+<button class="btn btn-green" type="submit">Aika buƙatar withdrawal</button></form>
+<div id="withdrawMessage" class="noticebox" role="status">Za a duba buƙatar withdrawal kafin a aiwatar da biyan kuɗi.</div>
+<h3>Tarihin withdrawal</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div>
+</div>
+<div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2>Admin Dashboard</h2><p class="empty-note">Wannan sashe yana bayyana ga admin kawai.</p>
+<div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0">
+<div class="stat"><span>Total Users</span><strong id="adminTotalUsers">—</strong></div>
+<div class="stat"><span>Total Wallet Balance</span><strong id="adminWalletTotal">—</strong></div>
+<div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
+<div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="margin:0">Task Review</h3><button class="btn btn-soft" type="button" onclick="loadAdminTaskSubmissions()">Sabunta jerin Tasks ↻</button></div><p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p><div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
+<h3 style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
+<h3 style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
+</div>
+<div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Duba wallet da withdrawal a ƙasa.</div></div></section>
+</main>
+<footer><div class="wrap foot"><a class="brand" href="#" onclick="showView('home');return false"><span class="mark">↗</span><span>LIFETIME <span style="color:#f0cd68">EARNING</span><small>WATCH • DO • EARN • REPEAT</small></span></a><small>© 2026 Lifetime Earning</small><small>Green + Gold · Hausa / English</small></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// Supabase browser configuration. The anon/publishable key is public by design;
+// never place a service_role/secret key in this file.
+const SUPABASE_URL = 'https://biuomwzxmcvztavgsdvh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdW9td3p4bWN2enRhdmdzZHZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMTk4ODUsImV4cCI6MjEwODc5NTg4NX0.MqkNzPkatWhGNn_vk-Za_pMpcoN91JLY9RsZkz-ns7g';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let currentUser = null;
+let adminTaskChannel = null;
+
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}return false;}
+function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
+async function registerUser(e){
+  e.preventDefault();
+  const name=document.getElementById('regname').value.trim();
+  const email=document.getElementById('regemail').value.trim();
+  const password=document.getElementById('regpass').value;
+  const referralCode=document.getElementById('regref').value.trim().toUpperCase();
+  const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana ƙirƙirar account...';}
+  setMessage('registerMessage','Ana aika rajista...');
+  try{
+    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name,referral_code:referralCode}}});
+    if(error) throw error;
+    if(data.session){currentUser=data.user;await loadProfile();showView('dashboard');}
+    else {setMessage('registerMessage','An karɓi rajistarka. Duba email ɗinka domin tabbatarwa, sannan ka dawo ka shiga.');}
+  }catch(err){setMessage('registerMessage','Rajista ta samu matsala: '+err.message);}
+  finally{if(button){button.disabled=false;button.textContent='Yi Rajista';}}
+}
+async function loginUser(e){
+  e.preventDefault();
+  const email=document.getElementById('loginemail').value.trim();
+  const password=document.getElementById('loginpass').value;
+  const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana shiga...';}
+  setMessage('loginMessage','Ana tabbatar da bayananka...');
+  try{
+    const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+    if(error) throw error;
+    currentUser=data.user;await loadProfile();showView('dashboard');
+  }catch(err){setMessage('loginMessage','Shiga bai yi nasara ba: '+err.message);}
+  finally{if(button){button.disabled=false;button.textContent='Shiga';}}
+}
+async function loadProfile(){
+  if(!currentUser)return;
+  const {data,error}=await supabaseClient.from('profiles').select('full_name,points').eq('id',currentUser.id).single();
+  if(error){setMessage('dashboardMessage','An shiga account amma ba a iya karanta profile ba: '+error.message+' — ka tabbatar ka gudanar da SQL setup.');return;}
+  const fullName=(data.full_name||currentUser.email||'Aboki').trim();
+  document.getElementById('welcomeName').textContent=fullName.split(' ')[0]||'Aboki';
+  document.getElementById('pointCount').textContent=Number(data.points||0);
+  setMessage('dashboardMessage','An haɗa account ɗinka da Supabase. Points ɗinka na database ne. Ads da automatic payments ba su haɗu ba tukuna.');
+  await loadWalletAndWithdrawals();
+  await loadReferralInfo();
+  await loadPointsHistory();
+  await loadTaskSubmissions();
+}
+async function loadPointsHistory(){
+  if(!currentUser)return;
+  const target=document.getElementById('pointsHistory');
+  try{
+    const {data:rows,error}=await supabaseClient.from('points_ledger').select('delta_points,reason,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
+    if(error)throw error;
+    if(!rows||!rows.length){target.textContent='Babu tarihin maki tukuna.';return;}
+    target.innerHTML=rows.map(row=>`<div class="listrow"><div><b>${Number(row.delta_points)>0?'+':''}${Number(row.delta_points)} points</b><small>${escapeHtml(row.reason||'Canjin maki')} • ${new Date(row.created_at).toLocaleString()}</small></div><span class="tag">${Number(row.delta_points)>0?'An ƙara':'An cire'}</span></div>`).join('');
+  }catch(err){target.textContent='Ba a iya ɗauko tarihin maki ba: '+err.message;}
+}
+async function loadReferralInfo(){
+  if(!currentUser)return;
+  const codeEl=document.getElementById('myReferralCode');
+  const linkEl=document.getElementById('myReferralLink');
+  const listEl=document.getElementById('referralList');
+  try{
+    const {data:codeRow,error:codeError}=await supabaseClient.from('referral_codes').select('code').eq('user_id',currentUser.id).single();
+    if(codeError)throw codeError;
+    const code=codeRow.code;
+    const link=window.location.origin+window.location.pathname+'?ref='+encodeURIComponent(code);
+    codeEl.value=code;linkEl.value=link;
+    const {data:rows,error}=await supabaseClient.from('referrals').select('id,status,created_at').eq('referrer_user_id',currentUser.id).order('created_at',{ascending:false});
+    if(error)throw error;
+    document.getElementById('referralCount').textContent=String(rows?.length||0);
+    listEl.innerHTML=rows?.length?rows.map(r=>`<div class="listrow"><div><b>Sabon mai amfani</b><small>${new Date(r.created_at).toLocaleDateString()}</small></div><span class="tag">${escapeHtml(r.status)}</span></div>`).join(''):'Ba a samu wanda ya yi rajista ta link ɗinka ba tukuna.';
+    setMessage('referralMessage','An shirya referral link ɗinka. Ana nuna matsayin rajista da ladan referral a tarihin wallet idan an cancanta.');
+  }catch(err){codeEl.value='Ba a samu ba';linkEl.value='';listEl.textContent='Ba a iya ɗauko referral ba: '+err.message;setMessage('referralMessage','Ka tabbatar an gudanar da Referral SQL setup a Supabase.');}
+}
+async function copyReferralLink(){
+  const value=document.getElementById('myReferralLink').value;
+  if(!value||value==='Ana ɗauko...'||value===''){setMessage('referralMessage','Referral link bai samu ba tukuna.');return;}
+  try{await navigator.clipboard.writeText(value);setMessage('referralMessage','An kwafi referral link. Za ka iya turawa abokanka.');}
+  catch(err){document.getElementById('myReferralLink').focus();document.getElementById('myReferralLink').select();setMessage('referralMessage','Ka riƙe link ɗin ka zaɓi Copy.');}
+}
+async function loadWalletAndWithdrawals(){
+  if(!currentUser)return;
+  const balanceEl=document.getElementById('walletBalance');
+  const dashboardBalanceEl=document.getElementById('dashboardWalletBalance');
+  const historyEl=document.getElementById('withdrawHistory');
+  try{
+    const {data:wallet,error:walletError}=await supabaseClient.from('wallets').select('balance_kobo').eq('user_id',currentUser.id).single();
+    if(walletError) throw walletError;
+    const formattedBalance='₦'+(Number(wallet.balance_kobo||0)/100).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
+    balanceEl.textContent=formattedBalance;
+    if(dashboardBalanceEl) dashboardBalanceEl.textContent=formattedBalance;
+    const {data:items,error}=await supabaseClient.from('withdrawal_requests').select('id,amount_kobo,bank_name,account_name,status,admin_note,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false});
+    if(error) throw error;
+    if(!items||!items.length){historyEl.textContent='Ba ka da tarihin withdrawal tukuna.';}
+    else historyEl.innerHTML=items.map(x=>`<div class="listrow"><div><b>₦${(Number(x.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>${escapeHtml(x.bank_name)} • ${new Date(x.created_at).toLocaleDateString()}</small>${x.admin_note?`<small>${escapeHtml(x.admin_note)}</small>`:''}</div><span class="tag">${escapeHtml(x.status)}</span></div>`).join('');
+  }catch(err){balanceEl.textContent='Ba a samu ba';if(dashboardBalanceEl)dashboardBalanceEl.textContent='Ba a samu ba';historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+err.message;}
+  await loadAdminPanel();
+}
+function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function submitWithdrawal(e){
+  e.preventDefault();
+  if(!currentUser)return;
+  const amount=Number(document.getElementById('withdrawAmount').value);
+  if(!Number.isFinite(amount)||amount<5000){setMessage('withdrawMessage','Minimum withdrawal shi ne ₦5,000.');return;}
+  const button=e.submitter;if(button){button.disabled=true;button.textContent='Ana aika buƙata...';}
+  try{
+    const {error}=await supabaseClient.rpc('request_withdrawal',{
+      p_amount_kobo:Math.round(amount*100),
+      p_bank_name:document.getElementById('bankName').value.trim(),
+      p_account_name:document.getElementById('accountName').value.trim(),
+      p_account_number:document.getElementById('accountNumber').value.trim()
+    });
+    if(error)throw error;
+    setMessage('withdrawMessage','An aika buƙatarka. Tana jiran duba daga admin. Wannan ba yana nufin an biya ba.');
+    e.target.reset();await loadWalletAndWithdrawals();
+  }catch(err){setMessage('withdrawMessage','Ba a iya aika buƙatar ba: '+err.message);}
+  finally{if(button){button.disabled=false;button.textContent='Aika buƙatar withdrawal';}}
+}
+async function loadAdminPanel(){
+  const panel=document.getElementById('adminPanel');if(!panel)return;
+  try{
+    const {data:isAdmin,error:checkError}=await supabaseClient.rpc('is_app_admin');
+    if(checkError||!isAdmin){panel.style.display='none';return;}
+    panel.style.display='block';
+    subscribeToAdminTaskSubmissions();
+    await loadAdminTaskSubmissions();
+    const {data:stats,error:statsError}=await supabaseClient.rpc('admin_dashboard_stats');
+    if(statsError)throw statsError;
+    const st=Array.isArray(stats)?stats[0]:stats;
+    if(st){
+      document.getElementById('adminTotalUsers').textContent=Number(st.total_users||0).toLocaleString('en-NG');
+      document.getElementById('adminWalletTotal').textContent='₦'+(Number(st.total_wallet_balance_kobo||0)/100).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
+      document.getElementById('adminTotalWithdrawals').textContent=Number(st.total_withdrawals||0).toLocaleString('en-NG');
+      document.getElementById('adminPendingWithdrawals').textContent=Number(st.pending_withdrawals||0).toLocaleString('en-NG');
+    }
+    const {data:rows,error}=await supabaseClient.from('withdrawal_requests').select('id,user_id,amount_kobo,bank_name,account_name,account_number,status,admin_note,created_at').order('created_at',{ascending:false});
+    if(error)throw error;
+    const target=document.getElementById('adminWithdrawals');
+    if(!rows||!rows.length){target.textContent='Babu buƙatun withdrawal tukuna.';}
+    else target.innerHTML=rows.map(r=>`<div class="listrow" style="align-items:flex-start"><div><b>₦${(Number(r.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})} — ${escapeHtml(r.status)}</b><small>${escapeHtml(r.bank_name)} • ${escapeHtml(r.account_name)} • ${escapeHtml(r.account_number)}</small><small>User: ${escapeHtml(r.user_id)}</small></div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==='pending'?`<button class="btn btn-soft" onclick="reviewWithdrawal('${r.id}','approve')">Approve</button><button class="btn btn-soft" onclick="reviewWithdrawal('${r.id}','reject')">Reject</button>`:''}${r.status==='approved'?`<button class="btn btn-gold" onclick="markWithdrawalPaid('${r.id}')">Mark paid</button>`:''}</div></div>`).join('');
+    const {data:users,error:userError}=await supabaseClient.from('profiles').select('id,full_name,points').order('full_name',{ascending:true}).limit(100);
+    const usersEl=document.getElementById('adminUsers');
+    if(userError){usersEl.textContent='Ba a iya ɗauko users ba: '+userError.message;}
+    else if(!users||!users.length){usersEl.textContent='Babu users tukuna.';}
+    else usersEl.innerHTML=users.map(u=>`<div class="listrow"><div><b>${escapeHtml(u.full_name||'Ba a saka suna ba')}</b><small>Points: ${Number(u.points||0)} • ID: ${escapeHtml(u.id)}</small></div><span class="tag">User</span></div>`).join('');
+  }catch(err){panel.style.display='block';document.getElementById('adminWithdrawals').textContent='Admin dashboard error: '+err.message;}
+}
+
+function subscribeToAdminTaskSubmissions(){
+  if(!currentUser || adminTaskChannel)return;
+  adminTaskChannel=supabaseClient.channel('admin-task-submissions-'+currentUser.id)
+    .on('postgres_changes',{event:'*',schema:'public',table:'task_submissions'},()=>loadAdminTaskSubmissions())
+    .subscribe();
+}
+async function loadAdminTaskSubmissions(){
+  const target=document.getElementById('adminTaskSubmissions');
+  if(!target)return;
+  const {data:rows,error}=await supabaseClient.from('task_submissions')
+    .select('id,user_id,task_key,proof,status,admin_note,created_at,reviewed_at')
+    .order('created_at',{ascending:false}).limit(100);
+  if(error){target.textContent='Ba a iya ɗauko submissions ba: '+error.message;return;}
+  if(!rows||!rows.length){target.textContent='Babu task submissions tukuna.';return;}
+  const labels={complete_profile:'Kammala bayanin account',review_features:'Duba shafin features',read_rules:'Karanta dokokin website'};
+  target.innerHTML=rows.map(r=>{const statusLabel=r.status==='approved'?'Approved':r.status==='rejected'?'Rejected':'Pending';return `<div class="listrow" style="align-items:flex-start;gap:12px"><div style="min-width:0;flex:1"><b>${escapeHtml(labels[r.task_key]||r.task_key)} — ${statusLabel}</b><small>User ID: ${escapeHtml(r.user_id)}</small><small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof||'Babu hujja')}</p>${r.admin_note?`<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>`:''}</div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==='pending'?`<button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button><button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>`:''}</div></div>`;}).join('');
+}
+async function reviewTaskSubmission(id,decision){
+  const approvedMessage='Approved';
+  const rejectedMessage='Rejected';
+  const defaultMessage=decision==='approve'?approvedMessage:rejectedMessage;
+  const promptText=decision==='approve'?'Saƙon da mai amfani zai gani bayan amincewa:':'Saƙon da mai amfani zai gani bayan ƙin amincewa:';
+  const note=prompt(promptText,defaultMessage);if(note===null)return;
+  if(!note.trim()){alert('Ka saka saƙon da mai amfani zai gani.');return;}
+  try{
+    const dbDecision=decision==='approve'?'approved':'rejected';
+    const {error}=await supabaseClient.rpc('admin_review_task_submission',{p_submission_id:id,p_decision:dbDecision,p_note:note.trim()});
+    if(error)throw error;
+    alert(note.trim());
+    await loadAdminTaskSubmissions();
+    await loadAdminPanel();
+  }catch(err){alert('Ba a iya sabunta task ba: '+err.message);}
+}
+
+async function reviewWithdrawal(id,decision){
+  const note=prompt(decision==='approve'?'Rubuta bayanin amincewa (za ka iya barin babu):':'Dalilin ƙin buƙatar:');if(note===null)return;
+  try{const {error}=await supabaseClient.rpc('admin_review_withdrawal',{p_withdrawal_id:id,p_decision:decision,p_note:note});if(error)throw error;await loadWalletAndWithdrawals();}
+  catch(err){alert('Ba a iya sabunta buƙatar ba: '+err.message);}
+}
+async function markWithdrawalPaid(id){
+  if(!confirm('Ka tabbatar an riga an aika kuɗin zuwa bankin mai amfani? Sai bayan transfer na gaske ka ci gaba.'))return;
+  const note=prompt('Saka bayanin tabbatar da transfer (misali reference):');if(note===null||!note.trim())return;
+  try{const {error}=await supabaseClient.rpc('admin_mark_withdrawal_paid',{p_withdrawal_id:id,p_note:note.trim()});if(error)throw error;await loadWalletAndWithdrawals();}
+  catch(err){alert('Ba a iya sabunta matsayin biyan kuɗi ba: '+err.message);}
+}
+
+async function logoutUser(){
+  if(taskStatusChannel){await supabaseClient.removeChannel(taskStatusChannel);taskStatusChannel=null;}
+  if(adminTaskChannel){await supabaseClient.removeChannel(adminTaskChannel);adminTaskChannel=null;}
+  const {error}=await supabaseClient.auth.signOut();
+  if(error){setMessage('dashboardMessage','An samu matsala wajen fita: '+error.message);return;}
+  currentUser=null;showView('home');
+}
+const referralFromUrl=new URLSearchParams(window.location.search).get('ref');
+if(referralFromUrl){document.getElementById('regref').value=referralFromUrl.toUpperCase();}
+let taskStatusChannel=null;
+function subscribeToTaskStatus(){
+  if(!currentUser)return;
+  if(taskStatusChannel)supabaseClient.removeChannel(taskStatusChannel);
+  taskStatusChannel=supabaseClient.channel('task-status-'+currentUser.id)
+    .on('postgres_changes',{event:'UPDATE',schema:'public',table:'task_submissions',filter:'user_id=eq.'+currentUser.id},()=>loadTaskSubmissions())
+    .subscribe();
+}
+supabaseClient.auth.getSession().then(async({data})=>{
+  if(data.session){currentUser=data.session.user;await loadProfile();subscribeToTaskStatus();showView('dashboard');}
+});
+async function loadTaskSubmissions(){
+  if(!currentUser)return;
+  const {data,error}=await supabaseClient.from('task_submissions')
+    .select('task_key,status,admin_note,created_at')
+    .eq('user_id',currentUser.id).order('created_at',{ascending:false});
+  if(error){setMessage('dashboardMessage','Ba a iya ɗauko matsayin tasks ba: '+error.message);return;}
+  const approved=new Set((data||[]).filter(x=>x.status==='approved').map(x=>x.task_key));
+  document.getElementById('taskCount').textContent=approved.size+'/3';
+  const labels={complete_profile:'Kammala bayanin account',review_features:'Duba shafin features',read_rules:'Karanta dokokin website'};
+  document.querySelectorAll('[data-task-key]').forEach(btn=>{
+    const key=btn.dataset.taskKey;const row=(data||[]).find(x=>x.task_key===key);
+    btn.disabled=!!row&&(row.status==='pending'||row.status==='approved');btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'Approved':row.status==='rejected'?'Sake aikawa':'Aika hujja';
+    btn.title=row?.admin_note||'';
+  });
+}
+async function completeTask(btn,taskKey){
+  if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
+  const prompts={
+    complete_profile:'Ka bayyana yadda ka kammala bayanin account ɗinka (aƙalla haruffa 10):',
+    review_features:'Ka rubuta abubuwan da ka gani a shafin features (aƙalla haruffa 10):',
+    read_rules:'Ka taƙaita dokokin website da ka karanta (aƙalla haruffa 10):'
+  };
+  const proof=prompt(prompts[taskKey]);if(proof===null)return;
+  if(proof.trim().length<10){alert('Hujja ta yi gajarta. Ka rubuta aƙalla haruffa 10.');return;}
+  btn.disabled=true;btn.textContent='Ana aikawa...';
+  try{
+    const {error}=await supabaseClient.rpc('submit_task_for_review',{p_task_key:taskKey,p_proof:proof.trim()});
+    if(error)throw error;
+    setMessage('dashboardMessage','An aika task ɗinka. Za a duba hujjar kafin a ba da points.');
+    await loadTaskSubmissions();
+    await loadAdminTaskSubmissions();
+  }catch(err){
+    alert('Ba a aika task ba: '+err.message);
+    btn.disabled=false;btn.textContent='Aika hujja';
+  }
+}
+</script>
+</body>
+</html>
