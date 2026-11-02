@@ -50,7 +50,64 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <section id="about"><div class="wrap"><div class="cta"><div><h2>LIFETIME EARNING</h2><p>Watch • Do • Earn • Repeat<br>Gina damarka ta dijital, mataki ɗaya a lokaci.</p></div><button class="btn btn-gold" onclick="showView('register')">Ƙirƙiri Account →</button></div><p class="notice">Bayani: An haɗa wasu sassan website da Supabase. Ads da automatic payments ba su haɗu ba tukuna. Withdrawal requests suna jiran duba da aiwatarwa daga admin. Ba a tabbatar da samun kuɗi ba.</p></div></section>
 </div>
 <section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>
-<section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button><p><a style="color:var(--green2);font-weight:800"
+<!-- FORGOT PASSWORD -->
+<section id="forgotPassword" class="view">
+  <div class="wrap">
+    <div class="panel auth">
+      <span class="tag">ACCOUNT RECOVERY</span>
+      <h1>Ka manta kalmar sirri?</h1>
+      <p>Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka hanyar sabunta kalmar sirri.</p>
+
+      <form onsubmit="sendPasswordReset(event)">
+        <label class="field">
+          <span>Email ɗinka</span>
+          <input id="resetEmail" type="email" required placeholder="name@example.com">
+        </label>
+        <button class="btn btn-green full" id="resetEmailButton" type="submit">
+          Aika hanyar dawo da account
+        </button>
+      </form>
+
+      <div id="resetEmailMessage" class="noticebox" role="status">
+        Duba email ɗinka bayan aika buƙatar.
+      </div>
+
+      <p><a href="#" onclick="showView('login');return false"
+      style="color:var(--green2);font-weight:800">Komawa Shiga Account</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SET NEW PASSWORD -->
+<section id="resetPassword" class="view">
+  <div class="wrap">
+    <div class="panel auth">
+      <span class="tag">NEW PASSWORD</span>
+      <h1>Saita sabuwar kalmar sirri</h1>
+      <p>Shigar da sabuwar kalmar sirri, sannan ka tabbatar da ita.</p>
+
+      <form onsubmit="saveNewPassword(event)">
+        <label class="field">
+          <span>Sabuwar kalmar sirri</span>
+          <input id="newPassword" type="password" minlength="6" required>
+        </label>
+
+        <label class="field">
+          <span>Maimaita kalmar sirri</span>
+          <input id="confirmNewPassword" type="password" minlength="6" required>
+        </label>
+
+        <button class="btn btn-green full" id="savePasswordButton" type="submit">
+          Sabunta kalmar sirri
+        </button>
+      </form>
+
+      <div id="newPasswordMessage" class="noticebox" role="status">
+        Ka tabbatar kalmomin sirrin sun yi daidai.
+      </div>
+    </div>
+  </div>
+</section><section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button><p><a style="color:var(--green2);font-weight:800"
 href="#" onclick="showView('forgotPassword');return false">
 Ka manta kalmar sirrinka? Forgot Password
 </a></p></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
