@@ -353,19 +353,105 @@ async function loadAdminPanel(){
     else usersEl.innerHTML=users.map(u=>`<div class="listrow"><div><b>${escapeHtml(u.full_name||'Ba a saka suna ba')}</b><small>Points: ${Number(u.points||0)} • ID: ${escapeHtml(u.id)}</small></div><span class="tag">User</span></div>`).join('');
   }catch(err){panel.style.display='block';document.getElementById('adminWithdrawals').textContent='Admin dashboard error: '+err.message;}
 }
+  
+let adminTaskSubmissionRows = [];
+let adminTaskLabels = {};
 
-async function loadAdminTaskSubmissions(){
-  const target=document.getElementById('adminTaskSubmissions');
-  if(!target)return;
-  const {data:rows,error}=await supabaseClient.from('task_submissions')
+async function loadAdminTaskSubmissions() {
+  const target = document.getElementById('adminTaskSubmissions');
+  if (!target) return;
+
+  const { data: rows, error } = await supabaseClient
+    .from('task_submissions')
     .select('id,user_id,task_key,proof,status,admin_note,created_at,reviewed_at')
-    .order('created_at',{ascending:false}).limit(100);
-  if(error){target.textContent='Ba a iya ɗauko submissions ba: '+error.message;return;}
-  if(!rows||!rows.length){target.textContent='Babu task submissions tukuna.';return;}
-  const {data:taskRows}=await supabaseClient.from('tasks').select('task_key,title,reward_points');
-  const labels=Object.fromEntries((taskRows||[]).map(t=>[t.task_key,t.title+' ('+t.reward_points+' Points)']));
-  target.innerHTML=rows.map(r=>{const statusLabel=r.status==='approved'?'Approved':r.status==='rejected'?'Rejected':'Pending';return `<div class="listrow" style="align-items:flex-start;gap:12px"><div style="min-width:0;flex:1"><b>${escapeHtml(labels[r.task_key]||r.task_key)} — ${statusLabel}</b><small>User ID: ${escapeHtml(r.user_id)}</small><small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof||'Babu hujja')}</p>${r.admin_note?`<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>`:''}</div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==='pending'?`<button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button><button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>`:''}</div></div>`;}).join('');
+    .order('created_at', { ascending: false })
+    .limit(100);
+
+  if (error) {
+    target.textContent = 'Ba a iya ɗauko submissions ba: ' + error.message;
+    return;
+  }
+
+  adminTaskSubmissionRows = rows || [];
+
+  const { data: taskRows } = await supabaseClient
+    .from('tasks')
+    .select('task_key,title,reward_points');
+
+  adminTaskLabels = Object.fromEntries(
+    (taskRows || []).map(t => [
+      t.task_key,
+      t.title + ' (' + t.reward_points + ' Points)'
+    ])
+  );
+
+  renderAdminTaskSubmissions();
 }
+
+function renderAdminTaskSubmissions() {
+  const target = document.getElementById('adminTaskSubmissions');
+  if (!target) return;
+
+  const rows = adminTaskSubmissionRows;
+
+  const count = status =>
+    rows.filter(r => r.status === status).length;
+
+  document.getElementById('adminPendingTasks').textContent = count('pending');
+  document.getElementById('adminApprovedTasks').textContent = count('approved');
+  document.getElementById('adminRejectedTasks').textContent = count('rejected');
+
+  const query = (document.getElementById('adminTaskSearch')?.value || '')
+    .trim().toLowerCase();
+
+  const statusFilter =
+    document.getElementById('adminTaskStatusFilter')?.value || 'all';
+
+  const filtered = rows.filter(r => {
+    const title = adminTaskLabels[r.task_key] || r.task_key;
+    const matchesStatus =
+      statusFilter === 'all' || r.status === statusFilter;
+
+    const haystack = [
+      title, r.proof, r.user_id, r.status, r.admin_note
+    ].join(' ').toLowerCase();
+
+    return matchesStatus && haystack.includes(query);
+  });
+
+  if (!rows.length) {
+    target.textContent = 'Babu task submissions tukuna.';
+    return;
+  }
+
+  if (!filtered.length) {
+    target.textContent = 'Ba a samu sakamakon da ya dace da bincikenka ba.';
+    return;
+  }
+
+  target.innerHTML = filtered.map(r => {
+    const statusLabel =
+      r.status === 'approved' ? 'Approved' :
+      r.status === 'rejected' ? 'Rejected' : 'Pending';
+
+    return `<div class="listrow" style="align-items:flex-start;gap:12px">
+      <div style="min-width:0;flex:1">
+        <b>${escapeHtml(adminTaskLabels[r.task_key] || r.task_key)} — ${statusLabel}</b>
+        <small>User ID: ${escapeHtml(r.user_id)}</small>
+        <small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small>
+        <p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof || 'Babu hujja')}</p>
+        ${r.admin_note ? `<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>` : ''}
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${r.status === 'pending' ? `
+          <button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button>
+          <button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>
+        ` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
 async function reviewTaskSubmission(id,decision){
   const approvedMessage='Approved';
   const rejectedMessage='Rejected';
