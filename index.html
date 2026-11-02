@@ -461,7 +461,8 @@ async function loadTaskSubmissions(){
 
     btn.title=row?.admin_note||'';
   });
-    }
+}
+
   async function completeTask(btn,taskKey){
   if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
   const description=btn?.dataset?.taskDescription||'Ka bayyana yadda ka kammala wannan Task.';
