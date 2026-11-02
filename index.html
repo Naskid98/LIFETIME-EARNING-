@@ -130,7 +130,80 @@ Ka manta kalmar sirrinka? Forgot Password
 const SUPABASE_URL = 'https://biuomwzxmcvztavgsdvh.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdW9td3p4bWN2enRhdmdzZHZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMTk4ODUsImV4cCI6MjEwODc5NTg4NX0.MqkNzPkatWhGNn_vk-Za_pMpcoN91JLY9RsZkz-ns7g';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-let currentUser = null;
+let passwordRecoveryMode = false;
+
+async function sendPasswordReset(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('resetEmail').value.trim();
+  const button = document.getElementById('resetEmailButton');
+
+  button.disabled = true;
+  button.textContent = 'Ana aikawa...';
+
+  setMessage('resetEmailMessage', 'Ana aika hanyar dawo da account...');
+
+  try {
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
+    });
+
+    if (error) throw error;
+
+    setMessage(
+      'resetEmailMessage',
+      'An aika buƙatarka. Duba Inbox ko Spam na email ɗinka, sannan ka bi hanyar da aka turo maka.'
+    );
+  } catch (err) {
+    setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Aika hanyar dawo da account';
+  }
+}
+
+async function saveNewPassword(e) {
+  e.preventDefault();
+
+  const password = document.getElementById('newPassword').value;
+  const confirmation = document.getElementById('confirmNewPassword').value;
+  const button = document.getElementById('savePasswordButton');
+
+  if (password.length < 6) {
+    setMessage('newPasswordMessage', 'Kalmar sirri dole ta kasance aƙalla haruffa 6.');
+    return;
+  }
+
+  if (password !== confirmation) {
+    setMessage('newPasswordMessage', 'Kalmomin sirrin ba su yi daidai ba.');
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Ana sabuntawa...';
+
+  try {
+    const { error } = await supabaseClient.auth.updateUser({
+      password: password
+    });
+
+    if (error) throw error;
+
+    passwordRecoveryMode = false;
+    setMessage('newPasswordMessage', 'An sabunta kalmar sirrinka cikin nasara. Yanzu za ka iya shiga da sabuwar kalmar sirri.');
+
+    await supabaseClient.auth.signOut();
+    currentUser = null;
+
+    setTimeout(() => showView('login'), 1800);
+
+  } catch (err) {
+    setMessage('newPasswordMessage', 'Ba a iya sabunta kalmar sirri ba: ' + err.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Sabunta kalmar sirri';
+  }
+  }let currentUser = null;
 
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}return false;}
 function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
