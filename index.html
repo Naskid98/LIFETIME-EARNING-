@@ -427,42 +427,6 @@ async function loadTaskSubmissions(){
 });
 }
 
-async function loadTaskSubmissions(){
-  if(!currentUser)return;
-
-  const {data,error}=await supabaseClient.from('task_submissions')
-    .select('task_key,status,admin_note,created_at')
-    .eq('user_id',currentUser.id)
-    .order('created_at',{ascending:false});
-
-  if(error){
-    setMessage('dashboardMessage','Ba a iya ɗauko matsayin tasks ba: '+error.message);
-    return;
-  }
-
-  const {data:tasks}=await supabaseClient.from('tasks').select('task_key,is_active');
-  const activeTasks=(tasks||[]).filter(t=>t.is_active);
-  const approved=new Set((data||[]).filter(x=>x.status==='approved').map(x=>x.task_key));
-
-  const countEl=document.getElementById('taskCount');
-  if(countEl)countEl.textContent=approved.size+'/'+activeTasks.length;
-
-  document.querySelectorAll('[data-task-key]').forEach(btn=>{
-    const key=btn.dataset.taskKey;
-    const row=(data||[]).find(x=>x.task_key===key);
-    const status=row?.status;
-
-    btn.disabled=status==='pending'||status==='approved';
-
-    btn.textContent=!row?'Aika hujja':
-      status==='pending'?'Ana dubawa':
-      status==='approved'?'An amince':
-      'Sake aika hujja';
-
-    btn.title=row?.admin_note||'';
-  });
-}
-
   async function completeTask(btn,taskKey){
   if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
   const description=btn?.dataset?.taskDescription||'Ka bayyana yadda ka kammala wannan Task.';
