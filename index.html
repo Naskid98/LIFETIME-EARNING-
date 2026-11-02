@@ -418,11 +418,13 @@ async function loadTaskSubmissions(){
   const countEl=document.getElementById('taskCount');
   if(countEl)countEl.textContent=approved.size+'/'+activeTasks.length;
   document.querySelectorAll('[data-task-key]').forEach(btn=>{
-    const key=btn.dataset.taskKey;const row=(data||[]).find(x=>x.task_key===key);
-    btn.disabled=!!row;
-    btn.textContent=!row?'Aika hujja':row.status==='pending'?'Ana dubawa':row.status==='approved'?'An amince':'An ƙi';
-    btn.title=row?.admin_note||'';
-  });
+  const key=btn.dataset.taskKey;
+  const row=(data||[]).find(x=>x.task_key===key);
+  const status=row?.status;
+  btn.disabled=status==='pending'||status==='approved';
+  btn.textContent=!row?'Aika hujja':status==='pending'?'Ana dubawa':status==='approved'?'An amince':'Sake aika hujja';
+  btn.title=row?.admin_note||'';
+});
 }
 async function completeTask(btn,taskKey){
   if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
