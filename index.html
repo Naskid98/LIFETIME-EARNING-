@@ -474,14 +474,31 @@ async function loadAdminTasks(){
   if(!rows||!rows.length){target.textContent='Babu Tasks tukuna.';return;}
   target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} Points • ${t.is_active?'Aiki':'An dakatar'}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?'Dakatar':'Kunna'}</button></div>`).join('');
 }
-async function toggleAdminTask(taskKey,active){
+  async function toggleAdminTask(taskKey, active){
   try{
-    const {error}=await supabaseClient.from('tasks').update({is_active:active,updated_at:new Date().toISOString()}).eq('task_key',taskKey);
-    if(error)throw error;
+    const {data, error} = await supabaseClient
+      .from('tasks')
+      .update({
+        is_active: active,
+        updated_at: new Date().toISOString()
+      })
+      .eq('task_key', taskKey)
+      .select('is_active')
+      .single();
+
+    if(error) throw error;
+
+    if(data.is_active !== active){
+      throw new Error('Ba a tabbatar da sauyin matsayin Task ba.');
+    }
+
     await loadAdminTasks();
     await loadAvailableTasks();
-  }catch(err){alert('Ba a iya sauya matsayin Task ba: '+err.message);}
-}
+
+  }catch(err){
+    alert('Ba a iya sauya matsayin Task ba: ' + err.message);
+  }
+  
 
 </script>
 </body>
