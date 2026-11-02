@@ -111,6 +111,35 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 href="#" onclick="showView('forgotPassword');return false">
 Ka manta kalmar sirrinka? Forgot Password
 </a></p></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
+<section id="resetPassword" class="view">
+  <div class="wrap">
+    <div class="panel auth">
+      <h1>Sabunta Kalmar Sirri</h1>
+      <p>Shigar da sabuwar kalmar sirrinka.</p>
+
+      <form onsubmit="updatePassword(event)">
+        <label class="field">
+          <span>Sabuwar kalmar sirri</span>
+          <input id="newPassword" type="password"
+            minlength="6" autocomplete="new-password" required>
+        </label>
+
+        <label class="field">
+          <span>Sake shigar da kalmar sirri</span>
+          <input id="confirmNewPassword" type="password"
+            minlength="6" autocomplete="new-password" required>
+        </label>
+
+        <button class="btn btn-green full" type="submit">
+          Sabunta Kalmar Sirri
+        </button>
+      </form>
+
+      <div id="resetPasswordMessage" class="noticebox" role="status"></div>
+    </div>
+  </div>
+</section>
+  
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
 <div class="dash-grid"><div class="stat"><span>Wallet</span><strong id="walletTopBalance">Ana ɗauko...</strong><small class="tag">Daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
 <div class="dash-columns"><div class="panel"><h2>Tasks masu samuwa</h2><p class="empty-note">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa. Admin zai duba kafin a saka Points.</p><div id="availableTasks">Ana ɗauko Tasks...</div></div>
