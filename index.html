@@ -123,7 +123,13 @@ Ka manta kalmar sirrinka? Forgot Password
 <div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Duba wallet da withdrawal a ƙasa.</div></div></section>
 </main>
 <footer><div class="wrap foot"><a class="brand" href="#" onclick="showView('home');return false"><span class="mark">↗</span><span>LIFETIME <span style="color:#f0cd68">EARNING</span><small>WATCH • DO • EARN • REPEAT</small></span></a><small>© 2026 Lifetime Earning</small><small>Green + Gold · Hausa / English</small></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>supabaseClient.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    passwordRecoveryMode = true;
+    currentUser = session?.user || null;
+    showView('resetPassword');
+  }
+});
 <script>
 // Supabase browser configuration. The anon/publishable key is public by design;
 // never place a service_role/secret key in this file.
