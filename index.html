@@ -430,9 +430,11 @@ async function loadTaskSubmissions(){
   async function completeTask(btn,taskKey){
   if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
   const description=btn?.dataset?.taskDescription||'Ka bayyana yadda ka kammala wannan Task.';
-  const proof=prompt(description+'\n\nKa rubuta hujja mai aƙalla haruffa 10:');
-  if(proof===null)return;
-  if(proof.trim().length<10){alert('Hujja ta yi gajarta. Ka rubuta aƙalla haruffa 10.');return;}
+  const needsTenWords=taskKey.startsWith('ka_duba_sabon_update_na_yau_');
+const proof=prompt(description+'\n\n'+(needsTenWords?'Ka rubuta aƙalla kalmomi 10 daga cikin bidiyon:':'Ka rubuta hujja mai aƙalla haruffa 10:'));
+if(proof===null)return;
+if(needsTenWords&&proof.trim().split(/\s+/).filter(Boolean).length<10){alert('Wannan Task na bukatar aƙalla kalmomi 10 daga cikin bidiyon.');return;}
+if(!needsTenWords&&proof.trim().length<10){alert('Hujja ta yi gajarta. Ka rubuta aƙalla haruffa 10.');return;}
   btn.disabled=true;btn.textContent='Ana aikawa...';
   try{
     const {error}=await supabaseClient.rpc('submit_task_for_review',{p_task_key:taskKey,p_proof:proof.trim()});
