@@ -218,7 +218,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let passwordRecoveryMode = false;
 
-
+  
 async function sendPasswordReset(e) {
   e.preventDefault();
 
@@ -249,6 +249,43 @@ async function sendPasswordReset(e) {
   } finally {
     button.disabled = false;
     button.textContent = 'Aika hanyar dawo da account';
+  }
+}
+async function verifyRecoveryOtp(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('resetEmail').value.trim();
+  const token = document.getElementById('resetOtp').value.trim();
+
+  if (!email || !/^\d{6}$/.test(token)) {
+    setMessage(
+      'resetEmailMessage',
+      'Shigar da email da OTP mai lambobi 6.'
+    );
+    return;
+  }
+
+  try {
+    setMessage('resetEmailMessage', 'Ana tabbatar da OTP...');
+
+    const { data, error } = await supabaseClient.auth.verifyOtp({
+      email: email,
+      token: token,
+      type: 'recovery'
+    });
+
+    if (error) throw error;
+
+    passwordRecoveryMode = true;
+    currentUser = data.user || data.session?.user || null;
+
+    showView('resetPassword');
+
+  } catch (err) {
+    setMessage(
+      'resetEmailMessage',
+      'OTP bai yi aiki ba: ' + err.message
+    );
   }
 
 }
