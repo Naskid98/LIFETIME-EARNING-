@@ -290,20 +290,7 @@ async function loginUser(e){
   const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana shiga...';}
   setMessage('loginMessage','Ana tabbatar da bayananka...');
   try{
-    async function updatePassword(event) {
-  event.preventDefault();
-
-  const password = document.getElementById('newPassword').value;
-  const confirmPassword = document.getElementById('confirmNewPassword').value;
-  const message = document.getElementById('resetPasswordMessage');
-
-  if (password !== confirmPassword) {
-    message.textContent = 'Kalmomin sirrin ba su yi daidai ba.';
-    return;
-  }
-
-  try {
-    const { data, error } = await supabaseClient.auth.updateUser({
+   await supabaseClient.auth.updateUser({
       password: password
     });
 
