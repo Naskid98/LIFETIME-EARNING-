@@ -334,6 +334,41 @@ async function loginUser(e){
   const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana shiga...';}
   setMessage('loginMessage','Ana tabbatar da bayananka...');
   try{
+    async function updatePassword(event) {
+  event.preventDefault();
+
+  const password = document.getElementById('newPassword').value;
+  const confirmPassword = document.getElementById('confirmNewPassword').value;
+  const message = document.getElementById('resetPasswordMessage');
+
+  if (password !== confirmPassword) {
+    message.textContent = 'Kalmomin sirrin ba su yi daidai ba.';
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.updateUser({
+      password: password
+    });
+
+    if (error) throw error;
+
+    isPasswordRecovery = false;
+    currentUser = data.user || currentUser;
+
+    message.textContent = 'An sabunta kalmar sirrinka cikin nasara.';
+
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmNewPassword').value = '';
+
+    await loadProfile();
+    subscribeToTaskStatus();
+    showView('dashboard');
+
+  } catch (error) {
+    message.textContent = 'An samu matsala: ' + error.message;
+  }
+    }
     const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
     if(error) throw error;
     currentUser=data.user;await loadProfile();showView('dashboard');
