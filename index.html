@@ -252,10 +252,10 @@ async function verifyRecoveryOtp(e) {
   const email = document.getElementById('resetEmail').value.trim();
   const token = document.getElementById('resetOtp').value.trim();
 
-  if (!email || !/^\d{6}$/.test(token)) {
+  if (!email || !/^\d{8}$/.test(token)) {
     setMessage(
       'resetEmailMessage',
-      'Shigar da email da OTP mai lambobi 6.'
+      'Shigar da email da OTP mai lambobi 8.'
     );
     return;
   }
