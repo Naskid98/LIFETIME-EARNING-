@@ -131,11 +131,12 @@ href="#" onclick="showView('forgotPassword');return false">
 Ka manta kalmar sirrinka? Forgot Password
 </a></p></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section> 
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
-<div class="dash-grid"><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
-<div class="dash-columns"><div class="panel dashboard-section" id="tasksSection"><h2>Tasks masu samuwa</h2><p class="empty-note">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa. Admin zai duba kafin a saka Points.</p><div id="availableTasks">Ana ɗauko Tasks...</div></div>
-<div class="panel dashboard-section" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
+<div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
+<div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Yi amfani da maɓallan ƙasa domin buɗe kowane sashe.</div></div></section>
 
-<div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Duba wallet ta maɓallin Wallet da ke ƙasa.</div></div></section>
+<section id="tasksView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">TASK CENTER</span><h1>✓ Tasks masu samuwa</h1><p style="margin:0;color:var(--muted)">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa.</p></div></div><div class="panel dashboard-section" id="tasksSection"><div id="availableTasks">Ana ɗauko Tasks...</div></div></div></section>
+
+<section id="referralView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">REFERRAL CENTER</span><h1>👥 Referral System</h1><p style="margin:0;color:var(--muted)">Raba link ɗinka domin gayyatar sababbin masu amfani.</p></div></div><div class="panel dashboard-section" id="referralPanel"><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div></div></section>
 
 <section id="adminView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ADMIN WORKSPACE</span><h1>Admin Center</h1><p style="margin:0;color:var(--muted)">Dukkan ayyukan gudanarwa a wuri guda.</p></div></div>
 <div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2>Admin Dashboard</h2><p class="empty-note">Wannan sashe yana bayyana ga admin kawai.</p>
@@ -224,9 +225,9 @@ Ka manta kalmar sirrinka? Forgot Password
 </main>
 <nav id="dashboardBottomNav" class="bottom-nav" aria-label="Main navigation" hidden>
 <button type="button" onclick="showView('dashboard')"><span>⌂</span>Home</button>
-<button type="button" onclick="showView('dashboard');setTimeout(()=>scrollToDashboardSection('tasksSection'),80)"><span>✓</span>Tasks</button>
+<button type="button" onclick="showView('tasksView')"><span>✓</span>Tasks</button>
 <button type="button" onclick="showView('newsletterView')"><span>▤</span>News</button>
-<button type="button" onclick="showView('dashboard');setTimeout(()=>scrollToDashboardSection('referralPanel'),80)"><span>♧</span>Referral</button>
+<button type="button" onclick="showView('referralView')"><span>♧</span>Referral</button>
 <button type="button" onclick="showView('walletView')"><span>₦</span>Wallet</button>
 <button type="button" onclick="showView('accountView')"><span>☻</span>Account</button>
 <button id="adminNavButton" type="button" onclick="showView('adminView')" hidden><span>⚙</span>Admin</button>
@@ -374,13 +375,13 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-  const appViews=['dashboard','walletView','newsletterView','accountView','adminView'];
+  const appViews=['dashboard','tasksView','referralView','walletView','newsletterView','accountView','adminView'];
   const nav=document.getElementById('dashboardBottomNav');if(nav)nav.hidden=!appViews.includes(id);
   document.body.classList.toggle('dashboard-open',appViews.includes(id));
   if(id==='newsletterView'&&currentUser)loadNewsletters();
   if(id==='accountView')renderAccountActions();
   if(id==='adminView'&&currentUser)loadAdminPanel();
-  if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const map={dashboard:0,walletView:4,newsletterView:2,accountView:5,adminView:6};if(map[id]!==undefined&&nav.children[map[id]])nav.children[map[id]].classList.add('active');}
+  if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const map={dashboard:0,tasksView:1,newsletterView:2,referralView:3,walletView:4,accountView:5,adminView:6};if(map[id]!==undefined&&nav.children[map[id]])nav.children[map[id]].classList.add('active');}
   return false;
 }
 function scrollToDashboardSection(id){const target=document.getElementById(id);if(!target)return;target.scrollIntoView({behavior:'smooth',block:'start'});const nav=document.getElementById('dashboardBottomNav');if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const active=Array.from(nav.querySelectorAll('button')).find(b=>b.getAttribute('onclick')?.includes(id));if(active)active.classList.add('active');}}
