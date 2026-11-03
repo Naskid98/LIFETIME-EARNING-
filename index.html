@@ -51,22 +51,49 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 </div>
 <section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>
 <!-- FORGOT PASSWORD -->
-<section id="forgotPassword" class="view">
-  <div class="wrap">
-    <div class="panel auth">
-      <span class="tag">ACCOUNT RECOVERY</span>
-      <h1>Ka manta kalmar sirri?</h1>
-      <p>Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka hanyar sabunta kalmar sirri.</p>
+  
+<div class="wrap">
+  <div class="panel auth">
+    <span class="tag">ACCOUNT RECOVERY</span>
+    <h1>Ka manta kalmar sirri?</h1>
+    <p>Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka lambar tabbatarwa.</p>
 
-      <form onsubmit="sendPasswordReset(event)">
-        <label class="field">
-          <span>Email ɗinka</span>
-          <input id="resetEmail" type="email" required placeholder="name@example.com">
-        </label>
-        <button class="btn btn-green full" id="resetEmailButton" type="submit">
-          Aika hanyar dawo da account
-        </button>
-      </form>
+    <form onsubmit="sendPasswordReset(event)">
+      <label class="field">
+        <span>Email ɗinka</span>
+        <input id="resetEmail" type="email" required placeholder="name@example.com">
+      </label>
+
+      <button class="btn btn-green full" id="resetEmailButton" type="submit">
+        Aika lambar tabbatarwa
+      </button>
+    </form>
+
+    <div id="resetOtpBox" style="display:none;margin-top:20px">
+      <label class="field">
+        <span>Lambar OTP mai lambobi 6</span>
+        <input id="resetOtp" type="text" inputmode="numeric"
+          maxlength="6" placeholder="Shigar da OTP">
+      </label>
+
+      <button class="btn btn-green full" type="button"
+        onclick="verifyRecoveryOtp(event)">
+        Tabbatar da OTP
+      </button>
+    </div>
+
+    <div id="resetEmailMessage" class="noticebox" role="status">
+      Duba email ɗinka bayan aika buƙatar.
+    </div>
+
+    <p>
+      <a href="#" onclick="showView('login');return false"
+      style="color:var(--green2);font-weight:800">
+        Komawa Shiga Account
+      </a>
+    </p>
+  </div>
+</div>
 
       <div id="resetEmailMessage" class="noticebox" role="status">
         Duba email ɗinka bayan aika buƙatar.
