@@ -78,16 +78,24 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
   </div>
 </section>
 
-<!-- SET NEW PASSWORD -->
 
+<!-- SET NEW PASSWORD -->
+<section id="resetPassword" class="view">
+  <div class="wrap">
+    <div class="panel auth">
+      <span class="tag">ACCOUNT RECOVERY</span>
+      <h1>Sabunta kalmar sirri</h1>
+      <p>Shigar da sabuwar kalmar sirrinka sannan ka maimaita ta.</p>
+
+      <form onsubmit="saveNewPassword(event)">
         <label class="field">
           <span>Sabuwar kalmar sirri</span>
-          <input id="newPassword" type="password" minlength="6" required>
+          <input id="newPassword" type="password" minlength="6" required autocomplete="new-password">
         </label>
 
         <label class="field">
           <span>Maimaita kalmar sirri</span>
-          <input id="confirmNewPassword" type="password" minlength="6" required>
+          <input id="confirmNewPassword" type="password" minlength="6" required autocomplete="new-password">
         </label>
 
         <button class="btn btn-green full" id="savePasswordButton" type="submit">
@@ -100,7 +108,8 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
       </div>
     </div>
   </div>
-</section><section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button><p><a style="color:var(--green2);font-weight:800"
+</section>
+  <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button><p><a style="color:var(--green2);font-weight:800"
 href="#" onclick="showView('forgotPassword');return false">
 Ka manta kalmar sirrinka? Forgot Password
 </a></p></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section> 
