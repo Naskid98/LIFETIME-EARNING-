@@ -191,27 +191,31 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let passwordRecoveryMode = false;
 
+
 async function sendPasswordReset(e) {
   e.preventDefault();
 
   const email = document.getElementById('resetEmail').value.trim();
   const button = document.getElementById('resetEmailButton');
 
+  if (!email) {
+    setMessage('resetEmailMessage', 'Da fatan za ka shigar da email ɗinka.');
+    return;
+  }
+
   button.disabled = true;
   button.textContent = 'Ana aikawa...';
 
-  setMessage('resetEmailMessage', 'Ana aika hanyar dawo da account...');
+  setMessage('resetEmailMessage', 'Ana aika lambar tabbatarwa...');
 
   try {
-    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + window.location.pathname
-    });
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
 
     if (error) throw error;
 
     setMessage(
       'resetEmailMessage',
-      'An aika buƙatarka. Duba Inbox ko Spam na email ɗinka, sannan ka bi hanyar da aka turo maka.'
+      'An aika buƙatarka. Duba Inbox ko Spam domin samun lambar tabbatarwa.'
     );
   } catch (err) {
     setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);
@@ -219,6 +223,7 @@ async function sendPasswordReset(e) {
     button.disabled = false;
     button.textContent = 'Aika hanyar dawo da account';
   }
+
 }
 
 async function saveNewPassword(e) {
