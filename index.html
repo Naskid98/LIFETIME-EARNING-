@@ -349,8 +349,17 @@ async function registerUser(e){
   const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana ƙirƙirar account...';}
   setMessage('registerMessage','Ana aika rajista...');
   try{
-    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name,referral_code:referralCode}}});
-    if(error) throw error;
+    const {data,error}=await supabaseClient.auth.signUp({
+  email,
+  password,
+  options:{
+    data:{
+      full_name:name,
+      referral_code:referralCode
+    },
+    emailRedirectTo:'https://naskid98.github.io/LIFETIME-EARNING-/'
+  }
+});
     if(data.session){currentUser=data.user;await loadProfile();showView('dashboard');}
     else {setMessage('registerMessage','An karɓi rajistarka. Duba email ɗinka domin tabbatarwa, sannan ka dawo ka shiga.');}
   }catch(err){setMessage('registerMessage','Rajista ta samu matsala: '+err.message);}
