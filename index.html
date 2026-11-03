@@ -292,41 +292,44 @@ async function registerUser(e){
   }catch(err){setMessage('registerMessage','Rajista ta samu matsala: '+err.message);}
   finally{if(button){button.disabled=false;button.textContent='Yi Rajista';}}
 }
-async function loginUser(e){
+
+async function loginUser(e) {
   e.preventDefault();
-  const email=document.getElementById('loginemail').value.trim();
-  const password=document.getElementById('loginpass').value;
-  const button=e.submitter; if(button){button.disabled=true;button.textContent='Ana shiga...';}
-  setMessage('loginMessage','Ana tabbatar da bayananka...');
-  try{
-   await supabaseClient.auth.updateUser({
-      password: password
+
+  const email = document.getElementById('loginemail').value.trim();
+  const password = document.getElementById('loginpass').value;
+  const button = e.submitter;
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Ana shiga...';
+  }
+
+  setMessage('loginMessage', 'Ana tabbatar da bayananka...');
+
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
     });
 
     if (error) throw error;
 
-    isPasswordRecovery = false;
-    currentUser = data.user || currentUser;
-
-    message.textContent = 'An sabunta kalmar sirrinka cikin nasara.';
-
-    document.getElementById('newPassword').value = '';
-    document.getElementById('confirmNewPassword').value = '';
-
+    currentUser = data.user;
     await loadProfile();
     subscribeToTaskStatus();
     showView('dashboard');
 
-  } catch (error) {
-    message.textContent = 'An samu matsala: ' + error.message;
-  }
+  } catch (err) {
+    setMessage('loginMessage', 'Shiga bai yi nasara ba: ' + err.message);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'Shiga';
     }
-    const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
-    if(error) throw error;
-    currentUser=data.user;await loadProfile();showView('dashboard');
-  }catch(err){setMessage('loginMessage','Shiga bai yi nasara ba: '+err.message);}
-  finally{if(button){button.disabled=false;button.textContent='Shiga';}}
-}
+  }
+  }
+  
 async function loadProfile(){
   if(!currentUser)return;
   const {data,error}=await supabaseClient.from('profiles').select('full_name,points').eq('id',currentUser.id).single();
