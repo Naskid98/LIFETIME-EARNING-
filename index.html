@@ -49,15 +49,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 </div></div></section>
 <section id="about"><div class="wrap"><div class="cta"><div><h2>LIFETIME EARNING</h2><p>Watch • Do • Earn • Repeat<br>Gina damarka ta dijital, mataki ɗaya a lokaci.</p></div><button class="btn btn-gold" onclick="showView('register')">Ƙirƙiri Account →</button></div><p class="notice">Bayani: An haɗa wasu sassan website da Supabase. Ads da automatic payments ba su haɗu ba tukuna. Withdrawal requests suna jiran duba da aiwatarwa daga admin. Ba a tabbatar da samun kuɗi ba.</p></div></section>
 </div>
-<section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>let isPasswordRecovery = false;
-
-supabaseClient.auth.onAuthStateChange((event, session) => {
-  if (event === 'PASSWORD_RECOVERY') {
-    isPasswordRecovery = true;
-    currentUser = session?.user || null;
-    showView('resetPassword');
-  }
-});
+<section id="register" class="view"><div class="wrap"><div class="panel auth"><span class="tag">LIFETIME EARNING</span><h1>Ƙirƙiri account</h1><p>Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.</p><form onsubmit="registerUser(event)"><label class="field"><span>Cikakken suna</span><input id="regname" required placeholder="Misali: Ahmad Musa"></label><label class="field"><span>Email</span><input id="regemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Lambar gayyata (idan kana da ita)</span><input id="regref" maxlength="10" placeholder="Referral code (optional)"></label><label class="field"><span>Kalmar sirri</span><input id="regpass" type="password" minlength="6" required placeholder="Aƙalla haruffa 6"></label><button class="btn btn-green full" type="submit">Yi Rajista</button></form><p>Kana da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('login');return false">Shiga</a></p><div id="registerMessage" class="noticebox" role="status">Za a iya buƙatar tabbatar da email kafin ka shiga account.</div></div></div></section>
 <!-- FORGOT PASSWORD -->
 <section id="forgotPassword" class="view">
   <div class="wrap">
