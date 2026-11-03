@@ -135,14 +135,25 @@ Ka manta kalmar sirrinka? Forgot Password
 <div class="dash-columns"><div class="panel dashboard-section" id="tasksSection"><h2>Tasks masu samuwa</h2><p class="empty-note">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa. Admin zai duba kafin a saka Points.</p><div id="availableTasks">Ana ɗauko Tasks...</div></div>
 <div class="panel dashboard-section" id="referralPanel"><h2>👥 Referral System</h2><p class="empty-note">Raba link ɗinka domin gayyatar sababbin masu amfani. Za a ƙirga rajista da aka tabbatar kawai.</p><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div><div class="panel"><h2>Quick links</h2><div class="listrow"><div><b>📺 Watch Ads</b><small>Za a haɗa ad provider nan gaba</small></div><span class="tag">Coming soon</span></div><div class="listrow"><div><b>👥 Referral</b><small>Referral link da rajistoci suna aiki</small></div><span class="tag">Akwai</span></div><div class="listrow"><div><b>💳 Withdrawal</b><small>Payment provider ba a haɗa ba</small></div><span class="tag">Coming soon</span></div></div></div>
 
+<div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Duba wallet ta maɓallin Wallet da ke ƙasa.</div></div></section>
+
+<section id="adminView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ADMIN WORKSPACE</span><h1>Admin Center</h1><p style="margin:0;color:var(--muted)">Dukkan ayyukan gudanarwa a wuri guda.</p></div></div>
 <div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2>Admin Dashboard</h2><p class="empty-note">Wannan sashe yana bayyana ga admin kawai.</p>
-<div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0">
+<div class="admin-shortcuts" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px">
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminOverview')">📊 Bayani</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminTaskHeading')">✓ Tasks</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminNewsHeading')">📰 Sanarwa</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminReviewHeading')">📝 Duba hujjoji</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminWithdrawalHeading')">💳 Withdrawals</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminUsersHeading')">👥 Users</button>
+</div>
+<div id="adminOverview" class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0">
 <div class="stat"><span>Total Users</span><strong id="adminTotalUsers">—</strong></div>
 <div class="stat"><span>Total Wallet Balance</span><strong id="adminWalletTotal">—</strong></div>
 <div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
 <div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
 </div>
-<h3>Task Manager</h3><p class="empty-note">Ƙirƙiri sabon Task, saita ladan Points, ko dakatar da Task. Kada a yi alkawarin kuɗi na gaske sai an tabbatar da tushen kudaden rewards.</p>
+<h3 id="adminTaskHeading">Task Manager</h3><p class="empty-note">Ƙirƙiri sabon Task, saita ladan Points, ko dakatar da Task. Kada a yi alkawarin kuɗi na gaske sai an tabbatar da tushen kudaden rewards.</p>
 <form id="adminCreateTaskForm" onsubmit="createAdminTask(event)" style="max-width:650px;margin:14px 0">
 <label class="field"><span>Sunan Task</span><input id="newTaskTitle" maxlength="100" required placeholder="Misali: Kalli koyarwar bidiyo"></label>
 <label class="field"><span>Bayani da umarnin Task</span><input id="newTaskDescription" maxlength="500" required placeholder="Bayyana abin da user zai yi"></label>
@@ -151,7 +162,7 @@ Ka manta kalmar sirrinka? Forgot Password
 <button class="btn btn-green" id="createTaskButton" type="submit">Ƙirƙiri Task</button>
 <div id="adminTaskMessage" class="noticebox" role="status">Sabon Task zai bayyana ga users bayan an ƙirƙira shi.</div>
 </form>
-<h3 style="margin-top:24px">Newsletter / Sanarwa</h3>
+<h3 id="adminNewsHeading" style="margin-top:24px">Newsletter / Sanarwa</h3>
 <p class="empty-note">Rubuta sanarwa domin ta bayyana ga duk masu amfani. Za ka iya saita lokacin da za ta ƙare.</p>
 <form id="adminCreateNewsletterForm" onsubmit="createNewsletter(event)" style="max-width:650px;margin:14px 0">
 <label class="field"><span taken="title">Taken sanarwa</span><input id="newsletterTitle" maxlength="160" required placeholder="Misali: Sabon bayani ga masu amfani"></label>
@@ -162,7 +173,7 @@ Ka manta kalmar sirrinka? Forgot Password
 </form>
 <div id="adminNewslettersList">Ana ɗauko sanarwa...</div>
 <div id="adminTasksList">Ana ɗauko Tasks...</div>
-<h3 style="margin-top:24px">Task Review</h3>
+<h3 id="adminReviewHeading" style="margin-top:24px">Task Review</h3>
 <p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p>
 
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin:12px 0">
@@ -182,10 +193,9 @@ Ka manta kalmar sirrinka? Forgot Password
 </div>
 
 <div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
-<h3 style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
-<h3 style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
-</div>
-<div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Duba wallet ta maɓallin Wallet da ke ƙasa.</div></div></section>
+<h3 id="adminWithdrawalHeading" style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
+<h3 id="adminUsersHeading" style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
+</div></div></section>
 
 <section id="walletView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">WALLET CENTER</span><h1>Wallet & Harkokin Kuɗi</h1><p style="margin:0;color:var(--muted)">Balance, conversion, withdrawal da tarihin mu’amalarka.</p></div></div><div class="panel wallet-panel" style="margin-top:17px" id="walletPanel"><span class="tag">WALLET CENTER</span><h2>💰 Wallet & Harkokin Kuɗi</h2>
 <p class="empty-note">Balance daga database ne. Ana iya neman withdrawal idan wallet ɗinka yana da isasshen balance. Minimum ₦5,000.</p>
@@ -210,7 +220,7 @@ Ka manta kalmar sirrinka? Forgot Password
 <h3>📤 Tarihin Withdrawal da Matsayinsa</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div><h3>📒 Tarihin Mu’amalar Wallet</h3><div id="walletRewardHistory" class="empty-note">Ana ɗauko tarihin kuɗin shiga...</div><div class="panel" id="pointsHistoryPanel" style="margin-top:17px;background:#fbfdfb"><h3>⭐ Tarihin Points</h3><p class="empty-note">Duk Points da aka ƙara ko aka cire. Points ba kuɗi ba ne har sai an canza su bisa ƙa’ida.</p><div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div></div>
 </div></div></section>
 <section id="newsletterView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">UPDATES & ANNOUNCEMENTS</span><h1>📰 Newsletter / Sanarwa</h1><p style="margin:0;color:var(--muted)">Sabbin sanarwa da bayanai daga Lifetime Earning.</p></div></div><div id="newsletterList" class="panel">Ana ɗauko sanarwa...</div></div></section>
-<section id="accountView" class="view"><div class="wrap"><div class="panel auth"><span class="tag">ACCOUNT CENTER</span><h1>Account</h1><p>Zaɓi ko kana son shiga account ɗinka ko ƙirƙirar sabon account.</p><button class="btn btn-green full" type="button" onclick="showView('login')">Shiga Account</button><button class="btn btn-gold full" style="margin-top:12px" type="button" onclick="showView('register')">Yi Rajista</button></div></div></section>
+<section id="accountView" class="view"><div class="wrap"><div class="panel auth"><span class="tag">ACCOUNT CENTER</span><h1>Account</h1><div id="accountActions"><p>Zaɓi ko kana son shiga account ɗinka ko ƙirƙirar sabon account.</p><button class="btn btn-green full" type="button" onclick="showView('login')">Shiga Account</button><button class="btn btn-gold full" style="margin-top:12px" type="button" onclick="showView('register')">Yi Rajista</button></div></div></div></section>
 </main>
 <nav id="dashboardBottomNav" class="bottom-nav" aria-label="Main navigation" hidden>
 <button type="button" onclick="showView('dashboard')"><span>⌂</span>Home</button>
@@ -219,6 +229,7 @@ Ka manta kalmar sirrinka? Forgot Password
 <button type="button" onclick="showView('dashboard');setTimeout(()=>scrollToDashboardSection('referralPanel'),80)"><span>♧</span>Referral</button>
 <button type="button" onclick="showView('walletView')"><span>₦</span>Wallet</button>
 <button type="button" onclick="showView('accountView')"><span>☻</span>Account</button>
+<button id="adminNavButton" type="button" onclick="showView('adminView')" hidden><span>⚙</span>Admin</button>
 </nav>
 <footer><div class="wrap foot"><a class="brand" href="#" onclick="showView('home');return false"><span class="mark">↗</span><span>LIFETIME <span style="color:#f0cd68">EARNING</span><small>WATCH • DO • EARN • REPEAT</small></span></a><small>© 2026 Lifetime Earning</small><small>Green + Gold · Hausa / English</small></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -363,14 +374,27 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-  const appViews=['dashboard','walletView','newsletterView','accountView'];
+  const appViews=['dashboard','walletView','newsletterView','accountView','adminView'];
   const nav=document.getElementById('dashboardBottomNav');if(nav)nav.hidden=!appViews.includes(id);
   document.body.classList.toggle('dashboard-open',appViews.includes(id));
   if(id==='newsletterView'&&currentUser)loadNewsletters();
-  if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const map={dashboard:0,walletView:4,newsletterView:2,accountView:5};if(map[id]!==undefined&&nav.children[map[id]])nav.children[map[id]].classList.add('active');}
+  if(id==='accountView')renderAccountActions();
+  if(id==='adminView'&&currentUser)loadAdminPanel();
+  if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const map={dashboard:0,walletView:4,newsletterView:2,accountView:5,adminView:6};if(map[id]!==undefined&&nav.children[map[id]])nav.children[map[id]].classList.add('active');}
   return false;
 }
 function scrollToDashboardSection(id){const target=document.getElementById(id);if(!target)return;target.scrollIntoView({behavior:'smooth',block:'start'});const nav=document.getElementById('dashboardBottomNav');if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const active=Array.from(nav.querySelectorAll('button')).find(b=>b.getAttribute('onclick')?.includes(id));if(active)active.classList.add('active');}}
+function renderAccountActions(){
+  const box=document.getElementById('accountActions');if(!box)return;
+  if(currentUser){
+    const email=escapeHtml(currentUser.email||'');
+    box.innerHTML=`<p>Ka shiga account cikin nasara.</p><p class="empty-note">${email}</p><button class="btn btn-outline full" style="color:#a32222;border:1px solid #e8caca;margin-top:14px" type="button" onclick="logoutUser()">Fita daga Account (Logout)</button>`;
+  }else{
+    box.innerHTML=`<p>Ba ka shiga account ba tukuna. Zaɓi abin da kake son yi.</p><button class="btn btn-green full" type="button" onclick="showView('login')">Shiga Account</button><button class="btn btn-gold full" style="margin-top:12px" type="button" onclick="showView('register')">Yi Rajista</button>`;
+  }
+}
+function scrollToAdminSection(id){const target=document.getElementById(id);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}
+
 function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
 async function registerUser(e){
   e.preventDefault();
@@ -603,8 +627,8 @@ async function loadAdminPanel(){
   const panel=document.getElementById('adminPanel');if(!panel)return;
   try{
     const {data:isAdmin,error:checkError}=await supabaseClient.rpc('is_app_admin');
-    if(checkError||!isAdmin){panel.style.display='none';return;}
-    panel.style.display='block';
+    if(checkError||!isAdmin){panel.style.display='none';const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=true;return;}
+    panel.style.display='block';const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=false;
     await loadAdminTasks();
     await loadAdminNewsletters();
     await loadAdminTaskSubmissions();
@@ -761,7 +785,7 @@ async function logoutUser(){
   if(taskStatusChannel){await supabaseClient.removeChannel(taskStatusChannel);taskStatusChannel=null;}
   const {error}=await supabaseClient.auth.signOut();
   if(error){setMessage('dashboardMessage','An samu matsala wajen fita: '+error.message);return;}
-  currentUser=null;showView('home');
+  currentUser=null;const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=true;renderAccountActions();showView('home');
 }
 const referralFromUrl=new URLSearchParams(window.location.search).get('ref');
 if(referralFromUrl){document.getElementById('regref').value=referralFromUrl.toUpperCase();}
