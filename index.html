@@ -245,7 +245,7 @@ async function sendPasswordReset(e) {
       'An aika buƙatarka. Duba Inbox ko Spam domin samun lambar tabbatarwa.'
     );
   } catch (err) {
-    setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);
+    setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);document.getElementById('resetOtpBox').style.display = 'block';
   } finally {
     button.disabled = false;
     button.textContent = 'Aika hanyar dawo da account';
