@@ -677,14 +677,23 @@ function subscribeToTaskStatus(){
     .on('postgres_changes',{event:'UPDATE',schema:'public',table:'task_submissions',filter:'user_id=eq.'+currentUser.id},()=>loadTaskSubmissions())
     .subscribe();
 }
-supabaseClient.auth.getSession().then(async({data})=>{
-  if(data.session){
-    currentUser=data.session.user;
-    if(!passwordRecoveryMode){
-      await loadProfile();
-      subscribeToTaskStatus();
-      showView('dashboard');
+supabaseClient.auth.getSession().then(async ({ data, error }) => {
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (data.session) {
+    currentUser = data.session.user;
+
+    if (isPasswordRecovery) {
+      showView('resetPassword');
+      return;
     }
+
+    await loadProfile();
+    subscribeToTaskStatus();
+    showView('dashboard');
   }
 });
 async function loadAvailableTasks(){
