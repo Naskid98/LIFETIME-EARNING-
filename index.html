@@ -134,7 +134,7 @@ Ka manta kalmar sirrinka? Forgot Password
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
 <div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Yi amfani da maɓallan ƙasa domin buɗe kowane sashe.</div></div></section>
 
-<section id="tasksView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">TASK CENTER</span><h1>✓ Tasks masu samuwa</h1><p style="margin:0;color:var(--muted)">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa.</p></div></div><div class="panel dashboard-section" id="tasksSection"><div id="availableTasks">Ana ɗauko Tasks...</div></div></div></section>
+<section id="tasksView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">TASK CENTER</span><h1>✓ Tasks masu samuwa</h1><p style="margin:0;color:var(--muted)">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa.</p></div></div><div id="referralTaskProgress" class="noticebox">Ana duba ci gaban tasks 3 na Referral Commission...</div><div class="panel dashboard-section" id="tasksSection"><div id="availableTasks">Ana ɗauko Tasks...</div></div></div></section>
 
 <section id="referralView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">REFERRAL CENTER</span><h1>👥 Referral System</h1><p style="margin:0;color:var(--muted)">Raba link ɗinka domin gayyatar sababbin masu amfani.</p></div></div><div class="panel dashboard-section" id="referralPanel"><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div></div></section>
 
@@ -143,6 +143,7 @@ Ka manta kalmar sirrinka? Forgot Password
 <div class="admin-shortcuts" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px">
 <button class="btn btn-soft" onclick="scrollToAdminSection('adminOverview')">📊 Bayani</button>
 <button class="btn btn-soft" onclick="scrollToAdminSection('adminTaskHeading')">✓ Tasks</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('referralQualificationManager')">🎯 Referral Tasks 3</button>
 <button class="btn btn-soft" onclick="scrollToAdminSection('adminNewsHeading')">📰 Sanarwa</button>
 <button class="btn btn-soft" onclick="scrollToAdminSection('adminReviewHeading')">📝 Duba hujjoji</button>
 <button class="btn btn-soft" onclick="scrollToAdminSection('adminWithdrawalHeading')">💳 Withdrawals</button>
@@ -154,7 +155,26 @@ Ka manta kalmar sirrinka? Forgot Password
 <div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
 <div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
 </div>
-<h3 id="adminTaskHeading">Task Manager</h3><p class="empty-note">Ƙirƙiri sabon Task, saita ladan Points, ko dakatar da Task. Kada a yi alkawarin kuɗi na gaske sai an tabbatar da tushen kudaden rewards.</p>
+<h3 id="adminTaskHeading">Task Manager</h3><p class="empty-note">A nan za ka ƙirƙiri tasks na yau da kullum. A ƙasa akwai wani sashe na musamman domin tasks 3 da sabon user zai kammala kafin a ba mai gayyata referral commission.</p>
+<div class="settings-card" id="referralQualificationManager">
+<h3>🎯 Referral Commission — Tasks 3 na dole</h3>
+<p>Waɗannan tasks uku ne tsarin referral yake dubawa. Kada a canza maɓallan su (task keys) ko a dakatar da su. Za ka iya gyara suna, umarni da Points.</p>
+<form id="adminReferralTasksForm" onsubmit="saveReferralQualificationTasks(event)" style="max-width:650px;margin-top:14px">
+<label class="field"><span>Task 1 — Kammala bayanin account</span><input id="refTask1Title" maxlength="100" required placeholder="Sunan task"></label>
+<label class="field"><span>Umarnin Task 1</span><textarea id="refTask1Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
+<label class="field"><span>Points</span><input id="refTask1Points" type="number" min="1" max="1000000" required></label>
+<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+<label class="field"><span>Task 2 — Duba shafin Features</span><input id="refTask2Title" maxlength="100" required placeholder="Sunan task"></label>
+<label class="field"><span>Umarnin Task 2</span><textarea id="refTask2Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
+<label class="field"><span>Points</span><input id="refTask2Points" type="number" min="1" max="1000000" required></label>
+<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+<label class="field"><span>Task 3 — Karanta dokokin website</span><input id="refTask3Title" maxlength="100" required placeholder="Sunan task"></label>
+<label class="field"><span>Umarnin Task 3</span><textarea id="refTask3Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
+<label class="field"><span>Points</span><input id="refTask3Points" type="number" min="1" max="1000000" required></label>
+<button class="btn btn-green" id="saveReferralTasksButton" type="submit">Ajiye Tasks 3 na Referral</button>
+<div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
+</form>
+</div>
 <form id="adminCreateTaskForm" onsubmit="createAdminTask(event)" style="max-width:650px;margin:14px 0">
 <label class="field"><span>Sunan Task</span><input id="newTaskTitle" maxlength="100" required placeholder="Misali: Kalli koyarwar bidiyo"></label>
 <label class="field"><span>Bayani da umarnin Task</span><input id="newTaskDescription" maxlength="500" required placeholder="Bayyana abin da user zai yi"></label>
@@ -431,6 +451,19 @@ async function startPasswordChange(){
 }
 function scrollToAdminSection(id){const target=document.getElementById(id);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}
 
+async function syncAdminNavigation(){
+  const button=document.getElementById('adminNavButton');
+  if(!button)return;
+  if(!currentUser){button.hidden=true;return;}
+  try{
+    const {data,isAdmin,error}=await supabaseClient.rpc('is_app_admin');
+    button.hidden=!!error||data!==true;
+  }catch(err){
+    console.warn('Admin navigation check failed:',err);
+    button.hidden=true;
+  }
+}
+
 function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
 async function registerUser(e){
   e.preventDefault();
@@ -497,6 +530,7 @@ async function loginUser(e) {
   
 async function loadProfile(){
   if(!currentUser)return;
+  await syncAdminNavigation();
   const {data,error}=await supabaseClient.from('profiles').select('full_name,points').eq('id',currentUser.id).single();
   if(error){setMessage('dashboardMessage','An shiga account amma ba a iya karanta profile ba: '+error.message+' — ka tabbatar ka gudanar da SQL setup.');return;}
   const fullName=(data.full_name||currentUser.user_metadata?.full_name||currentUser.email||'Aboki').trim();
@@ -668,6 +702,7 @@ async function loadAdminPanel(){
     if(checkError||!isAdmin){panel.style.display='none';const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=true;return;}
     panel.style.display='block';const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=false;
     await loadAdminTasks();
+    await loadReferralQualificationTasks();
     await loadAdminNewsletters();
     await loadAdminTaskSubmissions();
     const {data:stats,error:statsError}=await supabaseClient.rpc('admin_dashboard_stats');
@@ -871,10 +906,14 @@ async function loadAvailableTasks(){
   const {data:submissions,error:submissionError}=await supabaseClient.from('task_submissions')
     .select('task_key,status,admin_note,created_at').eq('user_id',currentUser.id);
   if(submissionError){target.textContent='Ba a iya ɗauko matsayin Tasks ba: '+submissionError.message;return;}
+  const requiredReferralKeys=new Set(['complete_profile','review_features','read_rules']);
+  const approvedReferralKeys=new Set((submissions||[]).filter(x=>x.status==='approved'&&requiredReferralKeys.has(x.task_key)).map(x=>x.task_key));
+  const progress=document.getElementById('referralTaskProgress');
+  if(progress)progress.textContent='Referral Commission: ka kammala '+approvedReferralKeys.size+'/3 tasks na dole. Admin zai duba hujjoji; ladan referral zai samu ne idan an tabbatar da email kuma an amince da tasks ukun.';
   const alreadySubmitted=new Set((submissions||[]).filter(x=>x.status==='pending'||x.status==='approved').map(x=>x.task_key));
-  const visible=available.filter(t=>!alreadySubmitted.has(t.task_key));
+  const visible=available.filter(t=>!alreadySubmitted.has(t.task_key)).sort((a,b)=>Number(requiredReferralKeys.has(b.task_key))-Number(requiredReferralKeys.has(a.task_key)));
   if(!visible.length){target.textContent='Babu sabon Task a yanzu. Ka sake dubawa daga baya.';await loadTaskSubmissions();return;}
-  target.innerHTML=visible.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small>${t.expires_at?`<small>Wa’adi: ${new Date(t.expires_at).toLocaleString()}</small>`:''}</div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">Aika hujja</button></div>`).join('');
+  target.innerHTML=visible.map(t=>{const isRequired=requiredReferralKeys.has(t.task_key);return `<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b>${isRequired?'<small class="tag">Dole domin Referral Commission</small>':''}<small>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small>${t.expires_at?`<small>Wa’adi: ${new Date(t.expires_at).toLocaleString()}</small>`:''}</div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">Aika hujja</button></div>`;}).join('');
   await loadTaskSubmissions();
 }
 async function loadTaskSubmissions(){
@@ -883,11 +922,10 @@ async function loadTaskSubmissions(){
     .select('task_key,status,admin_note,created_at')
     .eq('user_id',currentUser.id).order('created_at',{ascending:false});
   if(error){setMessage('dashboardMessage','Ba a iya ɗauko matsayin tasks ba: '+error.message);return;}
-  const {data:tasks}=await supabaseClient.from('tasks').select('task_key,is_active,expires_at');
-  const activeTasks=(tasks||[]).filter(t=>t.is_active&&(!t.expires_at||new Date(t.expires_at).getTime()>Date.now()));
-  const approved=new Set((data||[]).filter(x=>x.status==='approved').map(x=>x.task_key));
+  const requiredReferralKeys=new Set(['complete_profile','review_features','read_rules']);
+  const approved=new Set((data||[]).filter(x=>x.status==='approved'&&requiredReferralKeys.has(x.task_key)).map(x=>x.task_key));
   const countEl=document.getElementById('taskCount');
-  if(countEl)countEl.textContent=approved.size+'/'+activeTasks.length;
+  if(countEl)countEl.textContent=approved.size+'/3';
 }
 
   async function completeTask(btn,taskKey){
@@ -950,6 +988,63 @@ function makeTaskKey(title){
   const suffix=(window.crypto?.randomUUID?window.crypto.randomUUID().slice(0,8):Math.random().toString(36).slice(2,10));
   return slug+'_'+suffix;
 }
+const REFERRAL_QUALIFICATION_TASKS = [
+  {key:'complete_profile', titleId:'refTask1Title', descriptionId:'refTask1Description', pointsId:'refTask1Points'},
+  {key:'review_features', titleId:'refTask2Title', descriptionId:'refTask2Description', pointsId:'refTask2Points'},
+  {key:'read_rules', titleId:'refTask3Title', descriptionId:'refTask3Description', pointsId:'refTask3Points'}
+];
+
+async function loadReferralQualificationTasks(){
+  const message=document.getElementById('referralTasksAdminMessage');
+  if(!message)return;
+  const keys=REFERRAL_QUALIFICATION_TASKS.map(t=>t.key);
+  const {data:rows,error}=await supabaseClient.from('tasks')
+    .select('task_key,title,description,reward_points,is_active')
+    .in('task_key',keys);
+  if(error){message.textContent='Ba a iya ɗauko tasks na referral ba: '+error.message;return;}
+  const byKey=Object.fromEntries((rows||[]).map(row=>[row.task_key,row]));
+  for(const item of REFERRAL_QUALIFICATION_TASKS){
+    const row=byKey[item.key];
+    if(!row){message.textContent='An rasa task mai maɓalli '+item.key+'. A duba Supabase kafin a ci gaba.';continue;}
+    document.getElementById(item.titleId).value=row.title||'';
+    document.getElementById(item.descriptionId).value=row.description||'';
+    document.getElementById(item.pointsId).value=Number(row.reward_points||0);
+  }
+  const inactive=REFERRAL_QUALIFICATION_TASKS.filter(item=>byKey[item.key]&&!byKey[item.key].is_active);
+  message.textContent=inactive.length
+    ? 'GARGAƊI: akwai task na referral da aka dakatar. Ka kunna shi a Task Manager domin sabon user ya iya kammala shi.'
+    : 'An ɗauko tasks uku. Waɗannan su ne tasks da tsarin ke dubawa kafin referral commission.';
+}
+
+async function saveReferralQualificationTasks(event){
+  event.preventDefault();
+  const button=document.getElementById('saveReferralTasksButton');
+  const message=document.getElementById('referralTasksAdminMessage');
+  button.disabled=true;button.textContent='Ana ajiyewa...';
+  try{
+    const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
+    if(adminError)throw adminError;
+    if(isAdmin!==true)throw new Error('Admin kawai zai iya gyara tasks na referral.');
+    for(const item of REFERRAL_QUALIFICATION_TASKS){
+      const title=document.getElementById(item.titleId).value.trim();
+      const description=document.getElementById(item.descriptionId).value.trim();
+      const reward=Number(document.getElementById(item.pointsId).value);
+      if(title.length<2||description.length<2||!Number.isSafeInteger(reward)||reward<1||reward>1000000){
+        throw new Error('Ka duba sunan, umarni da Points na kowane task.');
+      }
+      const {data,error}=await supabaseClient.from('tasks')
+        .update({title,description,reward_points:reward,updated_at:new Date().toISOString()})
+        .eq('task_key',item.key).select('task_key').maybeSingle();
+      if(error)throw error;
+      if(!data)throw new Error('Ba a samu task '+item.key+' a database ba.');
+    }
+    message.textContent='An sabunta tasks uku na referral cikin nasara.';
+    await loadAdminTasks();
+    await loadAvailableTasks();
+  }catch(err){message.textContent='Ba a iya ajiye tasks ba: '+err.message;}
+  finally{button.disabled=false;button.textContent='Ajiye Tasks 3 na Referral';}
+}
+
 async function createAdminTask(event){
   event.preventDefault();
   const title=document.getElementById('newTaskTitle').value.trim();
@@ -981,6 +1076,10 @@ async function loadAdminTasks(){
   target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} Points • ${t.is_active?'Aiki':'An dakatar'}</small><small>${t.expires_at?'Ƙarewa: '+new Date(t.expires_at).toLocaleString():'Ba shi da wa’adi'}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?'Dakatar':'Kunna'}</button></div>`).join('');
 }
   async function toggleAdminTask(taskKey, active){
+  if(!active&&['complete_profile','review_features','read_rules'].includes(taskKey)){
+    alert('Ba za a dakatar da wannan task ba, domin yana cikin tasks 3 da ake bukata kafin referral commission.');
+    return;
+  }
   try{
     const {data, error} = await supabaseClient
       .from('tasks')
