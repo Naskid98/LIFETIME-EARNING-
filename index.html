@@ -234,12 +234,17 @@ async function sendPasswordReset(e) {
       'resetEmailMessage',
       'An aika buƙatarka. Duba Inbox ko Spam domin samun lambar tabbatarwa.'
     );
+
+    document.getElementById('resetOtpBox').style.display = 'block';
+
   } catch (err) {
-    setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);document.getElementById('resetOtpBox').style.display = 'block';
+    setMessage('resetEmailMessage', 'An samu matsala: ' + err.message);
+
   } finally {
     button.disabled = false;
-    button.textContent = 'Aika hanyar dawo da account';
+    button.textContent = 'Aika lambar tabbatarwa';
   }
+}
 }
 async function verifyRecoveryOtp(e) {
   e.preventDefault();
