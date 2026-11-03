@@ -664,9 +664,9 @@ supabaseClient.auth.getSession().then(async ({ data, error }) => {
   if (data.session) {
     currentUser = data.session.user;
 
-    if (isPasswordRecovery) {
-      showView('resetPassword');
-      return;
+    if (passwordRecoveryMode) {
+  showView('resetPassword');
+  return;
     }
 
     await loadProfile();
