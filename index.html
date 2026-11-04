@@ -450,50 +450,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedLanguage = localStorage.getItem('appLanguage') || 'ha';
   setAppLanguage(savedLanguage);
 });
-const homeTranslations = {
-  ha: {
-    eyebrow: '✦ DAMAMMAKIN DIJITAL',
-    title: 'Ka gina damarka.<br><span>Ka fara yau.</span>',
-    description: 'LIFETIME EARNING dandamali ne da aka tsara domin taimaka wa mutane su gano damammakin samun rewards ta ayyukan intanet, tasks da gayyatar abokai—cikin tsari mai bayyani.'
-  },
-  en: {
-    eyebrow: '✦ DIGITAL OPPORTUNITIES',
-    title: 'Build your opportunity.<br><span>Start today.</span>',
-    description: 'LIFETIME EARNING is a platform designed to help people discover reward opportunities through online activities, tasks and referrals.'
-  },
-  fr: {
-    eyebrow: '✦ OPPORTUNITÉS NUMÉRIQUES',
-    title: 'Construisez votre avenir.<br><span>Commencez aujourd’hui.</span>',
-    description: 'LIFETIME EARNING est une plateforme conçue pour aider les utilisateurs à découvrir des opportunités de récompenses grâce aux activités en ligne, aux tâches et aux parrainages.'
-  },
-  ar: {
-    eyebrow: '✦ الفرص الرقمية',
-    title: 'اصنع فرصتك.<br><span>ابدأ اليوم.</span>',
-    description: 'منصة LIFETIME EARNING مصممة لمساعدة الأشخاص على اكتشاف فرص المكافآت من خلال الأنشطة والمهام عبر الإنترنت ودعوة الأصدقاء.'
-  }
-};
-
-function setAppLanguage(language) {
-  const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
-  if (!supportedLanguages.includes(language)) return;
-
-  localStorage.setItem('appLanguage', language);
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-
-  const selector = document.getElementById('languageSelect');
-  if (selector) selector.value = language;
-
-  const translations = homeTranslations[language];
-
-  const eyebrow = document.getElementById('homeEyebrow');
-  const title = document.getElementById('homeTitle');
-  const description = document.getElementById('homeDescription');
-
-  if (eyebrow) eyebrow.textContent = translations.eyebrow;
-  if (title) title.innerHTML = translations.title;
-  if (description) description.textContent = translations.description;
-}
 
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
