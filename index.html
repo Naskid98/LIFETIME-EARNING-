@@ -25,7 +25,16 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <header><div class="wrap nav">
 <a class="brand" href="#" onclick="showView('home');return false"><span class="mark">↗</span><span>LIFETIME <span style="color:#f0cd68">EARNING</span><small>WATCH • DO • EARN • REPEAT</small></span></a>
 <nav class="links"><a href="#features" onclick="showView('home')">Features</a><a href="#how" onclick="showView('home')">Yadda yake aiki</a><a href="#about" onclick="showView('home')">Game da mu</a></nav>
-<div class="actions"><button class="btn btn-outline" onclick="showView('login')">Shiga</button><button class="btn btn-gold" onclick="showView('register')">Yi Rajista</button></div>
+<div class="actions">
+<select id="languageSelect" onchange="setAppLanguage(this.value)" aria-label="Choose language" style="padding:10px;border-radius:10px;border:1px solid #ffffff65;background:#063d25;color:white;font-weight:700">
+<option value="ha">🇳🇬 Hausa</option>
+<option value="en">🇬🇧 English</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="ar">🇸🇦 العربية</option>
+</select>
+<button class="btn btn-outline" onclick="showView('login')">Shiga</button>
+<button class="btn btn-gold" onclick="showView('register')">Yi Rajista</button>
+</div>
 </div></header>
 <main>
 <div id="home" class="view active" style="padding:0">
@@ -40,8 +49,8 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <div class="feature"><div class="icon">▶</div><h3>Watch Ads</h3><p>Shafin tallace-tallace da tsarin rewards, bayan an haɗa ad provider da ya amince da wannan amfani.</p></div>
 <div class="feature"><div class="icon">✓</div><h3>Daily Tasks</h3><p>Kammala ayyuka da duba ci gabanka a wuri guda.</p></div>
 <div class="feature"><div class="icon">♧</div><h3>Refer & Earn</h3><p>Gayyato abokai ta hanyar referral link bisa ƙa'idojin shirin.</p></div>
-<div class="feature"><div class="icon">₦</div><h3>Wallet</h3><p>Duba balance, points da tarihin rewards. Ana buƙatar backend mai tsaro kafin amfani da kuɗi na gaske.</p></div>
-<div class="feature"><div class="icon">↗</div><h3>Withdrawal</h3><p>Shafin neman cire rewards wanda zai fara aiki bayan an haɗa payment provider da sharuddan cire kuɗi.</p></div>
+<div class="feature"><div class="icon">₦</div><h3>Wallet</h3><p>Duba Wallet Balance, Points, Rewards da tarihin dukkan mu'amalolinka cikin tsaro.</p></div>
+<div class="feature"><div class="icon">↗</div><h3>Withdrawal</h3><p>Nemi cire kuɗin da ke Wallet bisa ƙa'idojin dandamali. Admin zai duba buƙatarka kafin amincewa da aiwatar da biyan kuɗi.</p></div>
 <div class="feature"><div class="icon">♙</div><h3>Account & Tsaro</h3><p>Tsarin asusu, bayanan mai amfani da kariya daga amfani da tsarin ta hanyar yaudara.</p></div>
 </div></div></section>
 <section class="how" id="how"><div class="wrap"><div class="section-head"><span class="eyebrow">YADDA YAKE AIKI</span><h2>Matakai huɗu masu sauƙi</h2><p>Rajista, profile, wallet, tasks da referral suna amfani da bayanan database. Tallace-tallace da wasu hanyoyin samun kuɗi ba su haɗu ba tukuna.</p></div><div class="steps">
