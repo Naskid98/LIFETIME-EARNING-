@@ -623,7 +623,7 @@ async function loadWalletAndWithdrawals(){
           const amount=Number(t.amount_kobo||0)/100;
           const isDebit=['withdrawal_requested','admin_debit'].includes(t.entry_type);
 const isPaid=t.entry_type==='withdrawal_paid';
-          const sign=isDebit?'−':'+', label=labels[t.entry_type]||"Mu’amalar Wallet";
+          const sign=isDebit?'−':(isPaid?'':'+'), label=labels[t.entry_type]||"Mu’amalar Wallet";
           const amountClass=isDebit||isPaid?'':'reward';
 const status=isDebit?'An cire daga Wallet':(isPaid?'An biya':(t.entry_type==='withdrawal_refunded'?'An mayar':'An saka'));
           return `<div class="listrow"><div><b class="${amountClass}">${sign}₦${Math.abs(amount).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}</b><small>${label} • ${new Date(t.created_at).toLocaleString()}</small></div><span class="tag">${status}</span></div>`;
