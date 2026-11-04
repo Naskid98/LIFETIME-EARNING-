@@ -495,11 +495,6 @@ function setAppLanguage(language) {
   if (description) description.textContent = translations.description;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const savedLanguage = localStorage.getItem('appLanguage') || 'ha';
-  setAppLanguage(savedLanguage);
-});
-
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
 
