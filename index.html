@@ -401,7 +401,7 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
     showView('resetPassword');
   }
 });
-function setAppLanguage(language) {
+function showView(id){function setAppLanguage(language) {
   const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
 
   if (!supportedLanguages.includes(language)) return;
@@ -419,7 +419,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedLanguage = localStorage.getItem('appLanguage') || 'ha';
   setAppLanguage(savedLanguage);
 });
-function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
   const appViews=['dashboard','tasksView','referralView','walletView','newsletterView','accountView','adminView'];
