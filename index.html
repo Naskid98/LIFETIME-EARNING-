@@ -410,7 +410,7 @@ const homeTranslations = {
   en: {
     eyebrow: '✦ DIGITAL OPPORTUNITIES',
     title: 'Build your opportunity.<br><span>Start today.</span>',
-    description: 'LIFETIME EARNING is a platform designed to help people discover reward opportunities through online activities, tasks and referrals—in a clear and organized way.'
+    description: 'LIFETIME EARNING is a platform designed to help people discover reward opportunities through online activities, tasks and referrals.'
   },
   fr: {
     eyebrow: '✦ OPPORTUNITÉS NUMÉRIQUES',
@@ -423,17 +423,12 @@ const homeTranslations = {
     description: 'منصة LIFETIME EARNING مصممة لمساعدة الأشخاص على اكتشاف فرص المكافآت من خلال الأنشطة والمهام عبر الإنترنت ودعوة الأصدقاء.'
   }
 };
-    eyebrow: '✦ الفرص الرقمية',
-    title: 'اصنع فرصتك.<br><span>ابدأ اليوم.</span>'
-  }
-};
 
 function setAppLanguage(language) {
   const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
   if (!supportedLanguages.includes(language)) return;
 
   localStorage.setItem('appLanguage', language);
-
   document.documentElement.lang = language;
   document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
 
@@ -444,29 +439,17 @@ function setAppLanguage(language) {
 
   const eyebrow = document.getElementById('homeEyebrow');
   const title = document.getElementById('homeTitle');
+  const description = document.getElementById('homeDescription');
 
   if (eyebrow) eyebrow.textContent = translations.eyebrow;
   if (title) title.innerHTML = translations.title;
-  const description = document.getElementById('homeDescription');
-if (description) description.textContent = translations.description;
+  if (description) description.textContent = translations.description;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   const savedLanguage = localStorage.getItem('appLanguage') || 'ha';
   setAppLanguage(savedLanguage);
 });
-
-  const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
-
-  if (!supportedLanguages.includes(language)) return;
-
-  localStorage.setItem('appLanguage', language);
-
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-
-  const selector = document.getElementById('languageSelect');
-  if (selector) selector.value = language;
 const homeTranslations = {
   ha: {
     eyebrow: '✦ DAMAMMAKIN DIJITAL',
