@@ -447,6 +447,8 @@ function setAppLanguage(language) {
 
   if (eyebrow) eyebrow.textContent = translations.eyebrow;
   if (title) title.innerHTML = translations.title;
+  const description = document.getElementById('homeDescription');
+if (description) description.textContent = translations.description;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
