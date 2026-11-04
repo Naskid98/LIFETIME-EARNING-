@@ -401,7 +401,52 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
     showView('resetPassword');
   }
 });
-function showView(id){function setAppLanguage(language) {
+function showView(id){
+const homeTranslations = {
+  ha: {
+    eyebrow: '✦ DAMAMMAKIN DIJITAL',
+    title: 'Ka gina damarka.<br><span>Ka fara yau.</span>'
+  },
+  en: {
+    eyebrow: '✦ DIGITAL OPPORTUNITIES',
+    title: 'Build your opportunity.<br><span>Start today.</span>'
+  },
+  fr: {
+    eyebrow: '✦ OPPORTUNITÉS NUMÉRIQUES',
+    title: 'Construisez votre avenir.<br><span>Commencez aujourd’hui.</span>'
+  },
+  ar: {
+    eyebrow: '✦ الفرص الرقمية',
+    title: 'اصنع فرصتك.<br><span>ابدأ اليوم.</span>'
+  }
+};
+
+function setAppLanguage(language) {
+  const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
+  if (!supportedLanguages.includes(language)) return;
+
+  localStorage.setItem('appLanguage', language);
+
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+
+  const selector = document.getElementById('languageSelect');
+  if (selector) selector.value = language;
+
+  const translations = homeTranslations[language];
+
+  const eyebrow = document.getElementById('homeEyebrow');
+  const title = document.getElementById('homeTitle');
+
+  if (eyebrow) eyebrow.textContent = translations.eyebrow;
+  if (title) title.innerHTML = translations.title;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const savedLanguage = localStorage.getItem('appLanguage') || 'ha';
+  setAppLanguage(savedLanguage);
+});
+
   const supportedLanguages = ['ha', 'en', 'fr', 'ar'];
 
   if (!supportedLanguages.includes(language)) return;
