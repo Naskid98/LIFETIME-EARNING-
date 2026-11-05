@@ -581,15 +581,15 @@ function translateAppInterface(language){
       // keep leading/trailing
       const leading = el.dataset.originalText.match(/^\s*/)?.[0]||'';
       const trailing = el.dataset.originalText.match(/\s*$/)?.[0]||'';
-      el.textContent = leading + trans + trailing;
-    }
+      const translatedText = leading + trans + trailing;
+if(el.textContent !== translatedText) el.textContent = translatedText;    }
   });
   // placeholders
   document.querySelectorAll('input[placeholder]').forEach(el=>{
     if(!el.dataset.origPlaceholder) el.dataset.origPlaceholder = el.placeholder;
     const orig = el.dataset.origPlaceholder.trim();
     const tr = dict[orig] || dict[orig.replace('...','').trim()];
-    if(tr) el.placeholder = tr;
+    if(tr && el.placeholder !== tr) el.placeholder = tr;
   });
 }
 
