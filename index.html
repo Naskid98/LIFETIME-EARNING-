@@ -334,7 +334,12 @@ async function verifyRecoveryOtp(e) {
       token: token,
       type: 'recovery'
     });
-
+alert(
+  'Language: ' + language +
+  '\nDictionary: ' + typeof homeTranslations +
+  '\nEnglish text: ' + homeTranslations.en.navFeatures +
+  '\nTranslation elements: ' + document.querySelectorAll('[data-i18n]').length
+);
     if (error) throw error;
 
     passwordRecoveryMode = true;
