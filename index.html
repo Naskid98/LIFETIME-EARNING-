@@ -552,8 +552,9 @@ function translateAppInterface(language){
   // restore if Hausa
   if(!dict || language==='ha'){
     document.querySelectorAll('[data-original-text]').forEach(el=>{
-      if(el.dataset.originalText) el.textContent = el.dataset.originalText;
-    });
+      if(el.dataset.originalText && el.textContent !== el.dataset.originalText) {
+  el.textContent = el.dataset.originalText;
+  }    });
     // restore placeholders
     document.querySelectorAll('[data-orig-placeholder]').forEach(el=>{
       el.placeholder = el.dataset.origPlaceholder;
