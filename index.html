@@ -860,6 +860,7 @@ function setAppLanguage(language){
 document.addEventListener('DOMContentLoaded', function () {
   alert('Saved language: ' + localStorage.getItem('appLanguage'));
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
+  setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
   const languageObserver = new MutationObserver(() => {
     translateAppInterface(localStorage.getItem('appLanguage') || 'ha');
   });
