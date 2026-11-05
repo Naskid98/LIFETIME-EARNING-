@@ -866,11 +866,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   languageObserver.observe(document.body, {childList:true,subtree:true,characterData:true});
 });
-  const languageObserver = new MutationObserver(() => {
-    translateAppInterface(localStorage.getItem('appLanguage') || 'ha');
-  });
-  languageObserver.observe(document.body, {childList:true,subtree:true,characterData:true});
-});
 
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
