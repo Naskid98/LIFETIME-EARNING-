@@ -834,10 +834,7 @@ function setAppLanguage(language){
   if(selector) selector.value = language;
 
   const dict = homeTranslations[language];
-alert('Language: ' + language +
-'\nDictionary: ' + typeof homeTranslations +
-'\nEnglish text: ' + homeTranslations.en.navFeatures +
-'\nTranslation elements: ' + document.querySelectorAll('[data-i18n]').length);
+
   document.querySelectorAll('[data-i18n]').forEach(function(element){
     const key = element.getAttribute('data-i18n');
 
