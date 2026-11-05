@@ -1091,8 +1091,32 @@ const appUiTranslations = {
 
 const appUiOriginalText = new WeakMap();
 
+const dashboardUiTranslations = {
+  en: {
+    'ACCOUNT DASHBOARD':'ACCOUNT DASHBOARD',
+    'Sannu,':'Hello,',
+    'Ga taƙaitaccen bayani game da account ɗinka.':'Here is your account summary.',
+    'An haɗa account ɗinka da Supabase. Points ɗinka na database ne. Ads da automatic payments ba su haɗu ba tukuna.':'Your account is connected to Supabase. Your points are stored in the database. Ads and automatic payments are not connected yet.',
+    'Home':'Home','Tasks':'Tasks','News':'News','Referral':'Referral','Wallet':'Wallet','Account':'Account','Admin':'Admin'
+  },
+  fr: {
+    'ACCOUNT DASHBOARD':'TABLEAU DE BORD DU COMPTE',
+    'Sannu,':'Bonjour,',
+    'Ga taƙaitaccen bayani game da account ɗinka.':'Voici le résumé de votre compte.',
+    'An haɗa account ɗinka da Supabase. Points ɗinka na database ne. Ads da automatic payments ba su haɗu ba tukuna.':'Votre compte est connecté à Supabase. Vos points sont enregistrés dans la base de données. Les publicités et les paiements automatiques ne sont pas encore connectés.',
+    'Home':'Accueil','Tasks':'Tâches','News':'Actualités','Referral':'Parrainage','Wallet':'Portefeuille','Account':'Compte','Admin':'Administration'
+  },
+  ar: {
+    'ACCOUNT DASHBOARD':'لوحة تحكم الحساب',
+    'Sannu,':'مرحباً،',
+    'Ga taƙaitaccen bayani game da account ɗinka.':'إليك ملخص حسابك.',
+    'An haɗa account ɗinka da Supabase. Points ɗinka na database ne. Ads da automatic payments ba su haɗu ba tukuna.':'حسابك متصل بـ Supabase. نقاطك محفوظة في قاعدة البيانات. الإعلانات والمدفوعات التلقائية غير متصلة بعد.',
+    'Home':'الرئيسية','Tasks':'المهام','News':'الأخبار','Referral':'الإحالات','Wallet':'المحفظة','Account':'الحساب','Admin':'الإدارة'
+  }
+};
+
 function translateAppInterface(language){
-  const dict = appUiTranslations[language];
+  const dict = appUiTranslations[language] ? {...appUiTranslations[language], ...(dashboardUiTranslations[language]||{})} : null;
   // restore if Hausa
   // restore if Hausa
 if(!dict || language==='ha'){
@@ -1100,6 +1124,12 @@ if(!dict || language==='ha'){
     if(el.dataset.originalText && el.textContent !== el.dataset.originalText){
       el.textContent = el.dataset.originalText;
     }
+  });
+
+  document.querySelectorAll('#dashboard .dashboard-head h1, #dashboardBottomNav button').forEach(container=>{
+    container.childNodes.forEach(node=>{
+      if(node.nodeType===Node.TEXT_NODE && node.__appOriginalText!==undefined) node.nodeValue=node.__appOriginalText;
+    });
   });
 
   // restore placeholders
@@ -1112,7 +1142,7 @@ if(!dict || language==='ha'){
   return;
   }
   // only translate elements that are not inside script/style and have visible text
-  const all = document.body.querySelectorAll('h1,h2,h3,h4,span,small,p,button,a,strong,label');
+  const all = document.body.querySelectorAll('h1,h2,h3,h4,span,small,p,button,a,strong,label,#dashboardMessage');
   all.forEach(el=>{
     if(el.closest('script,style,select,option')) return;
     if(el.hasAttribute('data-i18n')) return;
@@ -1135,6 +1165,21 @@ if(!dict || language==='ha'){
       const trailing = el.dataset.originalText.match(/\s*$/)?.[0]||'';
       const translatedText = leading + trans + trailing;
 if(el.textContent !== translatedText) el.textContent = translatedText;    }
+  });
+  document.querySelectorAll('#dashboard .dashboard-head h1, #dashboardBottomNav button').forEach(container=>{
+    container.childNodes.forEach(node=>{
+      if(node.nodeType!==Node.TEXT_NODE) return;
+      if(node.__appOriginalText===undefined) node.__appOriginalText=node.nodeValue;
+      const raw=node.__appOriginalText;
+      const key=raw.trim();
+      if(!key) return;
+      const translated=dict[key];
+      if(translated){
+        const leading=raw.match(/^\s*/)?.[0]||'';
+        const trailing=raw.match(/\s*$/)?.[0]||'';
+        node.nodeValue=leading+translated+trailing;
+      }
+    });
   });
   // placeholders
   document.querySelectorAll('input[placeholder]').forEach(el=>{
@@ -1290,7 +1335,7 @@ async function syncAdminNavigation(){
   }
 }
 
-function setMessage(id, message){const el=document.getElementById(id);if(el)el.textContent=message;}
+function setMessage(id, message){const el=document.getElementById(id);if(el){el.textContent=message;if(id==='dashboardMessage'){const lang=localStorage.getItem('appLanguage')||'ha';if(lang!=='ha')translateAppInterface(lang);}}}
 async function registerUser(e){
   e.preventDefault();
   const name=document.getElementById('regname').value.trim();
