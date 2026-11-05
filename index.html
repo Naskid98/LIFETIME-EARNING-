@@ -912,13 +912,14 @@ async function convertPointsToWallet(e){
   const input=document.getElementById('convertPointsAmount');
   const points=Number(input.value);
   if(!Number.isSafeInteger(points)||points<1000){setMessage('convertPointsMessage','Mafi ƙaranci Points 1,000 ne.');return;}
+  const requestId=createConversionRequestId();
   const button=document.getElementById('convertPointsButton');
   button.disabled=true;button.textContent='Ana canza Points...';
   setMessage('convertPointsMessage','Ana tabbatar da Points ɗinka a database...');
   try{
     const {data,error}=await supabaseClient.rpc('convert_points_to_wallet',{
       p_points:points,
-      p_request_id:createConversionRequestId()
+      p_request_id:requestId
     });
     if(error)throw error;
     setMessage('convertPointsMessage','An yi conversion cikin nasara. Transaction ID: '+String(data||'An rubuta transaction')+'.');
@@ -929,7 +930,10 @@ async function convertPointsToWallet(e){
     await loadWalletAndWithdrawals();
     await loadPointsHistory();
   }catch(err){
-    setMessage('convertPointsMessage','Conversion bai yi nasara ba: '+err.message);
+    const message=String(err?.message||err||'Unknown error');
+    setMessage('convertPointsMessage',message.toLowerCase().includes('duplicate')||message.toLowerCase().includes('unique')
+      ?'An riga an karɓi wannan conversion request; duba wallet da points history.'
+      :'Conversion bai yi nasara ba: '+message);
   }finally{
     button.disabled=false;button.textContent='Convert Points to Wallet';
   }

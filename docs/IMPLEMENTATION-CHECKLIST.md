@@ -26,6 +26,12 @@
 - [ ] Confirm withdrawal requests reserve/debit funds atomically.
 - [ ] Confirm rejected withdrawals refund funds exactly once.
 
+## Prepared database hardening
+
+- [x] Add a fail-safe migration for a unique `points_ledger.event_key` guard against replayed conversions.
+- [x] Keep the conversion request ID stable for the duration of a frontend submission and show a clear duplicate-request message.
+- [ ] Apply the migration to the Supabase production project and verify there are no historical duplicate event keys.
+
 ## Security checks
 
 - [ ] Enable and test Row Level Security on every user-facing table.
@@ -59,7 +65,7 @@
 
 ## Release checks
 
-- [ ] Add a real Supabase migration/schema file to the repository.
+- [x] Add a real Supabase migration/schema file to the repository.
 - [ ] Add a staging project or test data strategy.
 - [ ] Run browser smoke tests before every release.
 - [ ] Review the public Git history for accidental secrets.
