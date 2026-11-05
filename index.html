@@ -820,25 +820,41 @@ if(el.textContent !== translatedText) el.textContent = translatedText;    }
   });
 }
 
+
 function setAppLanguage(language){
   const available = ['ha','en','fr','ar'];
   if(!available.includes(language)) return;
+
   localStorage.setItem('appLanguage', language);
   document.documentElement.lang = language;
-  document.documentElement.dir = language==='ar' ? 'rtl' : 'ltr';
+  document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+
   const selector = document.getElementById('languageSelect');
   if(selector) selector.value = language;
-  // old home translations - keep compatibility
-  if(typeof homeTranslations !== 'undefined' && homeTranslations[language]){
-    document.querySelectorAll('[data-i18n]').forEach(function(element){
-      const key = element.getAttribute('data-i18n');
-      const dict = homeTranslations[language] || homeTranslations['ha'];
-      // try full dict if key exists, else keep
-      if(dict && dict[key]) element.textContent = dict[key];
-    });
-  }
+
+  const dict = homeTranslations[language];
+
+  document.querySelectorAll('[data-i18n]').forEach(function(element){
+    const key = element.getAttribute('data-i18n');
+
+    if(!element.dataset.haText){
+      element.dataset.haText = element.textContent;
+    }
+
+    if(element.children.length > 0) return;
+
+    const translated = language === 'ha'
+      ? element.dataset.haText
+      : dict[key];
+
+    if(translated && element.textContent !== translated){
+      element.textContent = translated;
+    }
+  });
+
   translateAppInterface(language);
-}
+  }
+      
 
 document.addEventListener('DOMContentLoaded', function () {
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
