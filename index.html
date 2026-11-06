@@ -1128,7 +1128,7 @@ if(!dict || language==='ha'){
 
   document.querySelectorAll('#dashboard .dashboard-head h1, #dashboardBottomNav button').forEach(container=>{
     container.childNodes.forEach(node=>{
-      if(node.nodeType===Node.TEXT_NODE && node.__appOriginalText!==undefined) node.nodeValue=node.__appOriginalText;
+      if(node.nodeType===Node.TEXT_NODE && node.__appOriginalText!==undefined && node.nodeValue!==node.__appOriginalText) node.nodeValue=node.__appOriginalText;
     });
   });
 
@@ -1177,7 +1177,8 @@ if(el.textContent !== translatedText) el.textContent = translatedText;    }
       if(translated){
         const leading=raw.match(/^\s*/)?.[0]||'';
         const trailing=raw.match(/\s*$/)?.[0]||'';
-        node.nodeValue=leading+translated+trailing;
+        const nextValue=leading+translated+trailing;
+        if(node.nodeValue!==nextValue) node.nodeValue=nextValue;
       }
     });
   });
