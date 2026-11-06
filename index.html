@@ -181,36 +181,9 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <label class="field"><span data-admin-key="points">Points</span><input id="refTask3Points" type="number" min="1" max="1000000" required></label>
 <button class="btn btn-green" id="saveReferralTasksButton" type="submit" data-admin-key="saveReferralTasks">Ajiye Tasks 3 na Referral</button>
 <div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
-<label class="field"><input id="refTask1Title" maxlength="100" required placeholder="Sunan task"></label>
-<label class="field"><span data-admin-key="
-<label class="field"><span data-admin-key="task1Label">Task 1 — Kammala bayanin account</span><input id="refTask1Title" maxlength="100" required placeholder="Sunan task"></label>
-<label class="field"><span data-admin-key="taskInstruction1">Umarnin Task 1</span><textarea id="refTask1Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
-<label class="field"><span data-admin-key="points">Points</span><input id="refTask1Points" type="number" min="1" max="1000000" required></label>
-<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
-<span data-admin-key="task3Label">Task 3 — Karanta dokokin website</span> maxlength="100" required placeholder="Sunan task"></label>
-<label class="field"><span data-admin-key="taskInstruction3">Umarnin Task 3</span><textarea id="refTask3Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
-<label class="field"><span>Points</span><input id="refTask3Points" type="number" min="1" max="1000000" required></label>
-<button class="btn btn-green" id="saveReferralTasksButton" type="submit" data-admin-key="saveReferralTasks">Ajiye Tasks 3 na Referral</button>
-<div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
 </form>
-</div>
-<form id="adminCreateTaskForm" onsubmit="createAdminTask(event)" style="max-width:650px;margin:14px 0">
-<label class="field"><span>Sunan Task</span><input id="newTaskTitle" maxlength="100" required placeholder="Misali: Kalli koyarwar bidiyo"></label>
-<label class="field"><span>Bayani da umarnin Task</span><input id="newTaskDescription" maxlength="500" required placeholder="Bayyana abin da user zai yi"></label>
-<label class="field"><span>Points da za a bayar</span><input id="newTaskPoints" type="number" min="1" max="1000000" step="1" required inputmode="numeric" placeholder="Misali: 100"></label>
-<label class="field"><span>Ranar/ lokacin ƙarewar Task (ba dole ba)</span><input id="newTaskExpiry" type="datetime-local"></label>
-<button class="btn btn-green" id="createTaskButton" type="submit">Ƙirƙiri Task</button>
-<div id="adminTaskMessage" class="noticebox" role="status">Sabon Task zai bayyana ga users bayan an ƙirƙira shi.</div>
-</form>
-<h3 id="adminNewsHeading" style="margin-top:24px" data-admin-key="newsletter">Newsletter / Sanarwa</h3>
-<p class="empty-note">Rubuta sanarwa domin ta bayyana ga duk masu amfani. Za ka iya saita lokacin da za ta ƙare.</p>
-<form id="adminCreateNewsletterForm" onsubmit="createNewsletter(event)" style="max-width:650px;margin:14px 0">
-<label class="field"><span taken="title">Taken sanarwa</span><input id="newsletterTitle" maxlength="160" required placeholder="Misali: Sabon bayani ga masu amfani"></label>
-<label class="field"><span>Saƙon sanarwa</span><textarea id="newsletterBody" maxlength="12000" required rows="5" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
-<label class="field"><span>Lokacin ƙarewar sanarwa (ba dole ba)</span><input id="newsletterExpiry" type="datetime-local"></label>
-<button class="btn btn-green" id="createNewsletterButton" type="submit" data-admin-key="publishAnnouncement">Wallafa sanarwa</button>
-<div id="adminNewsletterMessage" class="noticebox" role="status">Sanarwar da aka wallafa za ta bayyana a shafin Newsletter.</div>
-</form>
+
+
 <div id="adminNewslettersList">Ana ɗauko sanarwa...</div>
 <div id="adminTasksList">Ana ɗauko Tasks...</div>
 <h3 id="adminReviewHeading" style="margin-top:24px" data-admin-key="taskReview">Task Review</h3>
