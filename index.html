@@ -992,8 +992,14 @@ function adminT(key){
   return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
 function applyAdminTranslations(language){
   const dict=adminTranslations[language]||adminTranslations.ha;
-  document.querySelectorAll('[data-admin-key]').forEach(el=>{if(dict[el.dataset.adminKey])el.textContent=dict[el.dataset.adminKey];});
-  document.querySelectorAll('[data-admin-placeholder]').forEach(el=>{if(dict[el.dataset.adminPlaceholder])el.placeholder=dict[el.dataset.adminPlaceholder];});
+  document.querySelectorAll('[data-admin-key]').forEach(el=>{
+    const translated=dict[el.dataset.adminKey];
+    if(translated && el.textContent!==translated) el.textContent=translated;
+  });
+  document.querySelectorAll('[data-admin-placeholder]').forEach(el=>{
+    const translated=dict[el.dataset.adminPlaceholder];
+    if(translated && el.placeholder!==translated) el.placeholder=translated;
+  });
 }
 
 function translateAppInterface(language){
@@ -1163,7 +1169,9 @@ document.addEventListener('DOMContentLoaded', function () {
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
 
   const languageObserver = new MutationObserver(() => {
-    translateAppInterface(localStorage.getItem('appLanguage') || 'ha');
+    const currentLanguage=localStorage.getItem('appLanguage') || 'ha';
+    translateAppInterface(currentLanguage);
+    applyAdminTranslations(currentLanguage);
   });
 
   languageObserver.observe(document.body, {childList:true,subtree:true,characterData:true});
