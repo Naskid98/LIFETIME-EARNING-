@@ -891,7 +891,6 @@ Object.assign(adminTranslations.ha,{noTaskSubmissions:'Babu task submissions tuk
 Object.assign(adminTranslations.en,{noTaskSubmissions:'No task submissions yet.',noSearchResults:'No results match your search.',userId:'User ID',submittedOn:'Submitted',adminNote:'Admin note',approve:'Approve',reject:'Reject'});
 Object.assign(adminTranslations.fr,{noTaskSubmissions:'Aucune soumission de tâche pour le moment.',noSearchResults:'Aucun résultat ne correspond à votre recherche.',userId:'ID utilisateur',submittedOn:'Envoyée le',adminNote:'Note de l’administrateur',approve:'Approuver',reject:'Refuser'});
 Object.assign(adminTranslations.ar,{noTaskSubmissions:'لا توجد مهام مرسلة بعد.',noSearchResults:'لا توجد نتائج مطابقة لبحثك.',userId:'معرّف المستخدم',submittedOn:'تاريخ الإرسال',adminNote:'ملاحظة المسؤول',approve:'اعتماد',reject:'رفض'});
-function adminT(key){
 Object.assign(adminTranslations.ha, {
   taskManagerDesc: "A nan za ka ƙirƙiri tasks na yau da kullum. Sashen da ke ƙasa na musamman ne domin tasks 3 da sabon user zai kammala kafin mai gayyata ya samu referral commission.",
   referralDesc: "Waɗannan tasks uku ne tsarin referral yake dubawa. Kada a canza task keys ko a dakatar da su. Za ka iya gyara suna, umarni da Points.",
@@ -916,7 +915,6 @@ Object.assign(adminTranslations.ha, {
   taskReviewDesc: "Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.",
   usersDesc: "Jerin masu amfani da points dinsu. Kada a raba bayanan sirri."
 });
-
 Object.assign(adminTranslations.en, {
   taskManagerDesc: "Create regular tasks here. The section below is reserved for the 3 qualification tasks a new user must complete before the referrer earns a referral commission.",
   referralDesc: "These are the three tasks checked by the referral system. Do not change their task keys or deactivate them. You can edit their titles, instructions and points.",
@@ -941,7 +939,6 @@ Object.assign(adminTranslations.en, {
   taskReviewDesc: "Review user submissions. Approve only when the proof matches the requested task.",
   usersDesc: "List of users and their points. Do not share private information."
 });
-
 Object.assign(adminTranslations.fr, {
   taskManagerDesc: "Créez ici les tâches régulières. La section ci-dessous est réservée aux 3 tâches qu’un nouvel utilisateur doit terminer avant que le parrain reçoive sa commission.",
   referralDesc: "Le système de parrainage vérifie ces trois tâches. Ne modifiez pas leurs clés et ne les désactivez pas. Vous pouvez modifier leurs titres, instructions et points.",
@@ -966,7 +963,6 @@ Object.assign(adminTranslations.fr, {
   taskReviewDesc: "Examinez les preuves envoyées. Approuvez uniquement si la preuve correspond à la tâche demandée.",
   usersDesc: "Liste des utilisateurs et de leurs points. Ne partagez pas les informations privées."
 });
-
 Object.assign(adminTranslations.ar, {
   taskManagerDesc: "أنشئ المهام العادية هنا. القسم أدناه مخصص للمهام الثلاث التي يجب على المستخدم الجديد إكمالها قبل حصول المُحيل على العمولة.",
   referralDesc: "يتحقق نظام الإحالة من هذه المهام الثلاث. لا تغيّر مفاتيحها ولا توقفها. يمكنك تعديل العناوين والتعليمات والنقاط.",
@@ -991,6 +987,8 @@ Object.assign(adminTranslations.ar, {
   taskReviewDesc: "راجع إثباتات المستخدمين. وافق فقط عندما يتطابق الإثبات مع المهمة المطلوبة.",
   usersDesc: "قائمة المستخدمين ونقاطهم. لا تشارك المعلومات الخاصة."
 });
+
+function adminT(key){
   return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
 function applyAdminTranslations(language){
   const dict=adminTranslations[language]||adminTranslations.ha;
