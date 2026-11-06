@@ -1142,6 +1142,7 @@ if(!dict || language==='ha'){
   const all = document.body.querySelectorAll('h1,h2,h3,h4,span,small,p,button,a,strong,label,#dashboardMessage');
   all.forEach(el=>{
     if(el.closest('script,style,select,option,#login')) return;
+if(el.id === 'walletTopBalance' || el.id === 'walletBalance') return;
     if(el.hasAttribute('data-i18n')) return;
     if(el.children.length>0) return; // avoid parent that contains other tags
     const txt = el.textContent.trim();
