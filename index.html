@@ -990,13 +990,14 @@ Object.assign(adminTranslations.ar, {
 
 function adminT(key){
   return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
-function applyAdminTranslations(language){
+function applyAdminTranslations(language, root=document){
   const dict=adminTranslations[language]||adminTranslations.ha;
-  document.querySelectorAll('[data-admin-key]').forEach(el=>{
+  const scope=root||document;
+  scope.querySelectorAll('[data-admin-key]').forEach(el=>{
     const translated=dict[el.dataset.adminKey];
     if(translated && el.textContent!==translated) el.textContent=translated;
   });
-  document.querySelectorAll('[data-admin-placeholder]').forEach(el=>{
+  scope.querySelectorAll('[data-admin-placeholder]').forEach(el=>{
     const translated=dict[el.dataset.adminPlaceholder];
     if(translated && el.placeholder!==translated) el.placeholder=translated;
   });
@@ -1168,13 +1169,21 @@ function setAppLanguage(language){
 document.addEventListener('DOMContentLoaded', function () {
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
 
-  const languageObserver = new MutationObserver(() => {
-    const currentLanguage=localStorage.getItem('appLanguage') || 'ha';
-    translateAppInterface(currentLanguage);
-    applyAdminTranslations(currentLanguage);
-  });
-
-  languageObserver.observe(document.body, {childList:true,subtree:true,characterData:true});
+  // Watch only Admin Dashboard additions. Batch updates once per animation frame
+  // and avoid rescanning the entire app for every text-node mutation.
+  const adminView=document.getElementById('adminView');
+  if(adminView){
+    let adminTranslationFrame=0;
+    const adminLanguageObserver=new MutationObserver(()=>{
+      if(adminTranslationFrame) return;
+      adminTranslationFrame=requestAnimationFrame(()=>{
+        adminTranslationFrame=0;
+        const currentLanguage=localStorage.getItem('appLanguage')||'ha';
+        applyAdminTranslations(currentLanguage,adminView);
+      });
+    });
+    adminLanguageObserver.observe(adminView,{childList:true,subtree:true});
+  }
 });
 
 function showView(id) {
