@@ -1001,6 +1001,7 @@ Object.assign(adminTranslations.ar, {
 });
 
 Object.assign(adminTranslations.ha, {
+  newsletterPublished: "An wallafa", newsletterUnpublished: "Ba a wallafa ba", newsletterExpiryLabel: "Ƙarewa:", newsletterUnpublish: "Soke wallafawa", newsletterRepublish: "Sake wallafawa", newsletterEmpty: "Babu sanarwa tukuna.", newsletterLoadError: "Ba a iya ɗauko sanarwar admin ba:",
   publishedTasksHeading: "Tasks da aka riga aka wallafa", createTaskHeading: "Wallafa sabon Task",
   referralTasksSaved: "An sabunta tasks uku na referral cikin nasara.",
   referralTasksLoaded: "An ɗauko tasks uku. Waɗannan su ne tasks da tsarin ke dubawa kafin referral commission.",
@@ -1011,6 +1012,7 @@ Object.assign(adminTranslations.ha, {
 });
 
 Object.assign(adminTranslations.en, {
+  newsletterPublished: "Published", newsletterUnpublished: "Not published", newsletterExpiryLabel: "Expires:", newsletterUnpublish: "Unpublish", newsletterRepublish: "Republish", newsletterEmpty: "No announcements yet.", newsletterLoadError: "Unable to load admin announcements:",
   publishedTasksHeading: "Previously published tasks", createTaskHeading: "Publish a new task",
   referralTasksSaved: "The three referral tasks were updated successfully.",
   referralTasksLoaded: "The three tasks have loaded. These are checked before referral commission is awarded.",
@@ -1021,6 +1023,7 @@ Object.assign(adminTranslations.en, {
 });
 
 Object.assign(adminTranslations.fr, {
+  newsletterPublished: "Publiée", newsletterUnpublished: "Non publiée", newsletterExpiryLabel: "Expire :", newsletterUnpublish: "Dépublier", newsletterRepublish: "Republier", newsletterEmpty: "Aucune annonce pour le moment.", newsletterLoadError: "Impossible de charger les annonces admin :",
   publishedTasksHeading: "Tâches déjà publiées", createTaskHeading: "Publier une nouvelle tâche",
   referralTasksSaved: "Les trois tâches de parrainage ont été mises à jour.",
   referralTasksLoaded: "Les trois tâches sont chargées. Le système les vérifie avant d’accorder la commission de parrainage.",
@@ -1031,6 +1034,7 @@ Object.assign(adminTranslations.fr, {
 });
 
 Object.assign(adminTranslations.ar, {
+  newsletterPublished: "تم النشر", newsletterUnpublished: "غير منشورة", newsletterExpiryLabel: "تنتهي:", newsletterUnpublish: "إلغاء النشر", newsletterRepublish: "إعادة النشر", newsletterEmpty: "لا توجد إعلانات بعد.", newsletterLoadError: "تعذر تحميل إعلانات المسؤول:",
   publishedTasksHeading: "المهام المنشورة مسبقاً", createTaskHeading: "نشر مهمة جديدة",
   referralTasksSaved: "تم تحديث مهام الإحالة الثلاث بنجاح.",
   referralTasksLoaded: "تم تحميل المهام الثلاث. يتحقق النظام منها قبل منح عمولة الإحالة.",
@@ -1040,8 +1044,8 @@ Object.assign(adminTranslations.ar, {
   referralTaskCannotDeactivate: "لا يمكن إيقاف هذه المهمة لأنها واحدة من مهام الإحالة الثلاث المطلوبة.",
 });
 
-function adminT(key){
-  return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
+function adminT(key, language=localStorage.getItem('appLanguage')||'ha'){
+  return (adminTranslations[language]||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
 function applyAdminTranslations(language, root=document){
   const dict=adminTranslations[language]||adminTranslations.ha;
   const scope=root||document;
@@ -1053,9 +1057,10 @@ function applyAdminTranslations(language, root=document){
     const translated=dict[el.dataset.adminPlaceholder];
     if(translated && el.placeholder!==translated) el.placeholder=translated;
   });
-  if(typeof renderAdminTasks==='function' && Array.isArray(adminTaskRowsCache)) renderAdminTasks(false);
+  if(typeof renderAdminTasks==='function' && Array.isArray(adminTaskRowsCache)) renderAdminTasks(false, language);
+  if(typeof renderAdminNewsletters==='function' && Array.isArray(adminNewsletterRowsCache)) renderAdminNewsletters(language);
   const referralMessage=document.getElementById('referralTasksAdminMessage');
-  if(referralMessage && referralMessage.dataset.messageKey) referralMessage.textContent=adminT(referralMessage.dataset.messageKey);
+  if(referralMessage && referralMessage.dataset.messageKey) referralMessage.textContent=adminT(referralMessage.dataset.messageKey, language);
 }
 
 function translateAppInterface(language){
@@ -1877,12 +1882,20 @@ async function createNewsletter(event){
   }catch(err){setMessage('adminNewsletterMessage','Ba a iya wallafa sanarwa ba: '+err.message);}
   finally{button.disabled=false;button.textContent='Wallafa sanarwa';}
 }
+let adminNewsletterRowsCache=[];
+function renderAdminNewsletters(language=localStorage.getItem('appLanguage')||'ha', force=false){
+  const target=document.getElementById('adminNewslettersList');if(!target)return;
+  if(!force && target.dataset.renderedLanguage===language)return;
+  target.dataset.renderedLanguage=language;
+  if(!adminNewsletterRowsCache.length){target.textContent=adminT('newsletterEmpty',language);return;}
+  target.innerHTML=adminNewsletterRowsCache.map(n=>`<div class="listrow"><div><b>${escapeHtml(n.title)}</b><small>${n.is_published?adminT('newsletterPublished',language):adminT('newsletterUnpublished',language)} • ${new Date(n.published_at).toLocaleString()}${n.expires_at?' • '+adminT('newsletterExpiryLabel',language)+' '+new Date(n.expires_at).toLocaleString():''}</small></div><button class="btn btn-soft" onclick="toggleNewsletter('${n.id}',${!n.is_published})">${n.is_published?adminT('newsletterUnpublish',language):adminT('newsletterRepublish',language)}</button></div>`).join('');
+}
 async function loadAdminNewsletters(){
   const target=document.getElementById('adminNewslettersList');if(!target)return;
   const {data:rows,error}=await supabaseClient.from('newsletters').select('id,title,is_published,published_at,expires_at').order('published_at',{ascending:false}).limit(50);
-  if(error){target.textContent='Ba a iya ɗauko sanarwar admin ba: '+error.message;return;}
-  if(!rows||!rows.length){target.textContent='Babu sanarwa tukuna.';return;}
-  target.innerHTML=rows.map(n=>`<div class="listrow"><div><b>${escapeHtml(n.title)}</b><small>${n.is_published?'An wallafa':'Ba a wallafa ba'} • ${new Date(n.published_at).toLocaleString()}${n.expires_at?' • Ƙarewa: '+new Date(n.expires_at).toLocaleString():''}</small></div><button class="btn btn-soft" onclick="toggleNewsletter('${n.id}',${!n.is_published})">${n.is_published?'Soke wallafawa':'Sake wallafawa'}</button></div>`).join('');
+  if(error){target.textContent=adminT('newsletterLoadError')+' '+error.message;return;}
+  adminNewsletterRowsCache=rows||[];
+  renderAdminNewsletters(localStorage.getItem('appLanguage')||'ha',true);
 }
 async function toggleNewsletter(id,published){
   try{const {error}=await supabaseClient.from('newsletters').update({is_published:published}).eq('id',id);if(error)throw error;await loadAdminNewsletters();await loadNewsletters();}
@@ -1975,9 +1988,9 @@ async function createAdminTask(event){
   finally{button.disabled=false;button.textContent=adminT('createTask');}
 }
 let adminTaskRowsCache=[];
-function renderAdminTasks(force=false){
+function renderAdminTasks(force=false, languageOverride=null){
   const target=document.getElementById('adminTasksList');if(!target)return;
-  const language=localStorage.getItem('appLanguage')||'ha';
+  const language=languageOverride||localStorage.getItem('appLanguage')||'ha';
   if(!force && target.dataset.renderedLanguage===language) return;
   const rows=adminTaskRowsCache;
   target.dataset.renderedLanguage=language;
