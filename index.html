@@ -907,7 +907,107 @@ Object.assign(adminTranslations.ha,{noTaskSubmissions:'Babu task submissions tuk
 Object.assign(adminTranslations.en,{noTaskSubmissions:'No task submissions yet.',noSearchResults:'No results match your search.',userId:'User ID',submittedOn:'Submitted',adminNote:'Admin note',approve:'Approve',reject:'Reject'});
 Object.assign(adminTranslations.fr,{noTaskSubmissions:'Aucune soumission de tâche pour le moment.',noSearchResults:'Aucun résultat ne correspond à votre recherche.',userId:'ID utilisateur',submittedOn:'Envoyée le',adminNote:'Note de l’administrateur',approve:'Approuver',reject:'Refuser'});
 Object.assign(adminTranslations.ar,{noTaskSubmissions:'لا توجد مهام مرسلة بعد.',noSearchResults:'لا توجد نتائج مطابقة لبحثك.',userId:'معرّف المستخدم',submittedOn:'تاريخ الإرسال',adminNote:'ملاحظة المسؤول',approve:'اعتماد',reject:'رفض'});
-function adminT(key){return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
+function adminT(key){
+Object.assign(adminTranslations.ha, {
+  taskManagerDesc: "A nan za ka ƙirƙiri tasks na yau da kullum. Sashen da ke ƙasa na musamman ne domin tasks 3 da sabon user zai kammala kafin mai gayyata ya samu referral commission.",
+  referralDesc: "Waɗannan tasks uku ne tsarin referral yake dubawa. Kada a canza task keys ko a dakatar da su. Za ka iya gyara suna, umarni da Points.",
+  task1Label: "Task 1 — Kammala bayanin account",
+  task2Label: "Task 2 — Duba shafin Features",
+  task3Label: "Task 3 — Karanta dokokin website",
+  taskInstruction1: "Umarnin Task 1",
+  taskInstruction2: "Umarnin Task 2",
+  taskInstruction3: "Umarnin Task 3",
+  points: "Points",
+  createTaskTitle: "Sunan Task",
+  createTaskDescription: "Bayani da umarnin Task",
+  createTaskPoints: "Points da za a bayar",
+  taskExpiry: "Ranar/lokacin ƙarewar Task (ba dole ba)",
+  createTask: "Ƙirƙiri Task",
+  taskCreatedNotice: "Sabon Task zai bayyana ga users bayan an ƙirƙira shi.",
+  newsletterDesc: "Rubuta sanarwa domin ta bayyana ga duk masu amfani. Za ka iya saita lokacin da za ta ƙare.",
+  newsletterTitle: "Taken sanarwa",
+  newsletterMessage: "Saƙon sanarwa",
+  newsletterExpiry: "Lokacin ƙarewar sanarwa (ba dole ba)",
+  newsletterNotice: "Sanarwar da aka wallafa za ta bayyana a shafin Newsletter.",
+  taskReviewDesc: "Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.",
+  usersDesc: "Jerin masu amfani da points dinsu. Kada a raba bayanan sirri."
+});
+
+Object.assign(adminTranslations.en, {
+  taskManagerDesc: "Create regular tasks here. The section below is reserved for the 3 qualification tasks a new user must complete before the referrer earns a referral commission.",
+  referralDesc: "These are the three tasks checked by the referral system. Do not change their task keys or deactivate them. You can edit their titles, instructions and points.",
+  task1Label: "Task 1 — Complete account profile",
+  task2Label: "Task 2 — Review the Features page",
+  task3Label: "Task 3 — Read the website rules",
+  taskInstruction1: "Task 1 instructions",
+  taskInstruction2: "Task 2 instructions",
+  taskInstruction3: "Task 3 instructions",
+  points: "Points",
+  createTaskTitle: "Task title",
+  createTaskDescription: "Task details and instructions",
+  createTaskPoints: "Points to award",
+  taskExpiry: "Task expiry date/time (optional)",
+  createTask: "Create Task",
+  taskCreatedNotice: "The new task will appear to users after it is created.",
+  newsletterDesc: "Write an announcement for all users. You can set when it expires.",
+  newsletterTitle: "Announcement title",
+  newsletterMessage: "Announcement message",
+  newsletterExpiry: "Announcement expiry (optional)",
+  newsletterNotice: "Published announcements will appear on the Newsletter page.",
+  taskReviewDesc: "Review user submissions. Approve only when the proof matches the requested task.",
+  usersDesc: "List of users and their points. Do not share private information."
+});
+
+Object.assign(adminTranslations.fr, {
+  taskManagerDesc: "Créez ici les tâches régulières. La section ci-dessous est réservée aux 3 tâches qu’un nouvel utilisateur doit terminer avant que le parrain reçoive sa commission.",
+  referralDesc: "Le système de parrainage vérifie ces trois tâches. Ne modifiez pas leurs clés et ne les désactivez pas. Vous pouvez modifier leurs titres, instructions et points.",
+  task1Label: "Tâche 1 — Compléter le profil du compte",
+  task2Label: "Tâche 2 — Consulter la page Fonctionnalités",
+  task3Label: "Tâche 3 — Lire les règles du site",
+  taskInstruction1: "Instructions de la tâche 1",
+  taskInstruction2: "Instructions de la tâche 2",
+  taskInstruction3: "Instructions de la tâche 3",
+  points: "Points",
+  createTaskTitle: "Titre de la tâche",
+  createTaskDescription: "Détails et instructions de la tâche",
+  createTaskPoints: "Points à attribuer",
+  taskExpiry: "Date/heure d’expiration (facultatif)",
+  createTask: "Créer une tâche",
+  taskCreatedNotice: "La nouvelle tâche sera visible après sa création.",
+  newsletterDesc: "Rédigez une annonce destinée à tous les utilisateurs. Vous pouvez définir sa date d’expiration.",
+  newsletterTitle: "Titre de l’annonce",
+  newsletterMessage: "Message de l’annonce",
+  newsletterExpiry: "Expiration de l’annonce (facultatif)",
+  newsletterNotice: "Les annonces publiées apparaîtront sur la page Newsletter.",
+  taskReviewDesc: "Examinez les preuves envoyées. Approuvez uniquement si la preuve correspond à la tâche demandée.",
+  usersDesc: "Liste des utilisateurs et de leurs points. Ne partagez pas les informations privées."
+});
+
+Object.assign(adminTranslations.ar, {
+  taskManagerDesc: "أنشئ المهام العادية هنا. القسم أدناه مخصص للمهام الثلاث التي يجب على المستخدم الجديد إكمالها قبل حصول المُحيل على العمولة.",
+  referralDesc: "يتحقق نظام الإحالة من هذه المهام الثلاث. لا تغيّر مفاتيحها ولا توقفها. يمكنك تعديل العناوين والتعليمات والنقاط.",
+  task1Label: "المهمة 1 — إكمال الملف الشخصي",
+  task2Label: "المهمة 2 — مراجعة صفحة الميزات",
+  task3Label: "المهمة 3 — قراءة قواعد الموقع",
+  taskInstruction1: "تعليمات المهمة 1",
+  taskInstruction2: "تعليمات المهمة 2",
+  taskInstruction3: "تعليمات المهمة 3",
+  points: "النقاط",
+  createTaskTitle: "عنوان المهمة",
+  createTaskDescription: "تفاصيل المهمة وتعليماتها",
+  createTaskPoints: "النقاط الممنوحة",
+  taskExpiry: "تاريخ/وقت انتهاء المهمة (اختياري)",
+  createTask: "إنشاء مهمة",
+  taskCreatedNotice: "ستظهر المهمة الجديدة للمستخدمين بعد إنشائها.",
+  newsletterDesc: "اكتب إعلاناً ليظهر لجميع المستخدمين. يمكنك تحديد موعد انتهاء صلاحيته.",
+  newsletterTitle: "عنوان الإعلان",
+  newsletterMessage: "نص الإعلان",
+  newsletterExpiry: "انتهاء الإعلان (اختياري)",
+  newsletterNotice: "ستظهر الإعلانات المنشورة في صفحة النشرة الإخبارية.",
+  taskReviewDesc: "راجع إثباتات المستخدمين. وافق فقط عندما يتطابق الإثبات مع المهمة المطلوبة.",
+  usersDesc: "قائمة المستخدمين ونقاطهم. لا تشارك المعلومات الخاصة."
+});
+  return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
 function applyAdminTranslations(language){
   const dict=adminTranslations[language]||adminTranslations.ha;
   document.querySelectorAll('[data-admin-key]').forEach(el=>{if(dict[el.dataset.adminKey])el.textContent=dict[el.dataset.adminKey];});
