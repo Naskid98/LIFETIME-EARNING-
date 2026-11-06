@@ -137,10 +137,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
     </div>
   </div>
 </section>
-  <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag">BARKA DA ZUWA</span><h1>Shiga account</h1><p>Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span>Email</span><input id="loginemail" type="email" required placeholder="name@example.com"></label><label class="field"><span>Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" type="submit">Shiga</button><p><a style="color:var(--green2);font-weight:800"
-href="#" onclick="showView('forgotPassword');return false">
-Ka manta kalmar sirrinka? Forgot Password
-</a></p></form><p>Ba ka da account? <a style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section> 
+  <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag" id="loginWelcome">BARKA DA ZUWA</span><h1 id="loginTitle">Shiga account</h1><p id="loginDescription">Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span id="loginEmailLabel">Email</span><input id="loginemail" type="email" required placeholder="name@example.com" autocomplete="username"></label><label class="field"><span id="loginPasswordLabel">Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" id="loginSubmitButton" type="submit">Shiga</button><p><a id="loginForgotLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('forgotPassword');return false">Ka manta kalmar sirrinka?</a></p></form><p><span id="loginNoAccountText">Ba ka da account?</span> <a id="loginCreateLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section> 
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="stat"><span>Wallet</span><strong id="walletTopBalance">Ana ɗauko...</strong><small>Daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
 <div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Yi amfani da maɓallan ƙasa domin buɗe kowane sashe.</div></div></section>
@@ -1120,6 +1117,7 @@ function translateAppInterface(language){
   // restore if Hausa
 if(!dict || language==='ha'){
   document.querySelectorAll('[data-original-text]:not([data-i18n])').forEach(el=>{
+    if(el.closest('#login')) return;
     if(el.dataset.originalText && el.textContent !== el.dataset.originalText){
       el.textContent = el.dataset.originalText;
     }
@@ -1143,7 +1141,7 @@ if(!dict || language==='ha'){
   // only translate elements that are not inside script/style and have visible text
   const all = document.body.querySelectorAll('h1,h2,h3,h4,span,small,p,button,a,strong,label,#dashboardMessage');
   all.forEach(el=>{
-    if(el.closest('script,style,select,option')) return;
+    if(el.closest('script,style,select,option,#login')) return;
     if(el.hasAttribute('data-i18n')) return;
     if(el.children.length>0) return; // avoid parent that contains other tags
     const txt = el.textContent.trim();
@@ -1191,6 +1189,53 @@ if(el.textContent !== translatedText) el.textContent = translatedText;    }
 }
 
 
+const loginTranslations = {
+  ha: {
+    welcome: 'BARKA DA ZUWA', title: 'Shiga account', description: 'Shiga da email da kalmar sirri da ka yi rajista da su.',
+    email: 'Email', password: 'Kalmar sirri', submit: 'Shiga', forgot: 'Ka manta kalmar sirrinka?',
+    noAccount: 'Ba ka da account?', create: 'Yi rajista', notice: 'Shigar da bayanan account ɗinka na gaske.',
+    loading: 'Ana shiga...', checking: 'Ana tabbatar da bayananka...', failed: 'Shiga bai yi nasara ba: '
+  },
+  en: {
+    welcome: 'WELCOME', title: 'Log in to your account', description: 'Log in with the email and password you registered with.',
+    email: 'Email', password: 'Password', submit: 'Login', forgot: 'Forgot your password?',
+    noAccount: "Don't have an account?", create: 'Create account', notice: 'Enter your account details to continue.',
+    loading: 'Logging in...', checking: 'Verifying your details...', failed: 'Login failed: '
+  },
+  fr: {
+    welcome: 'BIENVENUE', title: 'Connectez-vous à votre compte', description: 'Connectez-vous avec l’adresse e-mail et le mot de passe utilisés lors de votre inscription.',
+    email: 'Adresse e-mail', password: 'Mot de passe', submit: 'Se connecter', forgot: 'Mot de passe oublié ?',
+    noAccount: 'Vous n’avez pas de compte ?', create: 'Créer un compte', notice: 'Saisissez les informations de votre compte pour continuer.',
+    loading: 'Connexion...', checking: 'Vérification de vos informations...', failed: 'Échec de la connexion : '
+  },
+  ar: {
+    welcome: 'مرحباً بك', title: 'تسجيل الدخول إلى حسابك', description: 'سجّل الدخول باستخدام البريد الإلكتروني وكلمة المرور اللذين استخدمتهما عند التسجيل.',
+    email: 'البريد الإلكتروني', password: 'كلمة المرور', submit: 'تسجيل الدخول', forgot: 'هل نسيت كلمة المرور؟',
+    noAccount: 'ليس لديك حساب؟', create: 'إنشاء حساب', notice: 'أدخل بيانات حسابك للمتابعة.',
+    loading: 'جارٍ تسجيل الدخول...', checking: 'جارٍ التحقق من بياناتك...', failed: 'فشل تسجيل الدخول: '
+  }
+};
+
+function translateLoginView(language) {
+  const t = loginTranslations[language] || loginTranslations.ha;
+  const values = {
+    loginWelcome: t.welcome, loginTitle: t.title, loginDescription: t.description,
+    loginEmailLabel: t.email, loginPasswordLabel: t.password, loginSubmitButton: t.submit,
+    loginForgotLink: t.forgot, loginNoAccountText: t.noAccount, loginCreateLink: t.create
+  };
+  Object.entries(values).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el && el.textContent !== value) el.textContent = value;
+  });
+  const message = document.getElementById('loginMessage');
+  if (message && (!message.dataset.loginDynamic || message.dataset.loginDynamic === 'notice')) {
+    message.textContent = t.notice;
+    message.dataset.loginDynamic = 'notice';
+  }
+  const button = document.getElementById('loginSubmitButton');
+  if (button && !button.disabled) button.textContent = t.submit;
+}
+
 function setAppLanguage(language){
   const available = ['ha','en','fr','ar'];
   if(!available.includes(language)) return;
@@ -1223,6 +1268,7 @@ function setAppLanguage(language){
   });
 
   translateAppInterface(language);
+  translateLoginView(language);
   }
       
 
@@ -1369,12 +1415,14 @@ async function loginUser(e) {
   const password = document.getElementById('loginpass').value;
   const button = e.submitter;
 
+  const loginText = loginTranslations[localStorage.getItem('appLanguage') || 'ha'] || loginTranslations.ha;
   if (button) {
     button.disabled = true;
-    button.textContent = 'Ana shiga...';
+    button.textContent = loginText.loading;
   }
 
-  setMessage('loginMessage', 'Ana tabbatar da bayananka...');
+  const loginMessage = document.getElementById('loginMessage');
+  if (loginMessage) { loginMessage.textContent = loginText.checking; loginMessage.dataset.loginDynamic = 'checking'; }
 
   try {
     const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -1390,11 +1438,11 @@ async function loginUser(e) {
     showView('dashboard');
 
   } catch (err) {
-    setMessage('loginMessage', 'Shiga bai yi nasara ba: ' + err.message);
+    if (loginMessage) { loginMessage.textContent = loginText.failed + err.message; loginMessage.dataset.loginDynamic = 'error'; }
   } finally {
     if (button) {
       button.disabled = false;
-      button.textContent = 'Shiga';
+      button.textContent = loginText.submit;
     }
   }
   }
