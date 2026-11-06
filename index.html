@@ -36,7 +36,6 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <option value="ar">🇸🇦 العربية</option>
 </select>
 <button class="btn btn-outline" onclick="showView('login')" data-i18n="navLogin">Shiga</button>
-
 </div>
 </div></header>
 <main>
@@ -1597,4 +1596,393 @@ async function loadAdminPanel(){
     if(error)throw error;
     const target=document.getElementById('adminWithdrawals');
     if(!rows||!rows.length){target.textContent='Babu buƙatun withdrawal tukuna.';}
-    else target.inne
+    else target.innerHTML=rows.map(r=>`<div class="listrow" style="align-items:flex-start"><div><b>₦${(Number(r.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})} — ${escapeHtml(r.status)}</b><small>${escapeHtml(r.bank_name)} • ${escapeHtml(r.account_name)} • ${escapeHtml(r.account_number)}</small><small>User: ${escapeHtml(r.user_id)}</small></div><div style="display:flex;gap:6px;flex-wrap:wrap">${r.status==='pending'?`<button class="btn btn-soft" onclick="reviewWithdrawal('${r.id}','approve')">Approve</button><button class="btn btn-soft" onclick="reviewWithdrawal('${r.id}','reject')">Reject</button>`:''}${r.status==='approved'?`<button class="btn btn-gold" onclick="markWithdrawalPaid('${r.id}')">Mark paid</button>`:''}</div></div>`).join('');
+    const {data:users,error:userError}=await supabaseClient.from('profiles').select('id,full_name,points').order('full_name',{ascending:true}).limit(100);
+    const usersEl=document.getElementById('adminUsers');
+    if(userError){usersEl.textContent='Ba a iya ɗauko users ba: '+userError.message;}
+    else if(!users||!users.length){usersEl.textContent='Babu users tukuna.';}
+    else usersEl.innerHTML=users.map(u=>`<div class="listrow"><div><b>${escapeHtml(u.full_name||'Ba a saka suna ba')}</b><small>Points: ${Number(u.points||0)} • ID: ${escapeHtml(u.id)}</small></div><span class="tag">User</span></div>`).join('');
+  }catch(err){panel.style.display='block';document.getElementById('adminWithdrawals').textContent='Admin dashboard error: '+err.message;}
+}
+  
+let adminTaskSubmissionRows = [];
+let adminTaskLabels = {};
+
+async function loadAdminTaskSubmissions() {
+  const target = document.getElementById('adminTaskSubmissions');
+  if (!target) return;
+
+  const { data: rows, error } = await supabaseClient
+    .from('task_submissions')
+    .select('id,user_id,task_key,proof,status,admin_note,created_at,reviewed_at')
+    .order('created_at', { ascending: false })
+    .limit(100);
+
+  if (error) {
+    target.textContent = 'Ba a iya ɗauko submissions ba: ' + error.message;
+    return;
+  }
+
+  adminTaskSubmissionRows = rows || [];
+
+  const { data: taskRows } = await supabaseClient
+    .from('tasks')
+    .select('task_key,title,reward_points');
+
+  adminTaskLabels = Object.fromEntries(
+    (taskRows || []).map(t => [
+      t.task_key,
+      t.title + ' (' + t.reward_points + ' Points)'
+    ])
+  );
+
+  renderAdminTaskSubmissions();
+}
+
+function renderAdminTaskSubmissions() {
+  const target = document.getElementById('adminTaskSubmissions');
+  if (!target) return;
+
+  const rows = adminTaskSubmissionRows;
+
+  const count = status =>
+    rows.filter(r => r.status === status).length;
+
+  document.getElementById('adminPendingTasks').textContent = count('pending');
+  document.getElementById('adminApprovedTasks').textContent = count('approved');
+  document.getElementById('adminRejectedTasks').textContent = count('rejected');
+
+  const query = (document.getElementById('adminTaskSearch')?.value || '')
+    .trim().toLowerCase();
+
+  const statusFilter =
+    document.getElementById('adminTaskStatusFilter')?.value || 'all';
+
+  const filtered = rows.filter(r => {
+    const title = adminTaskLabels[r.task_key] || r.task_key;
+    const matchesStatus =
+      statusFilter === 'all' || r.status === statusFilter;
+
+    const haystack = [
+      title, r.proof, r.user_id, r.status, r.admin_note
+    ].join(' ').toLowerCase();
+
+    return matchesStatus && haystack.includes(query);
+  });
+
+  if (!rows.length) {
+    target.textContent = 'Babu task submissions tukuna.';
+    return;
+  }
+
+  if (!filtered.length) {
+    target.textContent = 'Ba a samu sakamakon da ya dace da bincikenka ba.';
+    return;
+  }
+
+  target.innerHTML = filtered.map(r => {
+    const statusLabel =
+      r.status === 'approved' ? 'Approved' :
+      r.status === 'rejected' ? 'Rejected' : 'Pending';
+
+    return `<div class="listrow" style="align-items:flex-start;gap:12px">
+      <div style="min-width:0;flex:1">
+        <b>${escapeHtml(adminTaskLabels[r.task_key] || r.task_key)} — ${statusLabel}</b>
+        <small>User ID: ${escapeHtml(r.user_id)}</small>
+        <small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small>
+        <p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof || 'Babu hujja')}</p>
+        ${r.admin_note ? `<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>` : ''}
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${r.status === 'pending' ? `
+          <button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button>
+          <button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>
+        ` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function reviewTaskSubmission(id,decision){
+  const approvedMessage='Approved';
+  const rejectedMessage='Rejected';
+  const defaultMessage=decision==='approve'?approvedMessage:rejectedMessage;
+  const promptText=decision==='approve'?'Saƙon da mai amfani zai gani bayan amincewa:':'Saƙon da mai amfani zai gani bayan ƙin amincewa:';
+  const note=prompt(promptText,defaultMessage);if(note===null)return;
+  if(!note.trim()){alert('Ka saka saƙon da mai amfani zai gani.');return;}
+  try{
+    const dbDecision=decision==='approve'?'approved':'rejected';
+    const {error}=await supabaseClient.rpc('admin_review_task_submission',{p_submission_id:id,p_decision:dbDecision,p_note:note.trim()});
+    if(error)throw error;
+    alert(note.trim());
+    await loadAdminTaskSubmissions();
+    await loadAdminPanel();
+  }catch(err){alert('Ba a iya sabunta task ba: '+err.message);}
+}
+
+async function reviewWithdrawal(id,decision){
+  const note=prompt(decision==='approve'?'Rubuta bayanin amincewa (za ka iya barin babu):':'Dalilin ƙin buƙatar:');if(note===null)return;
+  try{const {error}=await supabaseClient.rpc('admin_review_withdrawal',{p_withdrawal_id:id,p_decision:decision,p_note:note});if(error)throw error;await loadWalletAndWithdrawals();}
+  catch(err){alert('Ba a iya sabunta buƙatar ba: '+err.message);}
+}
+async function markWithdrawalPaid(id){
+  if(!confirm('Ka tabbatar an riga an aika kuɗin zuwa bankin mai amfani? Sai bayan transfer na gaske ka ci gaba.'))return;
+  const note=prompt('Saka bayanin tabbatar da transfer (misali reference):');if(note===null||!note.trim())return;
+  try{const {error}=await supabaseClient.rpc('admin_mark_withdrawal_paid',{p_withdrawal_id:id,p_note:note.trim()});if(error)throw error;await loadWalletAndWithdrawals();}
+  catch(err){alert('Ba a iya sabunta matsayin biyan kuɗi ba: '+err.message);}
+}
+
+async function logoutUser(){
+  if(taskStatusChannel){await supabaseClient.removeChannel(taskStatusChannel);taskStatusChannel=null;}
+  const {error}=await supabaseClient.auth.signOut();
+  if(error){setMessage('dashboardMessage','An samu matsala wajen fita: '+error.message);return;}
+  currentUser=null;currentProfileName='';const adminNav=document.getElementById('adminNavButton');if(adminNav)adminNav.hidden=true;renderAccountActions();showView('accountView');
+}
+const referralFromUrl=new URLSearchParams(window.location.search).get('ref');
+if(referralFromUrl){document.getElementById('regref').value=referralFromUrl.toUpperCase();}
+let taskStatusChannel=null;
+function subscribeToTaskStatus(){
+  if(!currentUser)return;
+  if(taskStatusChannel)supabaseClient.removeChannel(taskStatusChannel);
+  taskStatusChannel=supabaseClient.channel('task-status-'+currentUser.id)
+    .on('postgres_changes',{event:'UPDATE',schema:'public',table:'task_submissions',filter:'user_id=eq.'+currentUser.id},()=>loadAvailableTasks())
+    .subscribe();
+}
+supabaseClient.auth.getSession().then(async ({ data, error }) => {
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (data.session) {
+    currentUser = data.session.user;
+
+    if (passwordRecoveryMode) {
+      showView('resetPassword');
+      return;
+    }
+
+    await loadProfile();
+    subscribeToTaskStatus();
+    showView('dashboard');
+  } else {
+    currentUser = null;
+    currentProfileName = '';
+    renderAccountActions();
+    showView('home');
+  }
+});
+async function loadAvailableTasks(){
+  const target=document.getElementById('availableTasks');
+  if(!target||!currentUser)return;
+  const {data:tasks,error}=await supabaseClient.from('tasks')
+    .select('task_key,title,description,reward_points,is_active,expires_at')
+    .eq('is_active',true).order('created_at',{ascending:true});
+  if(error){target.textContent='Ba a iya ɗauko Tasks ba: '+error.message;return;}
+  const now=Date.now();
+  const available=(tasks||[]).filter(t=>!t.expires_at||new Date(t.expires_at).getTime()>now);
+  const {data:submissions,error:submissionError}=await supabaseClient.from('task_submissions')
+    .select('task_key,status,admin_note,created_at').eq('user_id',currentUser.id);
+  if(submissionError){target.textContent='Ba a iya ɗauko matsayin Tasks ba: '+submissionError.message;return;}
+  const requiredReferralKeys=new Set(['complete_profile','review_features','read_rules']);
+  const approvedReferralKeys=new Set((submissions||[]).filter(x=>x.status==='approved'&&requiredReferralKeys.has(x.task_key)).map(x=>x.task_key));
+  const progress=document.getElementById('referralTaskProgress');
+  if(progress)progress.textContent='Referral Commission: ka kammala '+approvedReferralKeys.size+'/3 tasks na dole. Admin zai duba hujjoji; ladan referral zai samu ne idan an tabbatar da email kuma an amince da tasks ukun.';
+  const alreadySubmitted=new Set((submissions||[]).filter(x=>x.status==='pending'||x.status==='approved').map(x=>x.task_key));
+  const visible=available.filter(t=>!alreadySubmitted.has(t.task_key)).sort((a,b)=>Number(requiredReferralKeys.has(b.task_key))-Number(requiredReferralKeys.has(a.task_key)));
+  if(!visible.length){target.textContent='Babu sabon Task a yanzu. Ka sake dubawa daga baya.';await loadTaskSubmissions();return;}
+  target.innerHTML=visible.map(t=>{const isRequired=requiredReferralKeys.has(t.task_key);return `<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b>${isRequired?'<small class="tag">Dole domin Referral Commission</small>':''}<small>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small>${t.expires_at?`<small>Wa’adi: ${new Date(t.expires_at).toLocaleString()}</small>`:''}</div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">Aika hujja</button></div>`;}).join('');
+  await loadTaskSubmissions();
+}
+async function loadTaskSubmissions(){
+  if(!currentUser)return;
+  const {data,error}=await supabaseClient.from('task_submissions')
+    .select('task_key,status,admin_note,created_at')
+    .eq('user_id',currentUser.id).order('created_at',{ascending:false});
+  if(error){setMessage('dashboardMessage','Ba a iya ɗauko matsayin tasks ba: '+error.message);return;}
+  const requiredReferralKeys=new Set(['complete_profile','review_features','read_rules']);
+  const approved=new Set((data||[]).filter(x=>x.status==='approved'&&requiredReferralKeys.has(x.task_key)).map(x=>x.task_key));
+  const countEl=document.getElementById('taskCount');
+  if(countEl)countEl.textContent=approved.size+'/3';
+}
+
+  async function completeTask(btn,taskKey){
+  if(!currentUser){setMessage('dashboardMessage','Ka fara shiga account.');return;}
+  const description=btn?.dataset?.taskDescription||'Ka bayyana yadda ka kammala wannan Task.';
+  const needsTenWords=taskKey.startsWith('ka_duba_sabon_update_na_yau_');
+const proof=prompt(description+'\n\n'+(needsTenWords?'Ka rubuta aƙalla kalmomi 10 daga cikin bidiyon:':'Ka rubuta hujja mai aƙalla haruffa 10:'));
+if(proof===null)return;
+if(needsTenWords&&proof.trim().split(/\s+/).filter(Boolean).length<10){alert('Wannan Task na bukatar aƙalla kalmomi 10 daga cikin bidiyon.');return;}
+if(!needsTenWords&&proof.trim().length<10){alert('Hujja ta yi gajarta. Ka rubuta aƙalla haruffa 10.');return;}
+  btn.disabled=true;btn.textContent='Ana aikawa...';
+  try{
+    const {error}=await supabaseClient.rpc('submit_task_for_review',{p_task_key:taskKey,p_proof:proof.trim()});
+    if(error)throw error;
+    setMessage('dashboardMessage','An aika Task ɗinka. Admin zai duba hujjar kafin a ba da Points.');
+    await loadAvailableTasks();
+  }catch(err){
+    alert('Ba a aika Task ba: '+err.message);
+    btn.disabled=false;btn.textContent='Aika hujja';
+  }
+}
+async function loadNewsletters(){
+  const target=document.getElementById('newsletterList');if(!target||!currentUser)return;
+  target.textContent='Ana ɗauko sanarwa...';
+  const {data:rows,error}=await supabaseClient.from('newsletters')
+    .select('id,title,body,published_at,expires_at').eq('is_published',true).order('published_at',{ascending:false});
+  if(error){target.textContent='Ba a iya ɗauko sanarwa ba: '+error.message;return;}
+  const now=Date.now();const visible=(rows||[]).filter(n=>!n.expires_at||new Date(n.expires_at).getTime()>now);
+  if(!visible.length){target.textContent='Babu sabuwar sanarwa a yanzu. Za a saka sanarwa a nan idan admin ya wallafa.';return;}
+  target.innerHTML=visible.map(n=>`<article class="listrow" style="display:block"><h3 style="margin:0 0 8px">${escapeHtml(n.title)}</h3><p style="white-space:pre-wrap;line-height:1.7;margin:0">${escapeHtml(n.body)}</p><small>An wallafa: ${new Date(n.published_at).toLocaleString('ha-NG')}</small>${n.expires_at?`<small>Za ta ƙare: ${new Date(n.expires_at).toLocaleString('ha-NG')}</small>`:''}</article>`).join('');
+}
+async function createNewsletter(event){
+  event.preventDefault();const title=document.getElementById('newsletterTitle').value.trim();
+  const body=document.getElementById('newsletterBody').value.trim();const expiryValue=document.getElementById('newsletterExpiry')?.value||'';
+  const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;const button=document.getElementById('createNewsletterButton');
+  if(title.length<2||body.length<2){setMessage('adminNewsletterMessage','Ka saka take da cikakken saƙo.');return;}
+  button.disabled=true;button.textContent='Ana wallafawa...';
+  try{
+    const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');if(adminError)throw adminError;if(!isAdmin)throw new Error('Admin kawai zai iya wallafa sanarwa.');
+    const {error}=await supabaseClient.from('newsletters').insert({title,body,is_published:true,expires_at:expiresAt,created_by:currentUser.id});if(error)throw error;
+    document.getElementById('adminCreateNewsletterForm').reset();setMessage('adminNewsletterMessage','An wallafa sanarwar cikin nasara.');
+    await loadAdminNewsletters();await loadNewsletters();
+  }catch(err){setMessage('adminNewsletterMessage','Ba a iya wallafa sanarwa ba: '+err.message);}
+  finally{button.disabled=false;button.textContent='Wallafa sanarwa';}
+}
+async function loadAdminNewsletters(){
+  const target=document.getElementById('adminNewslettersList');if(!target)return;
+  const {data:rows,error}=await supabaseClient.from('newsletters').select('id,title,is_published,published_at,expires_at').order('published_at',{ascending:false}).limit(50);
+  if(error){target.textContent='Ba a iya ɗauko sanarwar admin ba: '+error.message;return;}
+  if(!rows||!rows.length){target.textContent='Babu sanarwa tukuna.';return;}
+  target.innerHTML=rows.map(n=>`<div class="listrow"><div><b>${escapeHtml(n.title)}</b><small>${n.is_published?'An wallafa':'Ba a wallafa ba'} • ${new Date(n.published_at).toLocaleString()}${n.expires_at?' • Ƙarewa: '+new Date(n.expires_at).toLocaleString():''}</small></div><button class="btn btn-soft" onclick="toggleNewsletter('${n.id}',${!n.is_published})">${n.is_published?'Soke wallafawa':'Sake wallafawa'}</button></div>`).join('');
+}
+async function toggleNewsletter(id,published){
+  try{const {error}=await supabaseClient.from('newsletters').update({is_published:published}).eq('id',id);if(error)throw error;await loadAdminNewsletters();await loadNewsletters();}
+  catch(err){alert('Ba a iya sauya sanarwa ba: '+err.message);}
+}
+
+function makeTaskKey(title){
+  const slug=String(title||'task').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,45)||'task';
+  const suffix=(window.crypto?.randomUUID?window.crypto.randomUUID().slice(0,8):Math.random().toString(36).slice(2,10));
+  return slug+'_'+suffix;
+}
+const REFERRAL_QUALIFICATION_TASKS = [
+  {key:'complete_profile', titleId:'refTask1Title', descriptionId:'refTask1Description', pointsId:'refTask1Points'},
+  {key:'review_features', titleId:'refTask2Title', descriptionId:'refTask2Description', pointsId:'refTask2Points'},
+  {key:'read_rules', titleId:'refTask3Title', descriptionId:'refTask3Description', pointsId:'refTask3Points'}
+];
+
+async function loadReferralQualificationTasks(){
+  const message=document.getElementById('referralTasksAdminMessage');
+  if(!message)return;
+  const keys=REFERRAL_QUALIFICATION_TASKS.map(t=>t.key);
+  const {data:rows,error}=await supabaseClient.from('tasks')
+    .select('task_key,title,description,reward_points,is_active')
+    .in('task_key',keys);
+  if(error){message.textContent='Ba a iya ɗauko tasks na referral ba: '+error.message;return;}
+  const byKey=Object.fromEntries((rows||[]).map(row=>[row.task_key,row]));
+  for(const item of REFERRAL_QUALIFICATION_TASKS){
+    const row=byKey[item.key];
+    if(!row){message.textContent='An rasa task mai maɓalli '+item.key+'. A duba Supabase kafin a ci gaba.';continue;}
+    document.getElementById(item.titleId).value=row.title||'';
+    document.getElementById(item.descriptionId).value=row.description||'';
+    document.getElementById(item.pointsId).value=Number(row.reward_points||0);
+  }
+  const inactive=REFERRAL_QUALIFICATION_TASKS.filter(item=>byKey[item.key]&&!byKey[item.key].is_active);
+  message.textContent=inactive.length
+    ? 'GARGAƊI: akwai task na referral da aka dakatar. Ka kunna shi a Task Manager domin sabon user ya iya kammala shi.'
+    : 'An ɗauko tasks uku. Waɗannan su ne tasks da tsarin ke dubawa kafin referral commission.';
+}
+
+async function saveReferralQualificationTasks(event){
+  event.preventDefault();
+  const button=document.getElementById('saveReferralTasksButton');
+  const message=document.getElementById('referralTasksAdminMessage');
+  button.disabled=true;button.textContent='Ana ajiyewa...';
+  try{
+    const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
+    if(adminError)throw adminError;
+    if(isAdmin!==true)throw new Error('Admin kawai zai iya gyara tasks na referral.');
+    for(const item of REFERRAL_QUALIFICATION_TASKS){
+      const title=document.getElementById(item.titleId).value.trim();
+      const description=document.getElementById(item.descriptionId).value.trim();
+      const reward=Number(document.getElementById(item.pointsId).value);
+      if(title.length<2||description.length<2||!Number.isSafeInteger(reward)||reward<1||reward>1000000){
+        throw new Error('Ka duba sunan, umarni da Points na kowane task.');
+      }
+      const {data,error}=await supabaseClient.from('tasks')
+        .update({title,description,reward_points:reward,updated_at:new Date().toISOString()})
+        .eq('task_key',item.key).select('task_key').maybeSingle();
+      if(error)throw error;
+      if(!data)throw new Error('Ba a samu task '+item.key+' a database ba.');
+    }
+    message.textContent='An sabunta tasks uku na referral cikin nasara.';
+    await loadAdminTasks();
+    await loadAvailableTasks();
+  }catch(err){message.textContent='Ba a iya ajiye tasks ba: '+err.message;}
+  finally{button.disabled=false;button.textContent='Ajiye Tasks 3 na Referral';}
+}
+
+async function createAdminTask(event){
+  event.preventDefault();
+  const title=document.getElementById('newTaskTitle').value.trim();
+  const description=document.getElementById('newTaskDescription').value.trim();
+  const reward=Number(document.getElementById('newTaskPoints').value);
+  const expiryValue=document.getElementById('newTaskExpiry')?.value||'';
+  const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;
+  const button=document.getElementById('createTaskButton');
+  if(!title||!description||!Number.isSafeInteger(reward)||reward<1||reward>1000000){setMessage('adminTaskMessage','Ka duba sunan Task, bayani da Points.');return;}
+  button.disabled=true;button.textContent='Ana ƙirƙira...';
+  try{
+    const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
+    if(adminError)throw adminError;
+    if(!isAdmin)throw new Error('Admin kawai zai iya ƙirƙirar Task.');
+    const {error}=await supabaseClient.from('tasks').insert({task_key:makeTaskKey(title),title,description,reward_points:reward,is_active:true,expires_at:expiresAt,created_by:currentUser.id});
+    if(error)throw error;
+    document.getElementById('adminCreateTaskForm').reset();
+    setMessage('adminTaskMessage','An ƙirƙiri Task cikin nasara. Yanzu users za su iya ganinsa.');
+    await loadAdminTasks();
+    await loadAvailableTasks();
+  }catch(err){setMessage('adminTaskMessage','Ba a iya ƙirƙirar Task ba: '+err.message);}
+  finally{button.disabled=false;button.textContent='Ƙirƙiri Task';}
+}
+async function loadAdminTasks(){
+  const target=document.getElementById('adminTasksList');if(!target)return;
+  const {data:rows,error}=await supabaseClient.from('tasks').select('task_key,title,description,reward_points,is_active,created_at,expires_at').order('created_at',{ascending:false});
+  if(error){target.textContent='Ba a iya ɗauko Tasks ba: '+error.message;return;}
+  if(!rows||!rows.length){target.textContent='Babu Tasks tukuna.';return;}
+  target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} Points • ${t.is_active?'Aiki':'An dakatar'}</small><small>${t.expires_at?'Ƙarewa: '+new Date(t.expires_at).toLocaleString():'Ba shi da wa’adi'}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?'Dakatar':'Kunna'}</button></div>`).join('');
+}
+  async function toggleAdminTask(taskKey, active){
+  if(!active&&['complete_profile','review_features','read_rules'].includes(taskKey)){
+    alert('Ba za a dakatar da wannan task ba, domin yana cikin tasks 3 da ake bukata kafin referral commission.');
+    return;
+  }
+  try{
+    const {data, error} = await supabaseClient
+      .from('tasks')
+      .update({
+        is_active: active,
+        updated_at: new Date().toISOString()
+      })
+      .eq('task_key', taskKey)
+      .select('is_active')
+      .single();
+
+    if(error) throw error;
+
+    if(data.is_active !== active){
+      throw new Error('Ba a tabbatar da sauyin matsayin Task ba.');
+    }
+
+    await loadAdminTasks();
+    await loadAvailableTasks();
+
+  }catch(err){
+    alert('Ba a iya sauya matsayin Task ba: ' + err.message);
+  }
+  } 
+
+</script>
+</body>
+</html>
