@@ -137,7 +137,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
     </div>
   </div>
 </section>
-  <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag" id="loginWelcome">BARKA DA ZUWA</span><h1 id="loginTitle">Shiga account</h1><p id="loginDescription">Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span id="loginEmailLabel">Email</span><input id="loginemail" type="email" required placeholder="name@example.com" autocomplete="username"></label><label class="field"><span id="loginPasswordLabel">Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" id="loginSubmitButton" type="submit">Shiga</button><p><a id="loginForgotLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('forgotPassword');return false">Ka manta kalmar sirrinka?</a></p></form><p><span id="loginNoAccountText">Ba ka da account?</span> <a id="loginCreateLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section> 
+  <section id="login" class="view"><div class="wrap"><div class="panel auth"><span class="tag" id="loginWelcome">BARKA DA ZUWA</span><h1 id="loginTitle">Shiga account</h1><p id="loginDescription">Shiga da email da kalmar sirri da ka yi rajista da su.</p><form onsubmit="loginUser(event)"><label class="field"><span id="loginEmailLabel">Email</span><input id="loginemail" type="email" required placeholder="name@example.com" autocomplete="username"></label><label class="field"><span id="loginPasswordLabel">Kalmar sirri</span><input id="loginpass" type="password" required autocomplete="current-password"></label><button class="btn btn-green full" id="loginSubmitButton" type="submit">Shiga</button><p><a id="loginForgotLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('forgotPassword');return false">Ka manta kalmar sirrinka?</a></p></form><p><span id="loginNoAccountText">Ba ka da account?</span> <a id="loginCreateLink" style="color:var(--green2);font-weight:800" href="#" onclick="showView('register');return false">Yi rajista</a></p><div id="loginMessage" class="noticebox" role="status">Shigar da bayanan account ɗinka na gaske.</div></div></div></section>
 <section id="dashboard" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ACCOUNT DASHBOARD</span><h1 style="margin:10px 0 5px">Sannu, <span id="welcomeName">Aboki</span> 👋</h1><p style="margin:0;color:var(--muted)">Ga taƙaitaccen bayani game da account ɗinka.</p></div><button class="btn btn-outline" style="color:var(--green);border-color:var(--line)" onclick="logoutUser()">Fita (Logout)</button></div>
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="stat"><span>Wallet</span><strong id="walletTopBalance">Ana ɗauko...</strong><small>Daga database</small></div><div class="stat"><span>Points</span><strong id="pointCount">0</strong><small>Points daga database</small></div><div class="stat"><span>Tasks</span><strong id="taskCount">0/3</strong><small>Tasks da aka amince da su</small></div><div class="stat"><span>Referrals</span><strong id="referralCount">0</strong><small>Rajistocin da suka zo ta link ɗinka</small></div></div>
 <div id="dashboardMessage" class="noticebox">An haɗa rajista, login da profile. Yi amfani da maɓallan ƙasa domin buɗe kowane sashe.</div></div></section>
@@ -146,26 +146,26 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 
 <section id="referralView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">REFERRAL CENTER</span><h1>👥 Referral System</h1><p style="margin:0;color:var(--muted)">Raba link ɗinka domin gayyatar sababbin masu amfani.</p></div></div><div class="panel dashboard-section" id="referralPanel"><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div></div></section>
 
-<section id="adminView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">ADMIN WORKSPACE</span><h1>Admin Center</h1><p style="margin:0;color:var(--muted)">Dukkan ayyukan gudanarwa a wuri guda.</p></div></div>
-<div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2>Admin Dashboard</h2><p class="empty-note">Wannan sashe yana bayyana ga admin kawai.</p>
+<section id="adminView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag" data-admin-key="adminWorkspace">ADMIN WORKSPACE</span><h1 data-admin-key="adminCenter">Admin Center</h1><p style="margin:0;color:var(--muted)" data-admin-key="adminIntro">Dukkan ayyukan gudanarwa a wuri guda.</p></div></div>
+<div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2 data-admin-key="adminDashboard">Admin Dashboard</h2><p class="empty-note" data-admin-key="adminOnly">Wannan sashe yana bayyana ga admin kawai.</p>
 <div class="admin-shortcuts" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px">
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminOverview')">📊 Bayani</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminTaskHeading')">✓ Tasks</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('referralQualificationManager')">🎯 Referral Tasks 3</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminNewsHeading')">📰 Sanarwa</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminReviewHeading')">📝 Duba hujjoji</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminWithdrawalHeading')">💳 Withdrawals</button>
-<button class="btn btn-soft" onclick="scrollToAdminSection('adminUsersHeading')">👥 Users</button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminOverview')"><span data-admin-key="overview">📊 Bayani</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminTaskHeading')"><span data-admin-key="taskManagerShortcut">✓ Tasks</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('referralQualificationManager')"><span data-admin-key="referralTasksShortcut">🎯 Referral Tasks 3</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminNewsHeading')"><span data-admin-key="announcements">📰 Sanarwa</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminReviewHeading')"><span data-admin-key="reviewSubmissions">📝 Duba hujjoji</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminWithdrawalHeading')"><span data-admin-key="withdrawals">💳 Withdrawals</span></button>
+<button class="btn btn-soft" onclick="scrollToAdminSection('adminUsersHeading')"><span data-admin-key="users">👥 Users</span></button>
 </div>
 <div id="adminOverview" class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0">
-<div class="stat"><span>Total Users</span><strong id="adminTotalUsers">—</strong></div>
-<div class="stat"><span>Total Wallet Balance</span><strong id="adminWalletTotal">—</strong></div>
-<div class="stat"><span>Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
-<div class="stat"><span>Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
+<div class="stat"><span data-admin-key="totalUsers">Total Users</span><strong id="adminTotalUsers">—</strong></div>
+<div class="stat"><span data-admin-key="totalWalletBalance">Total Wallet Balance</span><strong id="adminWalletTotal">—</strong></div>
+<div class="stat"><span data-admin-key="totalWithdrawals">Total Withdrawals</span><strong id="adminTotalWithdrawals">—</strong></div>
+<div class="stat"><span data-admin-key="pendingWithdrawals">Pending Withdrawals</span><strong id="adminPendingWithdrawals">—</strong></div>
 </div>
-<h3 id="adminTaskHeading">Task Manager</h3><p class="empty-note">A nan za ka ƙirƙiri tasks na yau da kullum. A ƙasa akwai wani sashe na musamman domin tasks 3 da sabon user zai kammala kafin a ba mai gayyata referral commission.</p>
+<h3 id="adminTaskHeading" data-admin-key="taskManager">Task Manager</h3><p class="empty-note">A nan za ka ƙirƙiri tasks na yau da kullum. A ƙasa akwai wani sashe na musamman domin tasks 3 da sabon user zai kammala kafin a ba mai gayyata referral commission.</p>
 <div class="settings-card" id="referralQualificationManager">
-<h3>🎯 Referral Commission — Tasks 3 na dole</h3>
+<h3 data-admin-key="referralCommission">🎯 Referral Commission — Tasks 3 na dole</h3>
 <p>Waɗannan tasks uku ne tsarin referral yake dubawa. Kada a canza maɓallan su (task keys) ko a dakatar da su. Za ka iya gyara suna, umarni da Points.</p>
 <form id="adminReferralTasksForm" onsubmit="saveReferralQualificationTasks(event)" style="max-width:650px;margin-top:14px">
 <label class="field"><span>Task 1 — Kammala bayanin account</span><input id="refTask1Title" maxlength="100" required placeholder="Sunan task"></label>
@@ -179,7 +179,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <label class="field"><span>Task 3 — Karanta dokokin website</span><input id="refTask3Title" maxlength="100" required placeholder="Sunan task"></label>
 <label class="field"><span>Umarnin Task 3</span><textarea id="refTask3Description" maxlength="500" required rows="2" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
 <label class="field"><span>Points</span><input id="refTask3Points" type="number" min="1" max="1000000" required></label>
-<button class="btn btn-green" id="saveReferralTasksButton" type="submit">Ajiye Tasks 3 na Referral</button>
+<button class="btn btn-green" id="saveReferralTasksButton" type="submit" data-admin-key="saveReferralTasks">Ajiye Tasks 3 na Referral</button>
 <div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
 </form>
 </div>
@@ -191,39 +191,39 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <button class="btn btn-green" id="createTaskButton" type="submit">Ƙirƙiri Task</button>
 <div id="adminTaskMessage" class="noticebox" role="status">Sabon Task zai bayyana ga users bayan an ƙirƙira shi.</div>
 </form>
-<h3 id="adminNewsHeading" style="margin-top:24px">Newsletter / Sanarwa</h3>
+<h3 id="adminNewsHeading" style="margin-top:24px" data-admin-key="newsletter">Newsletter / Sanarwa</h3>
 <p class="empty-note">Rubuta sanarwa domin ta bayyana ga duk masu amfani. Za ka iya saita lokacin da za ta ƙare.</p>
 <form id="adminCreateNewsletterForm" onsubmit="createNewsletter(event)" style="max-width:650px;margin:14px 0">
 <label class="field"><span taken="title">Taken sanarwa</span><input id="newsletterTitle" maxlength="160" required placeholder="Misali: Sabon bayani ga masu amfani"></label>
 <label class="field"><span>Saƙon sanarwa</span><textarea id="newsletterBody" maxlength="12000" required rows="5" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
 <label class="field"><span>Lokacin ƙarewar sanarwa (ba dole ba)</span><input id="newsletterExpiry" type="datetime-local"></label>
-<button class="btn btn-green" id="createNewsletterButton" type="submit">Wallafa sanarwa</button>
+<button class="btn btn-green" id="createNewsletterButton" type="submit" data-admin-key="publishAnnouncement">Wallafa sanarwa</button>
 <div id="adminNewsletterMessage" class="noticebox" role="status">Sanarwar da aka wallafa za ta bayyana a shafin Newsletter.</div>
 </form>
 <div id="adminNewslettersList">Ana ɗauko sanarwa...</div>
 <div id="adminTasksList">Ana ɗauko Tasks...</div>
-<h3 id="adminReviewHeading" style="margin-top:24px">Task Review</h3>
+<h3 id="adminReviewHeading" style="margin-top:24px" data-admin-key="taskReview">Task Review</h3>
 <p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p>
 
 <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin:12px 0">
-  <div class="stat"><span>Pending</span><strong id="adminPendingTasks">—</strong></div>
-  <div class="stat"><span>Approved</span><strong id="adminApprovedTasks">—</strong></div>
-  <div class="stat"><span>Rejected</span><strong id="adminRejectedTasks">—</strong></div>
+  <div class="stat"><span data-admin-key="pending">Pending</span><strong id="adminPendingTasks">—</strong></div>
+  <div class="stat"><span data-admin-key="approved">Approved</span><strong id="adminApprovedTasks">—</strong></div>
+  <div class="stat"><span data-admin-key="rejected">Rejected</span><strong id="adminRejectedTasks">—</strong></div>
 </div>
 
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0">
-  <input id="adminTaskSearch" type="search" placeholder="Nemi task ko hujja..." oninput="renderAdminTaskSubmissions()" style="flex:1;min-width:180px;padding:12px;border:1px solid #d9e4da;border-radius:11px">
+  <input id="adminTaskSearch" type="search" placeholder="Nemi task ko hujja..." data-admin-placeholder="searchTasks" oninput="renderAdminTaskSubmissions()" style="flex:1;min-width:180px;padding:12px;border:1px solid #d9e4da;border-radius:11px">
   <select id="adminTaskStatusFilter" onchange="renderAdminTaskSubmissions()" style="padding:12px;border:1px solid #d9e4da;border-radius:11px">
-    <option value="all">Dukkan matsayi</option>
-    <option value="pending">Pending kawai</option>
-    <option value="approved">Approved kawai</option>
-    <option value="rejected">Rejected kawai</option>
+    <option value="all" data-admin-key="allStatuses">Dukkan matsayi</option>
+    <option value="pending" data-admin-key="pendingOnly">Pending kawai</option>
+    <option value="approved" data-admin-key="approvedOnly">Approved kawai</option>
+    <option value="rejected" data-admin-key="rejectedOnly">Rejected kawai</option>
   </select>
 </div>
 
 <div id="adminTaskSubmissions">Ana ɗauko submissions...</div>
-<h3 id="adminWithdrawalHeading" style="margin-top:22px">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
-<h3 id="adminUsersHeading" style="margin-top:22px">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
+<h3 id="adminWithdrawalHeading" style="margin-top:22px" data-admin-key="withdrawalManagement">Withdrawal Management</h3><div id="adminWithdrawals">Ana duba izinin admin...</div>
+<h3 id="adminUsersHeading" style="margin-top:22px" data-admin-key="userManagement">Users Management</h3><p class="empty-note">Jerin masu amfani da points dinsu. Kada a raba bayanan sirri.</p><div id="adminUsers">Ana ɗauko masu amfani...</div>
 </div></div></section>
 
 <section id="walletView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">WALLET CENTER</span><h1>Wallet & Harkokin Kuɗi</h1><p style="margin:0;color:var(--muted)">Balance, conversion, withdrawal da tarihin mu’amalarka.</p></div></div><div class="panel wallet-panel" style="margin-top:17px" id="walletPanel"><span class="tag">WALLET CENTER</span><h2>💰 Wallet & Harkokin Kuɗi</h2>
@@ -270,7 +270,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storage: window.localStorage } });
 let passwordRecoveryMode = false;
 
-  
+
 async function sendPasswordReset(e) {
   e.preventDefault();
 
@@ -399,140 +399,22 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
     showView('resetPassword');
   }
 });
-  
+
 const homeTranslations = {
-  ha: {
-    navFeatures: "Abubuwan da ke ciki",
-    navHow: "Yadda yake aiki",
-    navAbout: "Game da mu",
-    navLogin: "Shiga",
-    navRegister: "Yi Rajista",
-    eyebrow: "✦ DAMAMMAKIN DIJITAL",
-    heroTitle1: "Ka gina damarka.",
-    heroTitle2: "Ka fara yau.",
-    heroDescription: "LIFETIME EARNING dandamali ne da aka tsara domin taimaka wa mutane su gano damammakin samun rewards ta ayyukan intanet, tasks da gayyatar abokai—cikin tsari mai bayyani.",
-    startNow: "Fara yanzu →",
-    howButton: "Yadda yake aiki",
-    trustEasy: "✓ Mai sauƙin amfani",
-    trustDevices: "✓ Android da Website",
-    trustLanguages: "✓ Harsuna huɗu",
-    preview: "● Preview",
-    demoBalance: "Demo Wallet Balance",
-    demoHint: "Ka fara da kammala tasks masu samuwa",
-    createAccount: "Ƙirƙiri Account",
-    ads: "Ads",
-    tasks: "Tasks",
-    referral: "Referral",
-    featuresEyebrow: "ABUBUWAN DA KE CIKI",
-    featuresTitle: "Duk abin da kake buƙata, a wuri guda",
-    featuresIntro: "An tsara website ɗin da sauƙin amfani a wayar Android da kwamfuta.",
-    watchAds: "Watch Ads",
-    watchAdsDesc: "Shafin tallace-tallace da tsarin rewards, bayan an haɗa ad provider da ya amince da wannan amfani.",
-    dailyTasks: "Daily Tasks",
-    dailyTasksDesc: "Kammala ayyuka da duba ci gabanka a wuri guda.",
-    referEarn: "Refer & Earn",
-    referEarnDesc: "Gayyato abokai ta hanyar referral link bisa ƙa'idojin shirin.",
-    wallet: "Wallet",
-    walletDesc: "Duba Wallet Balance, Points, Rewards da tarihin dukkan mu'amalolinka cikin tsaro.",
-    withdrawal: "Withdrawal",
-    withdrawalDesc: "Nemi cire kuɗin da ke Wallet bisa ƙa'idojin dandamali. Admin zai duba buƙatarka kafin amincewa da aiwatar da biyan kuɗi.",
-    accountSecurity: "Account & Tsaro",
-    accountSecurityDesc: "Tsarin asusu, bayanan mai amfani da kariya daga amfani da tsarin ta hanyar yaudara.",
-    howEyebrow: "YADDA YAKE AIKI",
-    howTitle: "Matakai huɗu masu sauƙi",
-    howIntro: "Rajista, profile, wallet, tasks da referral suna amfani da bayanan database. Tallace-tallace da wasu hanyoyin samun kuɗi ba su haɗu ba tukuna.",
-    step1: "MATAKI 01",
-    registerStep: "Yi rajista",
-    registerStepDesc: "Ƙirƙiri account ta amfani da sunanka da email.",
-    step2: "MATAKI 02",
-    tasksStep: "Duba ayyuka",
-    tasksStepDesc: "Shiga dashboard ka duba tasks ko tallace-tallacen da aka amince da su.",
-    step3: "MATAKI 03",
-    rewardsStep: "Tara rewards",
-    rewardsStepDesc: "Rewards za su dogara da ayyukan da aka tabbatar da dokokin dandamali.",
-    step4: "MATAKI 04",
-    walletStep: "Duba wallet",
-    walletStepDesc: "Ka duba tarihin rewards da sharuddan cire su idan an kunna tsarin.",
-    ctaText: "Gina damarka ta dijital, mataki ɗaya a lokaci.",
-    ctaButton: "Ƙirƙiri Account →",
-    notice: "Bayani: An haɗa wasu sassan website da Supabase. Ads da automatic payments ba su haɗu ba tukuna. Withdrawal requests suna jiran duba da aiwatarwa daga admin. Ba a tabbatar da samun kuɗi ba."
-  }
+ha: {
+navFeatures:'Abubuwan da ke ciki',navHow:'Yadda yake aiki',navAbout:'Game da mu',navLogin:'Shiga',navRegister:'Yi Rajista',eyebrow:'✦ DAMAMMAKIN DIJITAL',heroTitle1:'Ka gina damarka.',heroTitle2:'Ka fara yau.',heroDescription:'LIFETIME EARNING dandamali ne da aka tsara domin taimaka wa mutane su gano damammakin samun lada ta ayyukan intanet, tasks da gayyatar abokai—cikin tsari mai bayyani.',startNow:'Fara yanzu →',howButton:'Yadda yake aiki',trustEasy:'✓ Mai sauƙin amfani',trustDevices:'✓ Android da Website',trustLanguages:'✓ Harsuna huɗu',preview:'● Dubawa',demoBalance:'Ma’aunin Wallet na gwaji',demoHint:'Ka fara da kammala ayyukan da ake da su',createAccount:'Ƙirƙiri Account',ads:'Tallace-tallace',tasks:'Ayyuka',referral:'Gayyata',featuresEyebrow:'ABUBUWAN DA KE CIKI',featuresTitle:'Duk abin da kake buƙata, a wuri guda',featuresIntro:'An tsara website ɗin domin sauƙin amfani a wayar Android da kwamfuta.',watchAds:'Kallon tallace-tallace',watchAdsDesc:'Za a nuna tallace-tallace da tsarin lada bayan an haɗa mai samar da tallace-tallacen da ya amince da wannan amfani.',dailyTasks:'Ayyukan yau da kullum',dailyTasksDesc:'Kammala ayyuka kuma duba ci gabanka a wuri guda.',referEarn:'Gayyata ka samu lada',referEarnDesc:'Gayyato abokai ta hanyar hanyar gayyata bisa ƙa’idojin shirin.',wallet:'Wallet',walletDesc:'Duba ma’aunin Wallet, maki, lada da tarihin mu’amalolinka cikin tsaro.',withdrawal:'Cire kuɗi',withdrawalDesc:'Nemi cire kuɗin Wallet bisa ƙa’idojin dandamali. Admin zai duba buƙatarka kafin amincewa da aiwatar da biyan kuɗi.',accountSecurity:'Asusu da tsaro',accountSecurityDesc:'Sarrafa asusu da bayananka, tare da kariya daga amfani da tsarin ta hanyar yaudara.',howEyebrow:'YADDA YAKE AIKI',howTitle:'Matakai huɗu masu sauƙi',howIntro:'Rajista, bayanan profile, wallet, ayyuka da gayyata suna amfani da bayanan database. Tallace-tallace da wasu hanyoyin samun kuɗi ba su haɗu ba tukuna.',step1:'MATAKI 01',registerStep:'Yi rajista',registerStepDesc:'Ƙirƙiri account ta amfani da sunanka da email.',step2:'MATAKI 02',tasksStep:'Duba ayyuka',tasksStepDesc:'Shiga dashboard ka duba ayyuka ko tallace-tallacen da aka amince da su.',step3:'MATAKI 03',rewardsStep:'Tara lada',rewardsStepDesc:'Lada za ta dogara da ayyukan da aka tabbatar da ƙa’idojin dandamali.',step4:'MATAKI 04',walletStep:'Duba wallet',walletStepDesc:'Duba tarihin lada da sharuddan cire su idan an kunna tsarin.',ctaText:'Gina damarka ta dijital, mataki ɗaya a lokaci.',ctaButton:'Ƙirƙiri Account →',notice:'Bayani: An haɗa wasu sassan website da Supabase. Tallace-tallace da biyan kuɗi kai-tsaye ba su haɗu ba tukuna. Buƙatun cire kuɗi suna jiran dubawa da aiwatarwa daga admin. Ba a tabbatar da samun kuɗi ba.',footerText:'Kore da Zinariya · Hausa · English · Français · العربية'
+},
+en: {
+navFeatures:'Features',navHow:'How it works',navAbout:'About us',navLogin:'Log in',navRegister:'Sign up',eyebrow:'✦ DIGITAL OPPORTUNITIES',heroTitle1:'Build your opportunity.',heroTitle2:'Start today.',heroDescription:'LIFETIME EARNING is a platform designed to help people discover reward opportunities through online activities, tasks and referrals—with a clear and organized experience.',startNow:'Get started →',howButton:'How it works',trustEasy:'✓ Easy to use',trustDevices:'✓ Android and web',trustLanguages:'✓ Four languages',preview:'● Preview',demoBalance:'Demo Wallet Balance',demoHint:'Start by completing available tasks',createAccount:'Create account',ads:'Ads',tasks:'Tasks',referral:'Referral',featuresEyebrow:'PLATFORM FEATURES',featuresTitle:'Everything you need in one place',featuresIntro:'Designed for convenient use on Android phones and computers.',watchAds:'Watch ads',watchAdsDesc:'Ad viewing and rewards will be available after an ad provider that permits this use is connected.',dailyTasks:'Daily tasks',dailyTasksDesc:'Complete activities and track your progress in one place.',referEarn:'Refer & earn',referEarnDesc:'Invite friends using your referral link, subject to the programme rules.',wallet:'Wallet',walletDesc:'Safely view your wallet balance, points, rewards and transaction history.',withdrawal:'Withdrawals',withdrawalDesc:'Request a withdrawal according to platform rules. An admin reviews your request before approving and processing payment.',accountSecurity:'Account & security',accountSecurityDesc:'Manage your account and personal details, with protection against misuse of the platform.',howEyebrow:'HOW IT WORKS',howTitle:'Four simple steps',howIntro:'Registration, profile, wallet, tasks and referrals use database records. Advertising and some earning methods are not connected yet.',step1:'STEP 01',registerStep:'Sign up',registerStepDesc:'Create an account using your name and email.',step2:'STEP 02',tasksStep:'Explore tasks',tasksStepDesc:'Open your dashboard and view available tasks or approved ads.',step3:'STEP 03',rewardsStep:'Earn rewards',rewardsStepDesc:'Rewards depend on verified activities and platform rules.',step4:'STEP 04',walletStep:'Check your wallet',walletStepDesc:'Review your reward history and withdrawal conditions when enabled.',ctaText:'Build your digital opportunity, one step at a time.',ctaButton:'Create account →',notice:'Notice: Some website features are connected to Supabase. Ads and automatic payments are not connected yet. Withdrawal requests require admin review and processing. Earnings are not guaranteed.',footerText:'Green + Gold · Hausa · English · Français · العربية'
+},
+fr: {
+navFeatures:'Fonctionnalités',navHow:'Fonctionnement',navAbout:'À propos',navLogin:'Connexion',navRegister:'Inscription',eyebrow:'✦ OPPORTUNITÉS NUMÉRIQUES',heroTitle1:'Construisez votre avenir.',heroTitle2:'Commencez aujourd’hui.',heroDescription:'LIFETIME EARNING est une plateforme conçue pour aider chacun à découvrir des possibilités de récompenses grâce aux activités en ligne, aux tâches et au parrainage, dans un cadre clair et organisé.',startNow:'Commencer →',howButton:'Fonctionnement',trustEasy:'✓ Facile à utiliser',trustDevices:'✓ Android et web',trustLanguages:'✓ Quatre langues',preview:'● Aperçu',demoBalance:'Solde fictif du portefeuille',demoHint:'Commencez par effectuer les tâches disponibles',createAccount:'Créer un compte',ads:'Publicités',tasks:'Tâches',referral:'Parrainage',featuresEyebrow:'FONCTIONNALITÉS',featuresTitle:'Tout ce dont vous avez besoin au même endroit',featuresIntro:'Une plateforme conçue pour être utilisée facilement sur Android et ordinateur.',watchAds:'Voir des publicités',watchAdsDesc:'Les publicités et les récompenses seront disponibles après la connexion d’un fournisseur autorisant cet usage.',dailyTasks:'Tâches quotidiennes',dailyTasksDesc:'Effectuez des tâches et suivez votre progression au même endroit.',referEarn:'Parrainer et gagner',referEarnDesc:'Invitez des amis avec votre lien de parrainage, selon les règles du programme.',wallet:'Portefeuille',walletDesc:'Consultez en toute sécurité votre solde, vos points, vos récompenses et votre historique.',withdrawal:'Retraits',withdrawalDesc:'Demandez un retrait selon les règles de la plateforme. Un administrateur examine la demande avant toute approbation et tout paiement.',accountSecurity:'Compte et sécurité',accountSecurityDesc:'Gérez votre compte et vos informations, avec une protection contre les utilisations abusives.',howEyebrow:'FONCTIONNEMENT',howTitle:'Quatre étapes simples',howIntro:'L’inscription, le profil, le portefeuille, les tâches et le parrainage utilisent la base de données. La publicité et certaines méthodes de gains ne sont pas encore connectées.',step1:'ÉTAPE 01',registerStep:'Inscrivez-vous',registerStepDesc:'Créez un compte avec votre nom et votre adresse e-mail.',step2:'ÉTAPE 02',tasksStep:'Consultez les tâches',tasksStepDesc:'Ouvrez votre tableau de bord et consultez les tâches ou publicités approuvées.',step3:'ÉTAPE 03',rewardsStep:'Accumulez des récompenses',rewardsStepDesc:'Les récompenses dépendent des activités vérifiées et des règles de la plateforme.',step4:'ÉTAPE 04',walletStep:'Consultez votre portefeuille',walletStepDesc:'Consultez l’historique des récompenses et les conditions de retrait lorsqu’elles sont activées.',ctaText:'Construisez votre avenir numérique, une étape à la fois.',ctaButton:'Créer un compte →',notice:'Information : certaines fonctions du site sont connectées à Supabase. Les publicités et les paiements automatiques ne sont pas encore connectés. Les demandes de retrait doivent être examinées et traitées par un administrateur. Les gains ne sont pas garantis.',footerText:'Vert et or · Hausa · English · Français · العربية'
+},
+ar: {
+navFeatures:'المميزات',navHow:'كيف يعمل',navAbout:'من نحن',navLogin:'تسجيل الدخول',navRegister:'إنشاء حساب',eyebrow:'✦ فرص رقمية',heroTitle1:'ابنِ فرصتك.',heroTitle2:'ابدأ اليوم.',heroDescription:'LIFETIME EARNING منصة تساعد الأشخاص على اكتشاف فرص المكافآت من خلال الأنشطة والمهام عبر الإنترنت ودعوة الأصدقاء، ضمن تجربة واضحة ومنظمة.',startNow:'ابدأ الآن ←',howButton:'كيف يعمل',trustEasy:'✓ سهل الاستخدام',trustDevices:'✓ أندرويد والويب',trustLanguages:'✓ أربع لغات',preview:'● معاينة',demoBalance:'رصيد المحفظة التجريبي',demoHint:'ابدأ بإكمال المهام المتاحة',createAccount:'إنشاء حساب',ads:'إعلانات',tasks:'مهام',referral:'إحالة',featuresEyebrow:'مميزات المنصة',featuresTitle:'كل ما تحتاج إليه في مكان واحد',featuresIntro:'مصممة للاستخدام بسهولة على هواتف أندرويد وأجهزة الكمبيوتر.',watchAds:'مشاهدة الإعلانات',watchAdsDesc:'ستتوفر مشاهدة الإعلانات والمكافآت بعد ربط مزود إعلانات يسمح بهذا الاستخدام.',dailyTasks:'المهام اليومية',dailyTasksDesc:'أكمل الأنشطة وتابع تقدمك في مكان واحد.',referEarn:'ادعُ واربح',referEarnDesc:'ادعُ أصدقاءك عبر رابط الإحالة وفقاً لقواعد البرنامج.',wallet:'المحفظة',walletDesc:'اطّلع بأمان على رصيد محفظتك ونقاطك ومكافآتك وسجل معاملاتك.',withdrawal:'السحب',withdrawalDesc:'قدّم طلب سحب وفقاً لقواعد المنصة. يراجع المشرف طلبك قبل الموافقة على الدفع وتنفيذه.',accountSecurity:'الحساب والأمان',accountSecurityDesc:'أدر حسابك وبياناتك مع الحماية من إساءة استخدام المنصة.',howEyebrow:'كيف يعمل',howTitle:'أربع خطوات بسيطة',howIntro:'تستخدم عمليات التسجيل والملف الشخصي والمحفظة والمهام والإحالات بيانات قاعدة البيانات. الإعلانات وبعض طرق الربح لم يتم ربطها بعد.',step1:'الخطوة 01',registerStep:'إنشاء حساب',registerStepDesc:'أنشئ حساباً باستخدام اسمك وبريدك الإلكتروني.',step2:'الخطوة 02',tasksStep:'استكشف المهام',tasksStepDesc:'افتح لوحة التحكم واطّلع على المهام أو الإعلانات المعتمدة.',step3:'الخطوة 03',rewardsStep:'اجمع المكافآت',rewardsStepDesc:'تعتمد المكافآت على الأنشطة التي تم التحقق منها وقواعد المنصة.',step4:'الخطوة 04',walletStep:'راجع المحفظة',walletStepDesc:'راجع سجل المكافآت وشروط السحب عند تفعيلها.',ctaText:'ابنِ فرصتك الرقمية، خطوةً بعد خطوة.',ctaButton:'إنشاء حساب ←',notice:'تنبيه: تم ربط بعض وظائف الموقع بـ Supabase. لم يتم ربط الإعلانات والمدفوعات التلقائية بعد. تخضع طلبات السحب لمراجعة المشرف وتنفيذها. لا يوجد ضمان لتحقيق الأرباح.',footerText:'الأخضر والذهبي · Hausa · English · Français · العربية'
+}
 };
-  en: {
-    navFeatures: "Features",
-    navHow: "How it works",
-    navAbout: "About",
-    navLogin: "Login",
-    navRegister: "Register",
-    eyebrow: "✦ DIGITAL OPPORTUNITIES",
-    heroTitle1: "Build your opportunity.",
-    heroTitle2: "Start today.",
-    heroDescription: "LIFETIME EARNING is a platform designed to help people discover reward opportunities through online activities, tasks and referrals—with a transparent process.",
-    startNow: "Get started →",
-    howButton: "How it works",
-    trustEasy: "✓ Easy to use",
-    trustDevices: "✓ Android and Website",
-    trustLanguages: "✓ Four languages",
-    preview: "● Preview",
-    demoBalance: "Demo Wallet Balance",
-    demoHint: "Start by completing available tasks",
-    createAccount: "Create Account",
-    ads: "Ads",
-    tasks: "Tasks",
-    referral: "Referral",
-    featuresEyebrow: "OUR FEATURES",
-    featuresTitle: "Everything you need in one place",
-    featuresIntro: "Designed for easy use on Android phones and computers.",
-    watchAds: "Watch Ads",
-    watchAdsDesc: "An advertising and rewards section, once a compatible ad provider is connected.",
-    dailyTasks: "Daily Tasks",
-    dailyTasksDesc: "Complete tasks and track your progress in one place.",
-    referEarn: "Refer & Earn",
-    referEarnDesc: "Invite friends using your referral link according to the program rules.",
-    wallet: "Wallet",
-    walletDesc: "Securely view your wallet balance, points, rewards and transaction history.",
-    withdrawal: "Withdrawal",
-    withdrawalDesc: "Request a withdrawal according to platform rules. An admin reviews your request before approval and payment processing.",
-    accountSecurity: "Account & Security",
-    accountSecurityDesc: "Account management, user information and protection against fraudulent use.",
-    howEyebrow: "HOW IT WORKS",
-    howTitle: "Four simple steps",
-    howIntro: "Registration, profiles, wallets, tasks and referrals use database records. Advertising and some earning methods are not connected yet.",
-    step1: "STEP 01",
-    registerStep: "Register",
-    registerStepDesc: "Create an account using your name and email.",
-    step2: "STEP 02",
-    tasksStep: "Explore tasks",
-    tasksStepDesc: "Open your dashboard and view available tasks or approved advertisements.",
-    step3: "STEP 03",
-    rewardsStep: "Earn rewards",
-    rewardsStepDesc: "Rewards depend on verified activities and platform rules.",
-    step4: "STEP 04",
-    walletStep: "Check your wallet",
-    walletStepDesc: "View your rewards history and withdrawal conditions when enabled.",
-    ctaText: "Build your digital opportunity, one step at a time.",
-    ctaButton: "Create Account →",
-    notice: "Notice: Some website sections are connected to Supabase. Ads and automatic payments are not connected yet. Withdrawal requests require admin review and processing. Earnings are not guaranteed."
-    
-"Admin Dashboard": "Admin Dashboard",
-"📊 Bayani": "📊 Overview",
-"✓ Tasks": "✓ Tasks",
-"🎯 Referral Tasks 3": "🎯 Referral Tasks 3",
-"📰 Sanarwa": "📰 Announcements",
-"📝 Duba hujjoji": "📝 Review submissions",
-"💳 Withdrawals": "💳 Withdrawals",
-"👥 Users": "👥 Users",
-"Umarnin Task 1": "Task 1 instructions",
-"Umarnin Task 2": "Task 2 instructions",
-"Umarnin Task 3": "Task 3 instructions",
-"Misali: Kalli koyarwar bidiyo": "Example: Watch the video tutorial",
-"Bayyana abin da user zai yi": "Describe what the user should do",
-"Misali: 100": "Example: 100",
-"Sanarwar da aka wallafa za ta bayyana a shafin Newsletter.": "Published announcements will appear on the Newsletter page.",
-"Babu buƙatun withdrawal tukuna.": "No withdrawal requests yet."
-  }
-  };
-  fr: {
+
 const appUiTranslations = {
   "en": {
     "Abubuwan da ke ciki": "Features",
@@ -696,8 +578,7 @@ const appUiTranslations = {
     "Referral System": "Referral system",
     "Task Center": "Task center",
     "WALLET CENTER": "WALLET CENTER"
-  }
-};,
+  },
   "fr": {
     "Abubuwan da ke ciki": "Fonctionnalités",
     "Yadda yake aiki": "Comment ça marche",
@@ -842,8 +723,7 @@ const appUiTranslations = {
     "Newsletter / Sanarwa": "Newsletter / Annonces",
     "Wallet & Harkokin Kuɗi": "Portefeuille et finances",
     "Referral System": "Système de parrainage"
-  }
- };,
+  },
   "ar": {
     "Abubuwan da ke ciki": "الميزات",
     "Yadda yake aiki": "كيف يعمل",
@@ -989,7 +869,7 @@ const appUiTranslations = {
     "Wallet & Harkokin Kuɗi": "المحفظة والمعاملات المالية",
     "Referral System": "نظام الإحالة"
   }
-};,
+};
 
 const appUiOriginalText = new WeakMap();
 
@@ -1016,6 +896,23 @@ const dashboardUiTranslations = {
     'Home':'الرئيسية','Tasks':'المهام','News':'الأخبار','Referral':'الإحالات','Wallet':'المحفظة','Account':'الحساب','Admin':'الإدارة'
   }
 };
+
+const adminTranslations = {
+  ha: {adminWorkspace:'ADMIN WORKSPACE',adminCenter:'Admin Center',adminIntro:'Dukkan ayyukan gudanarwa a wuri guda.',adminDashboard:'Admin Dashboard',adminOnly:'Wannan sashe yana bayyana ga admin kawai.',overview:'📊 Bayani',taskManagerShortcut:'✓ Tasks',referralTasksShortcut:'🎯 Referral Tasks 3',announcements:'📰 Sanarwa',reviewSubmissions:'📝 Duba hujjoji',withdrawals:'💳 Withdrawals',users:'👥 Users',totalUsers:'Total Users',totalWalletBalance:'Total Wallet Balance',totalWithdrawals:'Total Withdrawals',pendingWithdrawals:'Pending Withdrawals',taskManager:'Task Manager',referralCommission:'🎯 Referral Commission — Tasks 3 na dole',saveReferralTasks:'Ajiye Tasks 3 na Referral',newsletter:'Newsletter / Sanarwa',publishAnnouncement:'Wallafa sanarwa',taskReview:'Task Review',pending:'Pending',approved:'Approved',rejected:'Rejected',allStatuses:'Dukkan matsayi',pendingOnly:'Pending kawai',approvedOnly:'Approved kawai',rejectedOnly:'Rejected kawai',searchTasks:'Nemi task ko hujja...',withdrawalManagement:'Withdrawal Management',userManagement:'Users Management'},
+  en: {adminWorkspace:'ADMIN WORKSPACE',adminCenter:'Admin Center',adminIntro:'All administration tools in one place.',adminDashboard:'Admin Dashboard',adminOnly:'This section is visible to admins only.',overview:'📊 Overview',taskManagerShortcut:'✓ Tasks',referralTasksShortcut:'🎯 Referral Tasks 3',announcements:'📰 Announcements',reviewSubmissions:'📝 Review submissions',withdrawals:'💳 Withdrawals',users:'👥 Users',totalUsers:'Total Users',totalWalletBalance:'Total Wallet Balance',totalWithdrawals:'Total Withdrawals',pendingWithdrawals:'Pending Withdrawals',taskManager:'Task Manager',referralCommission:'🎯 Referral Commission — 3 Required Tasks',saveReferralTasks:'Save Referral Tasks',newsletter:'Newsletter / Announcements',publishAnnouncement:'Publish Announcement',taskReview:'Task Review',pending:'Pending',approved:'Approved',rejected:'Rejected',allStatuses:'All statuses',pendingOnly:'Pending only',approvedOnly:'Approved only',rejectedOnly:'Rejected only',searchTasks:'Search tasks or proof...',withdrawalManagement:'Withdrawal Management',userManagement:'User Management'},
+  fr: {adminWorkspace:'ESPACE ADMIN',adminCenter:'Centre d’administration',adminIntro:'Tous les outils d’administration au même endroit.',adminDashboard:'Tableau de bord administrateur',adminOnly:'Cette section est réservée aux administrateurs.',overview:'📊 Aperçu',taskManagerShortcut:'✓ Tâches',referralTasksShortcut:'🎯 3 tâches de parrainage',announcements:'📰 Annonces',reviewSubmissions:'📝 Examiner les preuves',withdrawals:'💳 Retraits',users:'👥 Utilisateurs',totalUsers:'Nombre total d’utilisateurs',totalWalletBalance:'Solde total des portefeuilles',totalWithdrawals:'Nombre total de retraits',pendingWithdrawals:'Retraits en attente',taskManager:'Gestionnaire de tâches',referralCommission:'🎯 Commission de parrainage — 3 tâches obligatoires',saveReferralTasks:'Enregistrer les tâches de parrainage',newsletter:'Newsletter / Annonces',publishAnnouncement:'Publier l’annonce',taskReview:'Vérification des tâches',pending:'En attente',approved:'Approuvées',rejected:'Refusées',allStatuses:'Tous les statuts',pendingOnly:'En attente uniquement',approvedOnly:'Approuvées uniquement',rejectedOnly:'Refusées uniquement',searchTasks:'Rechercher une tâche ou une preuve...',withdrawalManagement:'Gestion des retraits',userManagement:'Gestion des utilisateurs'},
+  ar: {adminWorkspace:'مساحة المسؤول',adminCenter:'مركز المسؤول',adminIntro:'جميع أدوات الإدارة في مكان واحد.',adminDashboard:'لوحة تحكم المسؤول',adminOnly:'هذا القسم مخصص للمسؤولين فقط.',overview:'📊 نظرة عامة',taskManagerShortcut:'✓ المهام',referralTasksShortcut:'🎯 مهام الإحالة الثلاث',announcements:'📰 الإعلانات',reviewSubmissions:'📝 مراجعة الإثباتات',withdrawals:'💳 عمليات السحب',users:'👥 المستخدمون',totalUsers:'إجمالي المستخدمين',totalWalletBalance:'إجمالي رصيد المحافظ',totalWithdrawals:'إجمالي عمليات السحب',pendingWithdrawals:'عمليات السحب المعلقة',taskManager:'إدارة المهام',referralCommission:'🎯 عمولة الإحالة — ثلاث مهام إلزامية',saveReferralTasks:'حفظ مهام الإحالة',newsletter:'النشرة الإخبارية / الإعلانات',publishAnnouncement:'نشر الإعلان',taskReview:'مراجعة المهام',pending:'معلقة',approved:'معتمدة',rejected:'مرفوضة',allStatuses:'جميع الحالات',pendingOnly:'المعلقة فقط',approvedOnly:'المعتمدة فقط',rejectedOnly:'المرفوضة فقط',searchTasks:'ابحث عن المهام أو الإثبات...',withdrawalManagement:'إدارة عمليات السحب',userManagement:'إدارة المستخدمين'}
+};
+Object.assign(adminTranslations.ha,{noTaskSubmissions:'Babu task submissions tukuna.',noSearchResults:'Ba a samu sakamakon da ya dace da bincikenka ba.',userId:'User ID',submittedOn:'Ranar aikawa',adminNote:'Bayanin admin',approve:'Amince',reject:'Ƙi'});
+Object.assign(adminTranslations.en,{noTaskSubmissions:'No task submissions yet.',noSearchResults:'No results match your search.',userId:'User ID',submittedOn:'Submitted',adminNote:'Admin note',approve:'Approve',reject:'Reject'});
+Object.assign(adminTranslations.fr,{noTaskSubmissions:'Aucune soumission de tâche pour le moment.',noSearchResults:'Aucun résultat ne correspond à votre recherche.',userId:'ID utilisateur',submittedOn:'Envoyée le',adminNote:'Note de l’administrateur',approve:'Approuver',reject:'Refuser'});
+Object.assign(adminTranslations.ar,{noTaskSubmissions:'لا توجد مهام مرسلة بعد.',noSearchResults:'لا توجد نتائج مطابقة لبحثك.',userId:'معرّف المستخدم',submittedOn:'تاريخ الإرسال',adminNote:'ملاحظة المسؤول',approve:'اعتماد',reject:'رفض'});
+function adminT(key){return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
+function applyAdminTranslations(language){
+  const dict=adminTranslations[language]||adminTranslations.ha;
+  document.querySelectorAll('[data-admin-key]').forEach(el=>{if(dict[el.dataset.adminKey])el.textContent=dict[el.dataset.adminKey];});
+  document.querySelectorAll('[data-admin-placeholder]').forEach(el=>{if(dict[el.dataset.adminPlaceholder])el.placeholder=dict[el.dataset.adminPlaceholder];});
+}
 
 function translateAppInterface(language){
   const dict = appUiTranslations[language] ? {...appUiTranslations[language], ...(dashboardUiTranslations[language]||{})} : null;
@@ -1175,9 +1072,10 @@ function setAppLanguage(language){
   });
 
   translateAppInterface(language);
+  applyAdminTranslations(language);
   translateLoginView(language);
   }
-      
+
 
 document.addEventListener('DOMContentLoaded', function () {
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
@@ -1228,7 +1126,7 @@ function showView(id) {
 
   return false;
 }
-  
+
 function scrollToDashboardSection(id){const target=document.getElementById(id);if(!target)return;target.scrollIntoView({behavior:'smooth',block:'start'});const nav=document.getElementById('dashboardBottomNav');if(nav){nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));const active=Array.from(nav.querySelectorAll('button')).find(b=>b.getAttribute('onclick')?.includes(id));if(active)active.classList.add('active');}}
 function renderAccountActions(){
   const box=document.getElementById('accountActions');if(!box)return;
@@ -1353,7 +1251,7 @@ async function loginUser(e) {
     }
   }
   }
-  
+
 async function loadProfile(){
   if(!currentUser)return;
   await syncAdminNavigation();
@@ -1582,7 +1480,7 @@ async function loadAdminPanel(){
     else usersEl.innerHTML=users.map(u=>`<div class="listrow"><div><b>${escapeHtml(u.full_name||'Ba a saka suna ba')}</b><small>Points: ${Number(u.points||0)} • ID: ${escapeHtml(u.id)}</small></div><span class="tag">User</span></div>`).join('');
   }catch(err){panel.style.display='block';document.getElementById('adminWithdrawals').textContent='Admin dashboard error: '+err.message;}
 }
-  
+
 let adminTaskSubmissionRows = [];
 let adminTaskLabels = {};
 
@@ -1659,22 +1557,20 @@ function renderAdminTaskSubmissions() {
   }
 
   target.innerHTML = filtered.map(r => {
-    const statusLabel =
-      r.status === 'approved' ? 'Approved' :
-      r.status === 'rejected' ? 'Rejected' : 'Pending';
+    const statusLabel = r.status === 'approved' ? adminT('approved') : r.status === 'rejected' ? adminT('rejected') : adminT('pending');
 
     return `<div class="listrow" style="align-items:flex-start;gap:12px">
       <div style="min-width:0;flex:1">
         <b>${escapeHtml(adminTaskLabels[r.task_key] || r.task_key)} — ${statusLabel}</b>
-        <small>User ID: ${escapeHtml(r.user_id)}</small>
-        <small>Ranar aikawa: ${new Date(r.created_at).toLocaleString()}</small>
+        <small>${adminT('userId')}: ${escapeHtml(r.user_id)}</small>
+        <small>${adminT('submittedOn')}: ${new Date(r.created_at).toLocaleString()}</small>
         <p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0">${escapeHtml(r.proof || 'Babu hujja')}</p>
-        ${r.admin_note ? `<small>Bayanin admin: ${escapeHtml(r.admin_note)}</small>` : ''}
+        ${r.admin_note ? `<small>${adminT('adminNote')}: ${escapeHtml(r.admin_note)}</small>` : ''}
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         ${r.status === 'pending' ? `
-          <button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">Amince</button>
-          <button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">Ƙi</button>
+          <button class="btn btn-green" onclick="reviewTaskSubmission('${r.id}','approve')">${adminT('approve')}</button>
+          <button class="btn btn-soft" onclick="reviewTaskSubmission('${r.id}','reject')">${adminT('reject')}</button>
         ` : ''}
       </div>
     </div>`;
@@ -1959,7 +1855,7 @@ async function loadAdminTasks(){
   }catch(err){
     alert('Ba a iya sauya matsayin Task ba: ' + err.message);
   }
-  } 
+  }
 
 </script>
 </body>
