@@ -183,9 +183,21 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 <div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
 </form>
 
-
 <div id="adminNewslettersList">Ana ɗauko sanarwa...</div>
+<h4 data-admin-key="publishedTasksHeading">Tasks da aka riga aka wallafa</h4>
 <div id="adminTasksList">Ana ɗauko Tasks...</div>
+
+<h4 data-admin-key="createTaskHeading">Wallafa sabon Task</h4>
+<form id="adminCreateTaskForm" onsubmit="createAdminTask(event)" style="max-width:650px;margin:12px 0 22px">
+  <label class="field"><span data-admin-key="createTaskTitle">Sunan Task</span><input id="newTaskTitle" maxlength="100" required></label>
+  <label class="field"><span data-admin-key="createTaskDescription">Bayani da umarnin Task</span><textarea id="newTaskDescription" maxlength="1000" required rows="3" style="width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb"></textarea></label>
+  <label class="field"><span data-admin-key="createTaskPoints">Points da za a bayar</span><input id="newTaskPoints" type="number" min="1" max="1000000" required></label>
+  <label class="field"><span data-admin-key="taskExpiry">Ranar/lokacin ƙarewar Task (ba dole ba)</span><input id="newTaskExpiry" type="datetime-local"></label>
+  <button class="btn btn-green" id="createTaskButton" type="submit" data-admin-key="createTask">Ƙirƙiri Task</button>
+  <p class="empty-note" data-admin-key="taskCreatedNotice">Sabon Task zai bayyana ga users bayan an ƙirƙira shi.</p>
+  <div id="adminTaskMessage" class="noticebox" role="status"></div>
+</form>
+
 <h3 id="adminReviewHeading" style="margin-top:24px" data-admin-key="taskReview">Task Review</h3>
 <p class="empty-note">Duba hujjojin masu amfani. Ka amince ne kawai idan hujjar ta dace da aikin da aka nema.</p>
 
@@ -988,6 +1000,46 @@ Object.assign(adminTranslations.ar, {
   usersDesc: "قائمة المستخدمين ونقاطهم. لا تشارك المعلومات الخاصة."
 });
 
+Object.assign(adminTranslations.ha, {
+  publishedTasksHeading: "Tasks da aka riga aka wallafa", createTaskHeading: "Wallafa sabon Task",
+  referralTasksSaved: "An sabunta tasks uku na referral cikin nasara.",
+  referralTasksLoaded: "An ɗauko tasks uku. Waɗannan su ne tasks da tsarin ke dubawa kafin referral commission.",
+  referralTaskInactiveWarning: "GARGAƊI: akwai task na referral da aka dakatar. Ka kunna shi a Task Manager domin sabon user ya iya kammala shi.",
+  taskPointsLabel: "Points", taskActive: "Aiki", taskInactive: "An dakatar", taskExpiryLabel: "Ƙarewa:", taskNoExpiry: "Ba shi da wa’adi", taskDeactivate: "Dakatar", taskActivate: "Kunna", tasksLoading: "Ana ɗauko Tasks...", tasksLoadError: "Ba a iya ɗauko Tasks ba:", noPublishedTasks: "Babu Tasks tukuna.", taskCreateLoading: "Ana ƙirƙira...", taskSaveLoading: "Ana ajiyewa...", taskCreateValidation: "Ka duba sunan Task, bayani da Points.",
+  taskCreateSuccess: "An ƙirƙiri Task cikin nasara. Yanzu users za su iya ganinsa.", taskCreateError: "Ba a iya ƙirƙirar Task ba:", taskStatusError: "Ba a iya sauya matsayin Task ba:",
+  referralTaskCannotDeactivate: "Ba za a dakatar da wannan task ba, domin yana cikin tasks 3 da ake bukata kafin referral commission.",
+});
+
+Object.assign(adminTranslations.en, {
+  publishedTasksHeading: "Previously published tasks", createTaskHeading: "Publish a new task",
+  referralTasksSaved: "The three referral tasks were updated successfully.",
+  referralTasksLoaded: "The three tasks have loaded. These are checked before referral commission is awarded.",
+  referralTaskInactiveWarning: "WARNING: A referral task is inactive. Activate it in Task Manager so new users can complete it.",
+  taskPointsLabel: "Points", taskActive: "Active", taskInactive: "Inactive", taskExpiryLabel: "Expires:", taskNoExpiry: "No expiry", taskDeactivate: "Deactivate", taskActivate: "Activate", tasksLoading: "Loading tasks...", tasksLoadError: "Unable to load tasks:", noPublishedTasks: "No tasks yet.", taskCreateLoading: "Creating...", taskSaveLoading: "Saving...", taskCreateValidation: "Check the task title, description and points.",
+  taskCreateSuccess: "Task created successfully. Users can now see it.", taskCreateError: "Unable to create task:", taskStatusError: "Unable to change task status:",
+  referralTaskCannotDeactivate: "This task cannot be deactivated because it is one of the 3 required referral tasks.",
+});
+
+Object.assign(adminTranslations.fr, {
+  publishedTasksHeading: "Tâches déjà publiées", createTaskHeading: "Publier une nouvelle tâche",
+  referralTasksSaved: "Les trois tâches de parrainage ont été mises à jour.",
+  referralTasksLoaded: "Les trois tâches sont chargées. Le système les vérifie avant d’accorder la commission de parrainage.",
+  referralTaskInactiveWarning: "ATTENTION : une tâche de parrainage est inactive. Activez-la dans le gestionnaire de tâches pour que les nouveaux utilisateurs puissent la terminer.",
+  taskPointsLabel: "Points", taskActive: "Active", taskInactive: "Désactivée", taskExpiryLabel: "Expiration :", taskNoExpiry: "Sans expiration", taskDeactivate: "Désactiver", taskActivate: "Activer", tasksLoading: "Chargement des tâches...", tasksLoadError: "Impossible de charger les tâches :", noPublishedTasks: "Aucune tâche pour le moment.", taskCreateLoading: "Création...", taskSaveLoading: "Enregistrement...", taskCreateValidation: "Vérifiez le titre, la description et les points de la tâche.",
+  taskCreateSuccess: "Tâche créée avec succès. Les utilisateurs peuvent maintenant la voir.", taskCreateError: "Impossible de créer la tâche :", taskStatusError: "Impossible de modifier le statut de la tâche :",
+  referralTaskCannotDeactivate: "Cette tâche ne peut pas être désactivée, car elle fait partie des trois tâches de parrainage obligatoires.",
+});
+
+Object.assign(adminTranslations.ar, {
+  publishedTasksHeading: "المهام المنشورة مسبقاً", createTaskHeading: "نشر مهمة جديدة",
+  referralTasksSaved: "تم تحديث مهام الإحالة الثلاث بنجاح.",
+  referralTasksLoaded: "تم تحميل المهام الثلاث. يتحقق النظام منها قبل منح عمولة الإحالة.",
+  referralTaskInactiveWarning: "تحذير: توجد مهمة إحالة غير نشطة. فعّلها من إدارة المهام حتى يتمكن المستخدمون الجدد من إكمالها.",
+  taskPointsLabel: "النقاط", taskActive: "نشطة", taskInactive: "متوقفة", taskExpiryLabel: "تنتهي:", taskNoExpiry: "بلا تاريخ انتهاء", taskDeactivate: "إيقاف", taskActivate: "تفعيل", tasksLoading: "جارٍ تحميل المهام...", tasksLoadError: "تعذر تحميل المهام:", noPublishedTasks: "لا توجد مهام بعد.", taskCreateLoading: "جارٍ الإنشاء...", taskSaveLoading: "جارٍ الحفظ...", taskCreateValidation: "تحقق من عنوان المهمة ووصفها والنقاط.",
+  taskCreateSuccess: "تم إنشاء المهمة بنجاح. يمكن للمستخدمين رؤيتها الآن.", taskCreateError: "تعذر إنشاء المهمة:", taskStatusError: "تعذر تغيير حالة المهمة:",
+  referralTaskCannotDeactivate: "لا يمكن إيقاف هذه المهمة لأنها واحدة من مهام الإحالة الثلاث المطلوبة.",
+});
+
 function adminT(key){
   return (adminTranslations[localStorage.getItem('appLanguage')||'ha']||adminTranslations.ha)[key]||adminTranslations.ha[key]||key;}
 function applyAdminTranslations(language, root=document){
@@ -1001,6 +1053,9 @@ function applyAdminTranslations(language, root=document){
     const translated=dict[el.dataset.adminPlaceholder];
     if(translated && el.placeholder!==translated) el.placeholder=translated;
   });
+  if(typeof renderAdminTasks==='function' && Array.isArray(adminTaskRowsCache)) renderAdminTasks(false);
+  const referralMessage=document.getElementById('referralTasksAdminMessage');
+  if(referralMessage && referralMessage.dataset.messageKey) referralMessage.textContent=adminT(referralMessage.dataset.messageKey);
 }
 
 function translateAppInterface(language){
@@ -1862,16 +1917,15 @@ async function loadReferralQualificationTasks(){
     document.getElementById(item.pointsId).value=Number(row.reward_points||0);
   }
   const inactive=REFERRAL_QUALIFICATION_TASKS.filter(item=>byKey[item.key]&&!byKey[item.key].is_active);
-  message.textContent=inactive.length
-    ? 'GARGAƊI: akwai task na referral da aka dakatar. Ka kunna shi a Task Manager domin sabon user ya iya kammala shi.'
-    : 'An ɗauko tasks uku. Waɗannan su ne tasks da tsarin ke dubawa kafin referral commission.';
+  message.dataset.messageKey=inactive.length?'referralTaskInactiveWarning':'referralTasksLoaded';
+  message.textContent=adminT(message.dataset.messageKey);
 }
 
 async function saveReferralQualificationTasks(event){
   event.preventDefault();
   const button=document.getElementById('saveReferralTasksButton');
   const message=document.getElementById('referralTasksAdminMessage');
-  button.disabled=true;button.textContent='Ana ajiyewa...';
+  button.disabled=true;button.textContent=adminT('taskSaveLoading');
   try{
     const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
     if(adminError)throw adminError;
@@ -1889,11 +1943,12 @@ async function saveReferralQualificationTasks(event){
       if(error)throw error;
       if(!data)throw new Error('Ba a samu task '+item.key+' a database ba.');
     }
-    message.textContent='An sabunta tasks uku na referral cikin nasara.';
+    message.dataset.messageKey='referralTasksSaved';
+    message.textContent=adminT('referralTasksSaved');
     await loadAdminTasks();
     await loadAvailableTasks();
   }catch(err){message.textContent='Ba a iya ajiye tasks ba: '+err.message;}
-  finally{button.disabled=false;button.textContent='Ajiye Tasks 3 na Referral';}
+  finally{button.disabled=false;button.textContent=adminT('saveReferralTasks');}
 }
 
 async function createAdminTask(event){
@@ -1904,8 +1959,8 @@ async function createAdminTask(event){
   const expiryValue=document.getElementById('newTaskExpiry')?.value||'';
   const expiresAt=expiryValue?new Date(expiryValue).toISOString():null;
   const button=document.getElementById('createTaskButton');
-  if(!title||!description||!Number.isSafeInteger(reward)||reward<1||reward>1000000){setMessage('adminTaskMessage','Ka duba sunan Task, bayani da Points.');return;}
-  button.disabled=true;button.textContent='Ana ƙirƙira...';
+  if(!title||!description||!Number.isSafeInteger(reward)||reward<1||reward>1000000){setMessage('adminTaskMessage',adminT('taskCreateValidation'));return;}
+  button.disabled=true;button.textContent=adminT('taskCreateLoading');
   try{
     const {data:isAdmin,error:adminError}=await supabaseClient.rpc('is_app_admin');
     if(adminError)throw adminError;
@@ -1913,22 +1968,33 @@ async function createAdminTask(event){
     const {error}=await supabaseClient.from('tasks').insert({task_key:makeTaskKey(title),title,description,reward_points:reward,is_active:true,expires_at:expiresAt,created_by:currentUser.id});
     if(error)throw error;
     document.getElementById('adminCreateTaskForm').reset();
-    setMessage('adminTaskMessage','An ƙirƙiri Task cikin nasara. Yanzu users za su iya ganinsa.');
+    setMessage('adminTaskMessage',adminT('taskCreateSuccess'));
     await loadAdminTasks();
     await loadAvailableTasks();
-  }catch(err){setMessage('adminTaskMessage','Ba a iya ƙirƙirar Task ba: '+err.message);}
-  finally{button.disabled=false;button.textContent='Ƙirƙiri Task';}
+  }catch(err){setMessage('adminTaskMessage',adminT('taskCreateError')+' '+err.message);}
+  finally{button.disabled=false;button.textContent=adminT('createTask');}
+}
+let adminTaskRowsCache=[];
+function renderAdminTasks(force=false){
+  const target=document.getElementById('adminTasksList');if(!target)return;
+  const language=localStorage.getItem('appLanguage')||'ha';
+  if(!force && target.dataset.renderedLanguage===language) return;
+  const rows=adminTaskRowsCache;
+  target.dataset.renderedLanguage=language;
+  if(!rows.length){target.textContent=adminT('noPublishedTasks');return;}
+  target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} ${adminT('taskPointsLabel')} • ${t.is_active?adminT('taskActive'):adminT('taskInactive')}</small><small>${t.expires_at?adminT('taskExpiryLabel')+' '+new Date(t.expires_at).toLocaleString():adminT('taskNoExpiry')}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?adminT('taskDeactivate'):adminT('taskActivate')}</button></div>`).join('');
 }
 async function loadAdminTasks(){
   const target=document.getElementById('adminTasksList');if(!target)return;
+  target.textContent=adminT('tasksLoading');
   const {data:rows,error}=await supabaseClient.from('tasks').select('task_key,title,description,reward_points,is_active,created_at,expires_at').order('created_at',{ascending:false});
-  if(error){target.textContent='Ba a iya ɗauko Tasks ba: '+error.message;return;}
-  if(!rows||!rows.length){target.textContent='Babu Tasks tukuna.';return;}
-  target.innerHTML=rows.map(t=>`<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.description)}</small><small>${Number(t.reward_points)} Points • ${t.is_active?'Aiki':'An dakatar'}</small><small>${t.expires_at?'Ƙarewa: '+new Date(t.expires_at).toLocaleString():'Ba shi da wa’adi'}</small></div><button class="btn ${t.is_active?'btn-soft':'btn-green'}" onclick="toggleAdminTask('${escapeHtml(t.task_key)}',${!t.is_active})">${t.is_active?'Dakatar':'Kunna'}</button></div>`).join('');
+  if(error){target.textContent=adminT('tasksLoadError')+' '+error.message;return;}
+  adminTaskRowsCache=rows||[];
+  renderAdminTasks(true);
 }
   async function toggleAdminTask(taskKey, active){
   if(!active&&['complete_profile','review_features','read_rules'].includes(taskKey)){
-    alert('Ba za a dakatar da wannan task ba, domin yana cikin tasks 3 da ake bukata kafin referral commission.');
+    alert(adminT('referralTaskCannotDeactivate'));
     return;
   }
   try{
@@ -1952,7 +2018,7 @@ async function loadAdminTasks(){
     await loadAvailableTasks();
 
   }catch(err){
-    alert('Ba a iya sauya matsayin Task ba: ' + err.message);
+    alert(adminT('taskStatusError')+' '+err.message);
   }
   }
 
