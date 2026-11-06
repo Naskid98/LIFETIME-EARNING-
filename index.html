@@ -1510,15 +1510,28 @@ async function copyReferralLink(){
   catch(err){document.getElementById('myReferralLink').focus();document.getElementById('myReferralLink').select();setMessage('referralMessage','Ka riƙe link ɗin ka zaɓi Copy.');}
 }
 async function loadWalletAndWithdrawals(){
-  if(!currentUser)return;
   const balanceEl=document.getElementById('walletBalance');
+  const topBalance=document.getElementById('walletTopBalance');
   const historyEl=document.getElementById('withdrawHistory');
+  if(!currentUser){
+    if(topBalance)topBalance.textContent='—';
+    if(balanceEl)balanceEl.textContent='—';
+    return;
+  }
+  let walletLoaded=false;
+  if(topBalance)topBalance.textContent='Ana ɗauko...';
   try{
     const {data:wallet,error:walletError}=await supabaseClient.from('wallets').select('balance_kobo').eq('user_id',currentUser.id).single();
     if(walletError) throw walletError;
+    if(!wallet) throw new Error('Ba a samu bayanan Wallet na wannan account ba.');
     const formattedBalance='₦'+(Number(wallet.balance_kobo||0)/100).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
-    balanceEl.textContent=formattedBalance;
-    const topBalance=document.getElementById('walletTopBalance');if(topBalance)topBalance.textContent=formattedBalance;
+    if(balanceEl)balanceEl.textContent=formattedBalance;
+    if(topBalance){
+      topBalance.textContent=formattedBalance;
+      const hint=topBalance.parentElement?.querySelector('small');
+      if(hint)hint.textContent='Daga database';
+    }
+    walletLoaded=true;
     const {data:items,error}=await supabaseClient.from('withdrawal_requests').select('id,amount_kobo,bank_name,account_name,status,admin_note,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false});
     if(error) throw error;
     if(!items||!items.length){historyEl.textContent='Ba ka da tarihin withdrawal tukuna.';}
@@ -1549,7 +1562,17 @@ const status=isDebit?'An cire daga Wallet':(isPaid?'An biya':(t.entry_type==='wi
         }).join(''):'Babu tarihin mu’amalar Wallet tukuna.';
       }catch(txErr){rewardHistory.textContent='Ba a iya ɗauko tarihin kuɗin shiga ba: '+txErr.message;}
     }
-  }catch(err){balanceEl.textContent='Ba a samu ba';historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+err.message;}
+  }catch(err){
+    const errorText=String(err?.message||err||'Ba a san dalilin ba.');
+    if(balanceEl)balanceEl.textContent=walletLoaded?balanceEl.textContent:'Ba a samu ba';
+    if(!walletLoaded&&topBalance){
+      topBalance.textContent='Ba a samu ba';
+      const hint=topBalance.parentElement?.querySelector('small');
+      if(hint)hint.textContent='Matsalar Wallet: '+errorText;
+      topBalance.title='Ba a iya ɗauko Wallet ba: '+errorText;
+    }
+    if(historyEl)historyEl.textContent='Ba a iya ɗauko wallet/withdrawal ba: '+errorText;
+  }
   await loadAdminPanel();
 }
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
