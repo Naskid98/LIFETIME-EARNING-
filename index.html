@@ -21,7 +21,7 @@ footer{background:#042e1b;color:#d6e6db;padding:32px 0}.foot{display:flex;justif
 .view{display:none;min-height:75vh;padding:38px 0 65px}.view.active{display:block}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 12px 34px #0c472008}.auth{max-width:480px;margin:20px auto}.auth h1{margin:0 0 8px}.auth p{color:var(--muted);line-height:1.6}.field{display:block;margin:15px 0}.field span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;padding:13px 14px;border:1px solid #d9e4da;border-radius:11px;background:#fbfdfb;outline-color:var(--green2)}.full{width:100%}.dashboard-head{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.wallet-panel{scroll-margin-top:105px}.dashboard-section{scroll-margin-top:105px}.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:space-around;gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:#063d25;border-top:1px solid #ffffff30;box-shadow:0 -8px 24px #001d1020}.bottom-nav[hidden]{display:none!important}.bottom-nav button{flex:1;min-width:0;border:0;border-radius:11px;background:transparent;color:#dcebe1;padding:8px 3px;font-size:11px;font-weight:750}.bottom-nav button span{display:block;font-size:19px;line-height:1.3;margin-bottom:2px}.bottom-nav button.active,.bottom-nav button:focus{background:#0a8748;color:white}.dashboard-open .view.active{padding-bottom:110px}.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:white;border:1px solid var(--line);border-radius:17px;padding:20px}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;font-size:26px;margin:10px 0 3px}.dash-columns{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-top:17px}.listrow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.listrow:last-child{border:0}.listrow small{display:block;color:var(--muted);margin-top:4px}.reward{color:var(--green2);font-weight:850}.tag{display:inline-block;background:#e9f5ec;color:var(--green);padding:5px 9px;border-radius:30px;font-size:11px;font-weight:800}.empty-note{color:var(--muted);font-size:13px;line-height:1.7}.noticebox{background:#fff8e3;border:1px solid #eedb9b;color:#6f5616;padding:14px;border-radius:13px;font-size:13px;line-height:1.6;margin-top:15px}.profile-card{display:flex;align-items:center;gap:16px;padding:20px;background:linear-gradient(135deg,#f2f8f2,#fff);border:1px solid var(--line);border-radius:18px;margin:18px 0}.profile-avatar{width:66px;height:66px;flex:0 0 66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#0a8748,#064026);color:#fff;font-size:25px;font-weight:900;border:3px solid #e6bb4c}.profile-meta{min-width:0}.profile-meta strong{display:block;font-size:18px;overflow-wrap:anywhere}.profile-meta small{display:block;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}.account-actions{display:grid;gap:10px;margin-top:18px}.settings-card{margin-top:18px;border:1px solid var(--line);border-radius:16px;padding:18px;background:#fbfdfb}.settings-card h3{margin:0 0 8px}.settings-card p{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.6}
 @media(max-width:800px){.links{display:none}.hero-grid{grid-template-columns:1fr}.visual{min-height:330px}.features{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.dash-grid{grid-template-columns:repeat(2,1fr)}.dash-columns{grid-template-columns:1fr}.cta{align-items:flex-start;flex-direction:column}}
 @media(max-width:480px){.nav{height:68px}.brand{font-size:13px}.actions .btn{padding:10px 11px;font-size:12px}.hero{padding:53px 0}.hero h1{letter-spacing:-1px}.features,.steps{grid-template-columns:1fr}.dash-grid{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat strong{font-size:21px}.cta{padding:25px}.panel{padding:18px}}
-[dir="rtl"] .hero-grid,[dir="rtl"] .cta{direction:rtl}[dir="rtl"] .section-head{text-align:center}[dir="rtl"] .hero h1,[dir="rtl"] .hero p,[dir="rtl"] .feature,[dir="rtl"] .step,[dir="rtl"] .notice{text-align:right}[dir="rtl"] .trust{direction:rtl}
+html[dir="rtl"] body{direction:rtl;text-align:right}html[dir="rtl"] input,html[dir="rtl"] textarea,html[dir="rtl"] select{text-align:right}html[dir="rtl"] .bottom-nav{direction:rtl}[dir="rtl"] .hero-grid,[dir="rtl"] .cta{direction:rtl}[dir="rtl"] .section-head{text-align:center}[dir="rtl"] .hero h1,[dir="rtl"] .hero p,[dir="rtl"] .feature,[dir="rtl"] .step,[dir="rtl"] .notice{text-align:right}[dir="rtl"] .trust{direction:rtl}
 </style>
 </head>
 <body>
@@ -867,6 +867,33 @@ const appUiTranslations = {
   }
 };
 
+// Authentication screens use the same centralized dictionary as the dashboard.
+// The stored form values and Supabase messages remain untouched; only interface text is translated.
+Object.assign(appUiTranslations.en, {
+  'Ƙirƙiri account':'Create an account', 'Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.':'Register with your name, email and password to create an account.',
+  'Lambar gayyata (idan kana da ita)':'Referral code (if you have one)', 'Referral code (optional)':'Referral code (optional)', 'Aƙalla haruffa 6':'At least 6 characters',
+  'Kana da account?':'Already have an account?', 'Za a iya buƙatar tabbatar da email kafin ka shiga account.':'You may need to verify your email before signing in.',
+  'ACCOUNT RECOVERY':'ACCOUNT RECOVERY', 'Ka manta kalmar sirri?':'Forgot your password?', 'Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka lambar tabbatarwa.':'Enter the email you registered with. We will send you a verification code.',
+  'Email ɗinka':'Your email', 'Aika lambar tabbatarwa':'Send verification code', 'Lambar OTP mai lambobi 8':'8-digit OTP', 'Shigar da OTP':'Enter OTP', 'Tabbatar da OTP':'Verify OTP',
+  'Duba email ɗinka bayan aika buƙatar.':'Check your email after sending the request.', 'Komawa Shiga Account':'Back to login', 'Sabunta kalmar sirri':'Update password', 'Shigar da sabuwar kalmar sirrinka sannan ka maimaita ta.':'Enter your new password and repeat it.', 'Sabunta kalmar sirri':'Update password', 'Ka tabbatar kalmomin sirrin sun yi daidai.':'Make sure the passwords match.', '⚙️ Settings / Saituna':'⚙️ Settings', 'Account yana aiki ✓':'Account active ✓', 'Canza kalmar sirri':'Change password', 'Komawa Dashboard':'Back to dashboard', 'Fita daga Account (Log out)':'Log out', 'Ba a shiga account ba':'Not signed in', 'Shiga ko ƙirƙiri sabon account domin ci gaba.':'Sign in or create an account to continue.', 'Shiga Account (Log in)':'Log in', 'Ka manta kalmar sirri? (Forgot Password)':'Forgot your password?', 'Saitunan tsaro da bayanan profile za su bayyana bayan ka shiga account.':'Security and profile settings will appear after you sign in.'
+});
+Object.assign(appUiTranslations.fr, {
+  'Ƙirƙiri account':'Créer un compte', 'Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.':'Inscrivez-vous avec votre nom, votre e-mail et votre mot de passe.',
+  'Lambar gayyata (idan kana da ita)':'Code de parrainage (facultatif)', 'Referral code (optional)':'Code de parrainage (facultatif)', 'Aƙalla haruffa 6':'Au moins 6 caractères',
+  'Kana da account?':'Vous avez déjà un compte ?', 'Za a iya buƙatar tabbatar da email kafin ka shiga account.':'Vous devrez peut-être vérifier votre e-mail avant de vous connecter.',
+  'ACCOUNT RECOVERY':'RÉCUPÉRATION DU COMPTE', 'Ka manta kalmar sirri?':'Mot de passe oublié ?', 'Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka lambar tabbatarwa.':'Saisissez l’adresse e-mail utilisée lors de votre inscription. Nous vous enverrons un code de vérification.',
+  'Email ɗinka':'Votre e-mail', 'Aika lambar tabbatarwa':'Envoyer le code de vérification', 'Lambar OTP mai lambobi 8':'Code OTP à 8 chiffres', 'Shigar da OTP':'Saisissez le code OTP', 'Tabbatar da OTP':'Vérifier le code OTP',
+  'Duba email ɗinka bayan aika buƙatar.':'Consultez votre e-mail après l’envoi de la demande.', 'Komawa Shiga Account':'Retour à la connexion', 'Sabunta kalmar sirri':'Mettre à jour le mot de passe', 'Shigar da sabuwar kalmar sirrinka sannan ka maimaita ta.':'Saisissez votre nouveau mot de passe, puis confirmez-le.', 'Ka tabbatar kalmomin sirrin sun yi daidai.':'Vérifiez que les mots de passe correspondent.', '⚙️ Settings / Saituna':'⚙️ Paramètres', 'Account yana aiki ✓':'Compte actif ✓', 'Canza kalmar sirri':'Modifier le mot de passe', 'Komawa Dashboard':'Retour au tableau de bord', 'Fita daga Account (Log out)':'Se déconnecter', 'Ba a shiga account ba':'Compte non connecté', 'Shiga ko ƙirƙiri sabon account domin ci gaba.':'Connectez-vous ou créez un compte pour continuer.', 'Shiga Account (Log in)':'Se connecter', 'Ka manta kalmar sirri? (Forgot Password)':'Mot de passe oublié ?', 'Saitunan tsaro da bayanan profile za su bayyana bayan ka shiga account.':'Les paramètres de sécurité et du profil apparaîtront après connexion.'
+});
+Object.assign(appUiTranslations.ar, {
+  'Ƙirƙiri account':'إنشاء حساب', 'Yi rajista da sunanka, email da kalmar sirri domin ƙirƙirar account.':'سجّل باستخدام اسمك وبريدك الإلكتروني وكلمة المرور.',
+  'Lambar gayyata (idan kana da ita)':'رمز الإحالة (إن وُجد)', 'Referral code (optional)':'رمز الإحالة (اختياري)', 'Aƙalla haruffa 6':'ستة أحرف على الأقل',
+  'Kana da account?':'لديك حساب بالفعل؟', 'Za a iya buƙatar tabbatar da email kafin ka shiga account.':'قد تحتاج إلى تأكيد بريدك الإلكتروني قبل تسجيل الدخول.',
+  'ACCOUNT RECOVERY':'استعادة الحساب', 'Ka manta kalmar sirri?':'هل نسيت كلمة المرور؟', 'Shigar da email ɗin da ka yi rajista da shi. Za mu aika maka lambar tabbatarwa.':'أدخل البريد الإلكتروني الذي سجلت به. سنرسل لك رمز تحقق.',
+  'Email ɗinka':'بريدك الإلكتروني', 'Aika lambar tabbatarwa':'إرسال رمز التحقق', 'Lambar OTP mai lambobi 8':'رمز OTP من 8 أرقام', 'Shigar da OTP':'أدخل رمز OTP', 'Tabbatar da OTP':'تأكيد رمز OTP',
+  'Duba email ɗinka bayan aika buƙatar.':'تحقق من بريدك الإلكتروني بعد إرسال الطلب.', 'Komawa Shiga Account':'العودة إلى تسجيل الدخول', 'Sabunta kalmar sirri':'تحديث كلمة المرور', 'Shigar da sabuwar kalmar sirrinka sannan ka maimaita ta.':'أدخل كلمة المرور الجديدة ثم أعد إدخالها.', 'Ka tabbatar kalmomin sirrin sun yi daidai.':'تأكد من تطابق كلمتي المرور.', '⚙️ Settings / Saituna':'⚙️ الإعدادات', 'Account yana aiki ✓':'الحساب نشط ✓', 'Canza kalmar sirri':'تغيير كلمة المرور', 'Komawa Dashboard':'العودة إلى لوحة التحكم', 'Fita daga Account (Log out)':'تسجيل الخروج', 'Ba a shiga account ba':'لم يتم تسجيل الدخول', 'Shiga ko ƙirƙiri sabon account domin ci gaba.':'سجّل الدخول أو أنشئ حساباً للمتابعة.', 'Shiga Account (Log in)':'تسجيل الدخول', 'Ka manta kalmar sirri? (Forgot Password)':'هل نسيت كلمة المرور؟', 'Saitunan tsaro da bayanan profile za su bayyana bayan ka shiga account.':'ستظهر إعدادات الأمان والملف الشخصي بعد تسجيل الدخول.'
+});
+
 const appUiOriginalText = new WeakMap();
 
 const dashboardUiTranslations = {
@@ -1075,80 +1102,43 @@ function applyAdminTranslations(language, root=document){
 }
 
 function translateAppInterface(language){
-  const dict = appUiTranslations[language] ? {...appUiTranslations[language], ...(dashboardUiTranslations[language]||{})} : null;
-  // restore if Hausa
-  // restore if Hausa
-if(!dict || language==='ha'){
-  document.querySelectorAll('[data-original-text]:not([data-i18n])').forEach(el=>{
-    if(el.closest('#login')) return;
-    if(el.dataset.originalText && el.textContent !== el.dataset.originalText){
-      el.textContent = el.dataset.originalText;
+  const dict = appUiTranslations[language]
+    ? {...appUiTranslations[language], ...(dashboardUiTranslations[language]||{})}
+    : {};
+  const root=document.body;
+  const matchTranslation=(raw)=>{
+    const key=raw.trim();
+    if(!key)return null;
+    let translated=dict[key];
+    if(!translated){
+      const withoutArrow=key.replace(/→/g,'').trim();
+      translated=dict[withoutArrow];
+      if(translated && key.includes('→')) translated+=' →';
     }
-  });
-
-  document.querySelectorAll('#dashboard .dashboard-head h1, #dashboardBottomNav button').forEach(container=>{
-    container.childNodes.forEach(node=>{
-      if(node.nodeType===Node.TEXT_NODE && node.__appOriginalText!==undefined && node.nodeValue!==node.__appOriginalText) node.nodeValue=node.__appOriginalText;
-    });
-  });
-
-  // restore placeholders
-  document.querySelectorAll('[data-orig-placeholder]').forEach(el=>{
-    if(el.placeholder !== el.dataset.origPlaceholder){
-      el.placeholder = el.dataset.origPlaceholder;
+    if(!translated){
+      const prefix=Object.keys(dict).sort((a,b)=>b.length-a.length).find(candidate=>key.startsWith(candidate) && key.length>candidate.length);
+      if(prefix) translated=dict[prefix]+key.slice(prefix.length);
     }
+    return translated || null;
+  };
+  root.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+    if(!el.dataset.origPlaceholder) el.dataset.origPlaceholder=el.placeholder;
+    const original=el.dataset.origPlaceholder;
+    const translated=language==='ha' ? original : matchTranslation(original);
+    if(translated && el.placeholder!==translated) el.placeholder=translated;
   });
-
-  return;
-  }
-  // only translate elements that are not inside script/style and have visible text
-  const all = document.body.querySelectorAll('h1,h2,h3,h4,span,small,p,button,a,strong,label,#dashboardMessage');
-  all.forEach(el=>{
-    if(el.closest('script,style,select,option,#login')) return;
-if(el.id === 'walletTopBalance' || el.id === 'walletBalance') return;
-    if(el.hasAttribute('data-i18n')) return;
-    if(el.children.length>0) return; // avoid parent that contains other tags
-    const txt = el.textContent.trim();
-    if(!txt) return;
-    if(txt.length>500) return; // allow exact translations of longer interface text
-    if(!el.dataset.originalText) el.dataset.originalText = el.textContent;
-    const orig = el.dataset.originalText.trim();
-    // direct match
-    let trans = dict[orig];
-    if(!trans){
-      // try without punctuation
-      trans = dict[orig.replace(/→/g,'').trim()];
-      if(trans && orig.includes('→')) trans = trans + ' →';
-    }
-    if(trans){
-      // keep leading/trailing
-      const leading = el.dataset.originalText.match(/^\s*/)?.[0]||'';
-      const trailing = el.dataset.originalText.match(/\s*$/)?.[0]||'';
-      const translatedText = leading + trans + trailing;
-if(el.textContent !== translatedText) el.textContent = translatedText;    }
-  });
-  document.querySelectorAll('#dashboard .dashboard-head h1, #dashboardBottomNav button').forEach(container=>{
-    container.childNodes.forEach(node=>{
-      if(node.nodeType!==Node.TEXT_NODE) return;
-      if(node.__appOriginalText===undefined) node.__appOriginalText=node.nodeValue;
-      const raw=node.__appOriginalText;
-      const key=raw.trim();
-      if(!key) return;
-      const translated=dict[key];
-      if(translated){
-        const leading=raw.match(/^\s*/)?.[0]||'';
-        const trailing=raw.match(/\s*$/)?.[0]||'';
-        const nextValue=leading+translated+trailing;
-        if(node.nodeValue!==nextValue) node.nodeValue=nextValue;
-      }
-    });
-  });
-  // placeholders
-  document.querySelectorAll('input[placeholder]').forEach(el=>{
-    if(!el.dataset.origPlaceholder) el.dataset.origPlaceholder = el.placeholder;
-    const orig = el.dataset.origPlaceholder.trim();
-    const tr = dict[orig] || dict[orig.replace('...','').trim()];
-    if(tr && el.placeholder !== tr) el.placeholder = tr;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  const nodes=[];
+  let node;
+  while((node=walker.nextNode())) nodes.push(node);
+  nodes.forEach(textNode=>{
+    const parent=textNode.parentElement;
+    if(!parent || parent.closest('script,style,select,option,#login,[data-i18n],[data-admin-key]')) return;
+    if(!textNode.nodeValue.trim()) return;
+    if(textNode.__appOriginalText===undefined) textNode.__appOriginalText=textNode.nodeValue;
+    const original=textNode.__appOriginalText;
+    const translated=language==='ha' ? original : matchTranslation(original);
+    if(translated!==null && textNode.nodeValue!==translated) textNode.nodeValue=translated;
   });
 }
 
@@ -1241,21 +1231,20 @@ function setAppLanguage(language){
 document.addEventListener('DOMContentLoaded', function () {
   setAppLanguage(localStorage.getItem('appLanguage') || 'ha');
 
-  // Watch only Admin Dashboard additions. Batch updates once per animation frame
-  // and avoid rescanning the entire app for every text-node mutation.
-  const adminView=document.getElementById('adminView');
-  if(adminView){
-    let adminTranslationFrame=0;
-    const adminLanguageObserver=new MutationObserver(()=>{
-      if(adminTranslationFrame) return;
-      adminTranslationFrame=requestAnimationFrame(()=>{
-        adminTranslationFrame=0;
-        const currentLanguage=localStorage.getItem('appLanguage')||'ha';
-        applyAdminTranslations(currentLanguage,adminView);
-      });
+  // Translate newly rendered dashboard, wallet, referral, newsletter and account content.
+  // The original Hausa text is retained on each text node, so repeated language switches
+  // never translate a translated value or require a page reload.
+  let translationFrame=0;
+  const languageObserver=new MutationObserver(()=>{
+    if(translationFrame) return;
+    translationFrame=requestAnimationFrame(()=>{
+      translationFrame=0;
+      const currentLanguage=localStorage.getItem('appLanguage')||'ha';
+      translateAppInterface(currentLanguage);
+      applyAdminTranslations(currentLanguage,document.getElementById('adminView')||document);
     });
-    adminLanguageObserver.observe(adminView,{childList:true,subtree:true});
-  }
+  });
+  languageObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
 });
 
 function showView(id) {
