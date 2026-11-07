@@ -144,7 +144,11 @@ html[dir="rtl"] body{direction:rtl;text-align:right}html[dir="rtl"] input,html[d
 
 <section id="tasksView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">TASK CENTER</span><h1>✓ Tasks masu samuwa</h1><p style="margin:0;color:var(--muted)">Zaɓi Task, ka karanta umarninsa, sannan ka aika hujjar kammalawa.</p></div></div><div id="referralTaskProgress" class="noticebox">Ana duba ci gaban tasks 3 na Referral Commission...</div><div class="panel dashboard-section" id="tasksSection"><div id="availableTasks">Ana ɗauko Tasks...</div></div></div></section>
 
-<section id="referralView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">REFERRAL CENTER</span><h1>👥 Referral System</h1><p style="margin:0;color:var(--muted)">Raba link ɗinka domin gayyatar sababbin masu amfani.</p></div></div><div class="panel dashboard-section" id="referralPanel"><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><h3>Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div><h3>Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div></div></section>
+<section id="referralView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">REFERRAL CENTER</span><h1>👥 Referral System</h1><p style="margin:0;color:var(--muted)">Raba link ɗinka domin gayyatar sababbin masu amfani.</p></div></div><div class="panel dashboard-section" id="referralPanel"><label class="field"><span>Lambar gayyata</span><input id="myReferralCode" readonly value="Ana ɗauko..." /></label><label class="field"><span>Link ɗin gayyata</span><input id="myReferralLink" readonly value="Ana ɗauko..." /></label><button class="btn btn-green" type="button" onclick="copyReferralLink()">Kwafi referral link</button><div id="referralMessage" class="noticebox">Referral ba ya bada points ko kuɗi tukuna.</div><details class="panel" id="referralHistoryAccordion" style="margin-top:17px;background:#fbfdfb">
+<summary style="cursor:pointer;font-weight:800;padding:4px 0" data-history-key="referralHistoryTitle">📚 Tarihin Referral</summary>
+<div style="margin-top:14px"><h3 data-history-key="referralPeopleTitle">Mutanen da suka yi rajista ta link ɗinka</h3><div id="referralList" class="empty-note">Ana ɗauko bayanai...</div></div>
+<div style="margin-top:14px"><h3 data-history-key="referralRewardsTitle">Tarihin ladan referral</h3><div id="referralRewardHistory" class="empty-note">Ana ɗauko ladan referral...</div></div>
+</details></div></div></section>
 
 <section id="adminView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag" data-admin-key="adminWorkspace">ADMIN WORKSPACE</span><h1 data-admin-key="adminCenter">Admin Center</h1><p style="margin:0;color:var(--muted)" data-admin-key="adminIntro">Dukkan ayyukan gudanarwa a wuri guda.</p></div></div>
 <div class="panel" id="adminPanel" style="margin-top:17px;display:none"><h2 data-admin-key="adminDashboard">Admin Dashboard</h2><p class="empty-note" data-admin-key="adminOnly">Wannan sashe yana bayyana ga admin kawai.</p>
@@ -183,6 +187,7 @@ html[dir="rtl"] body{direction:rtl;text-align:right}html[dir="rtl"] input,html[d
 <div id="referralTasksAdminMessage" class="noticebox" role="status">Ana ɗauko tasks uku na referral...</div>
 </form>
 
+<h3 id="adminNewsHeading" data-admin-key="newsletter">Newsletter / Sanarwa</h3>
 <div id="adminNewslettersList">Ana ɗauko sanarwa...</div>
 <h4 data-admin-key="publishedTasksHeading">Tasks da aka riga aka wallafa</h4>
 <div id="adminTasksList">Ana ɗauko Tasks...</div>
@@ -242,7 +247,16 @@ html[dir="rtl"] body{direction:rtl;text-align:right}html[dir="rtl"] input,html[d
 <label class="field"><span>Lambar account</span><input id="accountNumber" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Lambobi 10"></label>
 <button class="btn btn-green" type="submit">Aika buƙatar withdrawal</button></form>
 <div id="withdrawMessage" class="noticebox" role="status">Za a duba buƙatar withdrawal kafin a aiwatar da biyan kuɗi.</div>
-<h3>📤 Tarihin Withdrawal da Matsayinsa</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div><h3>📒 Tarihin Mu’amalar Wallet</h3><div id="walletRewardHistory" class="empty-note">Ana ɗauko tarihin kuɗin shiga...</div><div class="panel" id="pointsHistoryPanel" style="margin-top:17px;background:#fbfdfb"><h3>⭐ Tarihin Points</h3><p class="empty-note">Duk Points da aka ƙara ko aka cire. Points ba kuɗi ba ne har sai an canza su bisa ƙa’ida.</p><div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div></div>
+<h3 data-history-key="withdrawalHistoryTitle">📤 Tarihin Withdrawal da Matsayinsa</h3><div id="withdrawHistory" class="empty-note">Ana ɗauko tarihin withdrawal...</div>
+<details class="panel" id="walletHistoryAccordion" style="margin-top:17px;background:#fbfdfb">
+<summary style="cursor:pointer;font-weight:800;padding:4px 0" data-history-key="walletHistoryTitle">📒 Tarihin Mu’amalar Wallet</summary>
+<div id="walletRewardHistory" class="empty-note" style="margin-top:14px">Ana ɗauko tarihin kuɗin shiga...</div>
+</details>
+<details class="panel" id="pointsHistoryPanel" style="margin-top:17px;background:#fbfdfb">
+<summary style="cursor:pointer;font-weight:800;padding:4px 0" data-history-key="pointsHistoryTitle">⭐ Tarihin Points</summary>
+<p class="empty-note" data-history-key="pointsHistoryDescription">Duk Points da aka ƙara ko aka cire. Points ba kuɗi ba ne har sai an canza su bisa ƙa’ida.</p>
+<div id="pointsHistory" class="empty-note">Ana ɗauko tarihin maki...</div>
+</details>
 </div></div></section>
 <section id="newsletterView" class="view"><div class="wrap"><div class="dashboard-head"><div><span class="tag">UPDATES & ANNOUNCEMENTS</span><h1>📰 Newsletter / Sanarwa</h1><p style="margin:0;color:var(--muted)">Sabbin sanarwa da bayanai daga Lifetime Earning.</p></div></div><div id="newsletterList" class="panel">Ana ɗauko sanarwa...</div></div></section>
 <section id="accountView" class="view"><div class="wrap"><div class="panel auth"><span class="tag">MY PROFILE</span><h1>Profile / Account</h1><p>Ka duba bayanan account ɗinka, saituna da tsaron shiga.</p><div id="accountActions"><p>Ana duba matsayin account...</p></div></div></div></section>
@@ -1245,8 +1259,15 @@ function setAppLanguage(language){
   });
 
   translateAppInterface(language);
+  applyHistoryTranslations(document);
   applyAdminTranslations(language);
   translateLoginView(language);
+  // Re-render database-backed history labels in the newly selected language.
+  if(currentUser){
+    if(typeof loadWalletAndWithdrawals==='function') loadWalletAndWithdrawals();
+    if(typeof loadPointsHistory==='function') loadPointsHistory();
+    if(typeof loadReferralInfo==='function') loadReferralInfo();
+  }
   if(document.getElementById('adminView')?.classList.contains('active') && typeof loadAdminPanel==='function') loadAdminPanel();
   }
 
@@ -1264,6 +1285,7 @@ document.addEventListener('DOMContentLoaded', function () {
       translationFrame=0;
       const currentLanguage=localStorage.getItem('appLanguage')||'ha';
       translateAppInterface(currentLanguage);
+      applyHistoryTranslations(document);
       applyAdminTranslations(currentLanguage,document.getElementById('adminView')||document);
     });
   });
@@ -1452,15 +1474,24 @@ async function loadProfile(){
   await loadAvailableTasks();
   await loadNewsletters();
 }
+const historyTranslations={
+  ha:{referralHistoryTitle:'📚 Tarihin Referral',referralPeopleTitle:'Mutanen da suka yi rajista ta link ɗinka',referralRewardsTitle:'Tarihin ladan referral',walletHistoryTitle:'📒 Tarihin Mu’amalar Wallet',pointsHistoryTitle:'⭐ Tarihin Points',pointsHistoryDescription:'Duk Points da aka ƙara ko aka cire. Points ba kuɗi ba ne har sai an canza su bisa ƙa’ida.',withdrawalHistoryTitle:'📤 Tarihin Withdrawal da Matsayinsa',walletReferralReward:'Ladan referral',walletPointsConversion:'Canza Points zuwa Wallet',walletWithdrawalRequested:'Neman cire kuɗi',walletWithdrawalRefunded:'An mayar da kuɗin withdrawal',walletWithdrawalPaid:'An biya withdrawal',walletAdminCredit:'Ladan da admin ya saka',walletAdminDebit:'Cirewa daga admin',walletGeneric:'Mu’amalar Wallet',walletStatusDebit:'An cire daga Wallet',walletStatusPaid:'An biya',walletStatusRefunded:'An mayar',walletStatusAdded:'An saka',pointsGenericReason:'Canjin maki',walletEmpty:'Babu tarihin mu’amalar Wallet tukuna.',walletLoadError:'Ba a iya ɗauko tarihin kuɗin shiga ba:',pointsEmpty:'Babu tarihin maki tukuna.',pointsAdded:'An ƙara',pointsRemoved:'An cire',pointsLoadError:'Ba a iya ɗauko tarihin maki ba:',referralNewUser:'Sabon mai amfani',referralEmpty:'Ba a samu wanda ya yi rajista ta link ɗinka ba tukuna.',referralRewardEmpty:'Ba a samu ladan referral a account ɗinka tukuna.',referralRewardAdded:'An saka'},
+  en:{referralHistoryTitle:'📚 Referral history',referralPeopleTitle:'People who registered through your link',referralRewardsTitle:'Referral reward history',walletHistoryTitle:'📒 Wallet transaction history',pointsHistoryTitle:'⭐ Points history',pointsHistoryDescription:'All points credited or deducted. Points are not cash until converted according to the rules.',withdrawalHistoryTitle:'📤 Withdrawal history and status',walletReferralReward:'Referral reward',walletPointsConversion:'Points converted to wallet',walletWithdrawalRequested:'Withdrawal requested',walletWithdrawalRefunded:'Withdrawal refunded',walletWithdrawalPaid:'Withdrawal paid',walletAdminCredit:'Admin credit',walletAdminDebit:'Admin debit',walletGeneric:'Wallet transaction',walletStatusDebit:'Deducted from wallet',walletStatusPaid:'Paid',walletStatusRefunded:'Refunded',walletStatusAdded:'Added',pointsGenericReason:'Points adjustment',walletEmpty:'No wallet transactions yet.',walletLoadError:'Unable to load wallet transaction history:',pointsEmpty:'No points history yet.',pointsAdded:'Added',pointsRemoved:'Removed',pointsLoadError:'Unable to load points history:',referralNewUser:'New user',referralEmpty:'No one has registered through your link yet.',referralRewardEmpty:'No referral rewards have been added to your account yet.',referralRewardAdded:'Added'},
+  fr:{referralHistoryTitle:'📚 Historique du parrainage',referralPeopleTitle:'Personnes inscrites via votre lien',referralRewardsTitle:'Historique des récompenses de parrainage',walletHistoryTitle:'📒 Historique des transactions du portefeuille',pointsHistoryTitle:'⭐ Historique des points',pointsHistoryDescription:'Tous les points crédités ou déduits. Les points ne sont pas de l’argent avant leur conversion selon les règles.',withdrawalHistoryTitle:'📤 Historique et statut des retraits',walletReferralReward:'Récompense de parrainage',walletPointsConversion:'Conversion des points en portefeuille',walletWithdrawalRequested:'Retrait demandé',walletWithdrawalRefunded:'Retrait remboursé',walletWithdrawalPaid:'Retrait payé',walletAdminCredit:'Crédit administrateur',walletAdminDebit:'Débit administrateur',walletGeneric:'Transaction du portefeuille',walletStatusDebit:'Déduit du portefeuille',walletStatusPaid:'Payé',walletStatusRefunded:'Remboursé',walletStatusAdded:'Ajouté',pointsGenericReason:'Ajustement des points',walletEmpty:'Aucune transaction du portefeuille.',walletLoadError:'Impossible de charger l’historique des transactions :',pointsEmpty:'Aucun historique de points.',pointsAdded:'Ajouté',pointsRemoved:'Retiré',pointsLoadError:'Impossible de charger l’historique des points :',referralNewUser:'Nouvel utilisateur',referralEmpty:'Personne ne s’est encore inscrit via votre lien.',referralRewardEmpty:'Aucune récompense de parrainage n’a encore été ajoutée à votre compte.',referralRewardAdded:'Ajouté'},
+  ar:{referralHistoryTitle:'📚 سجل الإحالات',referralPeopleTitle:'الأشخاص الذين سجلوا عبر رابطك',referralRewardsTitle:'سجل مكافآت الإحالة',walletHistoryTitle:'📒 سجل معاملات المحفظة',pointsHistoryTitle:'⭐ سجل النقاط',pointsHistoryDescription:'جميع النقاط المضافة أو المخصومة. النقاط ليست أموالاً حتى تحويلها وفقاً للقواعد.',withdrawalHistoryTitle:'📤 سجل السحب وحالته',walletReferralReward:'مكافأة الإحالة',walletPointsConversion:'تحويل النقاط إلى المحفظة',walletWithdrawalRequested:'طلب سحب',walletWithdrawalRefunded:'تم رد مبلغ السحب',walletWithdrawalPaid:'تم دفع السحب',walletAdminCredit:'إضافة من المسؤول',walletAdminDebit:'خصم من المسؤول',walletGeneric:'معاملة محفظة',walletStatusDebit:'تم الخصم من المحفظة',walletStatusPaid:'مدفوع',walletStatusRefunded:'تم الرد',walletStatusAdded:'تمت الإضافة',pointsGenericReason:'تعديل النقاط',walletEmpty:'لا توجد معاملات للمحفظة بعد.',walletLoadError:'تعذر تحميل سجل معاملات المحفظة:',pointsEmpty:'لا يوجد سجل للنقاط بعد.',pointsAdded:'تمت الإضافة',pointsRemoved:'تم الخصم',pointsLoadError:'تعذر تحميل سجل النقاط:',referralNewUser:'مستخدم جديد',referralEmpty:'لم يسجل أحد عبر رابطك بعد.',referralRewardEmpty:'لم تتم إضافة مكافآت إحالة إلى حسابك بعد.',referralRewardAdded:'تمت الإضافة'}
+};
+function historyT(key){const lang=localStorage.getItem('appLanguage')||'ha';return historyTranslations[lang]?.[key]||historyTranslations.ha[key]||key;}
+function applyHistoryTranslations(root=document){root.querySelectorAll('[data-history-key]').forEach(el=>{const value=historyT(el.dataset.historyKey);if(value&&el.textContent!==value)el.textContent=value;});}
+
 async function loadPointsHistory(){
   if(!currentUser)return;
   const target=document.getElementById('pointsHistory');
   try{
     const {data:rows,error}=await supabaseClient.from('points_ledger').select('delta_points,reason,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
     if(error)throw error;
-    if(!rows||!rows.length){target.textContent='Babu tarihin maki tukuna.';return;}
-    target.innerHTML=rows.map(row=>`<div class="listrow"><div><b>${Number(row.delta_points)>0?'+':''}${Number(row.delta_points)} points</b><small data-user-content>${escapeHtml(row.reason||'Canjin maki')} </small><small> ${new Date(row.created_at).toLocaleString()}</small></div><span class="tag">${Number(row.delta_points)>0?'An ƙara':'An cire'}</span></div>`).join('');
-  }catch(err){target.textContent='Ba a iya ɗauko tarihin maki ba: '+err.message;}
+    if(!rows||!rows.length){target.textContent=historyT('pointsEmpty');return;}
+    target.innerHTML=rows.map(row=>`<div class="listrow"><div><b>${Number(row.delta_points)>0?'+':''}${Number(row.delta_points)} points</b><small data-user-content>${escapeHtml(row.reason||historyT('pointsGenericReason'))} </small><small> ${new Date(row.created_at).toLocaleString()}</small></div><span class="tag">${Number(row.delta_points)>0?historyT('pointsAdded'):historyT('pointsRemoved')}</span></div>`).join('');
+  }catch(err){target.textContent=historyT('pointsLoadError')+' '+err.message;}
 }
 async function loadReferralInfo(){
   if(!currentUser)return;
@@ -1476,14 +1507,14 @@ async function loadReferralInfo(){
     const {data:rows,error}=await supabaseClient.from('referrals').select('id,status,created_at').eq('referrer_user_id',currentUser.id).order('created_at',{ascending:false});
     if(error)throw error;
     document.getElementById('referralCount').textContent=String(rows?.length||0);
-    listEl.innerHTML=rows?.length?rows.map(r=>`<div class="listrow"><div><b>Sabon mai amfani</b><small>${new Date(r.created_at).toLocaleDateString()}</small></div><span class="tag">${escapeHtml(runtimeStatus(r.status))}</span></div>`).join(''):'Ba a samu wanda ya yi rajista ta link ɗinka ba tukuna.';
+    listEl.innerHTML=rows?.length?rows.map(r=>`<div class="listrow"><div><b>${historyT('referralNewUser')}</b><small>${new Date(r.created_at).toLocaleDateString()}</small></div><span class="tag">${escapeHtml(runtimeStatus(r.status))}</span></div>`).join(''):historyT('referralEmpty');
     const rewardEl=document.getElementById('referralRewardHistory');
     try{
       // Use wallet_transactions as the display source so referral history matches the actual wallet credits.
       const {data:rewards,error:rewardError}=await supabaseClient.from('wallet_transactions').select('amount_kobo,created_at').eq('user_id',currentUser.id).eq('entry_type','referral_reward').order('created_at',{ascending:false}).limit(50);
       if(rewardError)throw rewardError;
       const totalKobo=(rewards||[]).reduce((sum,r)=>sum+Number(r.amount_kobo||0),0);
-      rewardEl.innerHTML=rewards&&rewards.length?rewards.map(r=>`<div class="listrow"><div><b class="reward">+₦${(Number(r.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>Ladan referral • ${new Date(r.created_at).toLocaleString()}</small></div><span class="tag">An saka</span></div>`).join(''):'Ba a samu ladan referral a account ɗinka tukuna.';
+      rewardEl.innerHTML=rewards&&rewards.length?rewards.map(r=>`<div class="listrow"><div><b class="reward">+₦${(Number(r.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small>${historyT('walletReferralReward')} • ${new Date(r.created_at).toLocaleString()}</small></div><span class="tag">${historyT('referralRewardAdded')}</span></div>`).join(''):historyT('referralRewardEmpty');
       setMessage('referralMessage',totalKobo>0?'Referral yana aiki. An saka ₦'+(totalKobo/100).toLocaleString('en-NG',{minimumFractionDigits:2})+' a wallet ɗinka daga ladan referral.':'An shirya referral link ɗinka. Za a saka ladan ₦500 idan wanda ka gayyata ya tabbatar da email kuma admin ya amince da tasks 3.');
     }catch(rewardErr){
       rewardEl.textContent='Ba a iya ɗauko tarihin ladan referral ba: '+rewardErr.message;
@@ -1522,7 +1553,7 @@ async function loadWalletAndWithdrawals(){
     walletLoaded=true;
     const {data:items,error}=await supabaseClient.from('withdrawal_requests').select('id,amount_kobo,bank_name,account_name,status,admin_note,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false});
     if(error) throw error;
-    if(!items||!items.length){historyEl.textContent='Ba ka da tarihin withdrawal tukuna.';}
+    if(!items||!items.length){historyEl.textContent=localStorage.getItem('appLanguage')==='ha'?'Ba ka da tarihin withdrawal tukuna.':(localStorage.getItem('appLanguage')==='fr'?'Aucun historique de retrait.':(localStorage.getItem('appLanguage')==='ar'?'لا يوجد سجل سحب بعد.':'You have no withdrawal history yet.'));}
     else historyEl.innerHTML=items.map(x=>`<div class="listrow"><div><b>₦${(Number(x.amount_kobo)/100).toLocaleString('en-NG',{minimumFractionDigits:2})}</b><small><span data-user-content>${escapeHtml(x.bank_name)}</span> • ${new Date(x.created_at).toLocaleDateString()}</small>${x.admin_note?`<small data-user-content>${escapeHtml(x.admin_note)}</small>`:''}</div><span class="tag">${escapeHtml(runtimeStatus(x.status))}</span></div>`).join('');
     const rewardHistory=document.getElementById('walletRewardHistory');
     if(rewardHistory){
@@ -1531,24 +1562,24 @@ async function loadWalletAndWithdrawals(){
         if(txError)throw txError;
         const historyItems=(transactions||[]);
         const labels={
-  referral_reward:'Ladan referral',
-  points_conversion:'Canza Points zuwa Wallet',
-  withdrawal_requested:'Neman cire kuɗi',
-  withdrawal_refunded:'An mayar da kuɗin withdrawal',
-  withdrawal_paid:'An biya withdrawal',
-  admin_credit:'Ladan da admin ya saka',
-  admin_debit:'Cirewa daga admin'
+  referral_reward:historyT('walletReferralReward'),
+  points_conversion:historyT('walletPointsConversion'),
+  withdrawal_requested:historyT('walletWithdrawalRequested'),
+  withdrawal_refunded:historyT('walletWithdrawalRefunded'),
+  withdrawal_paid:historyT('walletWithdrawalPaid'),
+  admin_credit:historyT('walletAdminCredit'),
+  admin_debit:historyT('walletAdminDebit')
 };
         rewardHistory.innerHTML=historyItems.length?historyItems.map(t=>{
           const amount=Number(t.amount_kobo||0)/100;
           const isDebit=['withdrawal_requested','admin_debit'].includes(t.entry_type);
 const isPaid=t.entry_type==='withdrawal_paid';
-          const sign=isDebit?'−':(isPaid?'':'+'), label=labels[t.entry_type]||"Mu’amalar Wallet";
+          const sign=isDebit?'−':(isPaid?'':'+'), label=labels[t.entry_type]||historyT('walletGeneric');
           const amountClass=isDebit||isPaid?'':'reward';
-const status=isDebit?'An cire daga Wallet':(isPaid?'An biya':(t.entry_type==='withdrawal_refunded'?'An mayar':'An saka'));
+const status=isDebit?historyT('walletStatusDebit'):(isPaid?historyT('walletStatusPaid'):(t.entry_type==='withdrawal_refunded'?historyT('walletStatusRefunded'):historyT('walletStatusAdded')));
           return `<div class="listrow"><div><b class="${amountClass}">${sign}₦${Math.abs(amount).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}</b><small>${label} • ${new Date(t.created_at).toLocaleString()}</small></div><span class="tag">${escapeHtml(runtimeStatus(status))}</span></div>`;
-        }).join(''):'Babu tarihin mu’amalar Wallet tukuna.';
-      }catch(txErr){rewardHistory.textContent='Ba a iya ɗauko tarihin kuɗin shiga ba: '+txErr.message;}
+        }).join(''):historyT('walletEmpty');
+      }catch(txErr){rewardHistory.textContent=historyT('walletLoadError')+' '+txErr.message;}
     }
   }catch(err){
     const errorText=String(err?.message||err||'Ba a san dalilin ba.');
@@ -1884,7 +1915,7 @@ async function loadAvailableTasks(){
   const alreadySubmitted=new Set((submissions||[]).filter(x=>x.status==='pending'||x.status==='approved').map(x=>x.task_key));
   const visible=available.filter(t=>!alreadySubmitted.has(t.task_key)).sort((a,b)=>Number(requiredReferralKeys.has(b.task_key))-Number(requiredReferralKeys.has(a.task_key)));
   if(!visible.length){target.textContent='Babu sabon Task a yanzu. Ka sake dubawa daga baya.';await loadTaskSubmissions();return;}
-  target.innerHTML=visible.map(t=>{const isRequired=requiredReferralKeys.has(t.task_key);return `<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b>${escapeHtml(t.title)}</b>${isRequired?'<small class="tag">Dole domin Referral Commission</small>':''}<small>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small>${t.expires_at?`<small>Wa’adi: ${new Date(t.expires_at).toLocaleString()}</small>`:''}</div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">${taskProofT('submit')}</button></div>`;}).join('');
+  target.innerHTML=visible.map(t=>{const isRequired=requiredReferralKeys.has(t.task_key);return `<div class="listrow" style="align-items:flex-start"><div style="min-width:0;flex:1"><b data-user-content>${escapeHtml(t.title)}</b>${isRequired?'<small class="tag">Dole domin Referral Commission</small>':''}<small data-user-content>${escapeHtml(t.description)}</small><small class="tag">${Number(t.reward_points)} Points</small>${t.expires_at?`<small>Wa’adi: ${new Date(t.expires_at).toLocaleString()}</small>`:''}</div><button class="btn btn-soft" data-task-key="${escapeHtml(t.task_key)}" data-task-description="${escapeHtml(t.description)}" onclick="completeTask(this,'${escapeHtml(t.task_key)}')">${taskProofT('submit')}</button></div>`;}).join('');
   await loadTaskSubmissions();
 }
 async function loadTaskSubmissions(){
